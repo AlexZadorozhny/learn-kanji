@@ -41,10 +41,13 @@ export default function StrokeOrderScreen() {
 
     if (!kanjiIds || kanjiIds.length === 0) {
       // Only use kanji that have stroke order data
-      kanjiIds = kanjiData
+      const kanjiWithStrokeData = kanjiData
         .filter((k) => k.strokeOrder && k.strokeOrder.length > 0)
-        .map((k) => k.id)
-        .slice(0, 5); // Max 5 kanji per session
+        .map((k) => k.id);
+
+      // Shuffle and take up to 5 kanji per session
+      const shuffled = [...kanjiWithStrokeData].sort(() => Math.random() - 0.5);
+      kanjiIds = shuffled.slice(0, Math.min(5, shuffled.length));
     }
 
     if (kanjiIds.length === 0) {

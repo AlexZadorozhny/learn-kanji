@@ -259,6 +259,40 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'くに', romaji: 'kuni' },
     ],
     strokes: 8,
+    strokeOrder: [
+      {
+        path: 'M 20 20 L 80 20 L 80 80 L 20 80 L 20 20',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 35 35 L 35 50',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 35 50 L 50 50',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 50 50 L 50 35',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 50 35 L 65 35',
+        strokeNumber: 5,
+      },
+      {
+        path: 'M 65 35 L 65 65',
+        strokeNumber: 6,
+      },
+      {
+        path: 'M 35 65 L 65 65',
+        strokeNumber: 7,
+      },
+      {
+        path: 'M 40 55 L 60 70',
+        strokeNumber: 8,
+      },
+    ],
     radicals: ['囗', '玉'],
     exampleWords: [
       {
@@ -295,6 +329,28 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'もと', romaji: 'moto' },
     ],
     strokes: 5,
+    strokeOrder: [
+      {
+        path: 'M 50 20 L 50 70',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 20 40 L 80 40',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 30 55 L 45 75',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 55 55 L 70 75',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 40 75 L 60 75',
+        strokeNumber: 5,
+      },
+    ],
     radicals: ['木'],
     exampleWords: [
       {
@@ -333,6 +389,20 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'おおきい', romaji: 'ookii' },
     ],
     strokes: 3,
+    strokeOrder: [
+      {
+        path: 'M 50 20 L 50 75',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 20 35 L 80 65',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 80 35 L 20 65',
+        strokeNumber: 3,
+      },
+    ],
     radicals: ['大'],
     exampleWords: [
       {
@@ -369,6 +439,32 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'とし', romaji: 'toshi' },
     ],
     strokes: 6,
+    strokeOrder: [
+      {
+        path: 'M 30 30 L 50 25',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 50 25 L 70 30',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 50 25 L 50 75',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 20 50 L 80 50',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 25 65 L 45 80',
+        strokeNumber: 5,
+      },
+      {
+        path: 'M 55 65 L 75 80',
+        strokeNumber: 6,
+      },
+    ],
     radicals: ['干'],
     exampleWords: [
       {
@@ -405,6 +501,24 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'なか', romaji: 'naka' },
     ],
     strokes: 4,
+    strokeOrder: [
+      {
+        path: 'M 50 20 L 50 80',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 25 30 L 75 30',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 25 30 L 25 70 L 75 70 L 75 30',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 50 50 L 50 50',
+        strokeNumber: 4,
+      },
+    ],
     radicals: ['丨'],
     exampleWords: [
       {
@@ -442,6 +556,28 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'だす', romaji: 'dasu' },
     ],
     strokes: 5,
+    strokeOrder: [
+      {
+        path: 'M 50 20 L 50 45',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 30 35 L 30 55',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 70 35 L 70 55',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 30 55 L 70 55',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 50 55 L 50 80',
+        strokeNumber: 5,
+      },
+    ],
     radicals: ['凵'],
     exampleWords: [
       {
@@ -479,6 +615,20 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'あがる', romaji: 'agaru' },
     ],
     strokes: 3,
+    strokeOrder: [
+      {
+        path: 'M 50 30 L 50 60',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 30 45 L 70 45',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 20 70 L 80 70',
+        strokeNumber: 3,
+      },
+    ],
     radicals: ['一'],
     exampleWords: [
       {
@@ -518,6 +668,28 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'なま', romaji: 'nama' },
     ],
     strokes: 5,
+    strokeOrder: [
+      {
+        path: 'M 30 30 L 50 25',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 50 25 L 70 30',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 50 25 L 50 75',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 20 50 L 80 50',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 30 65 L 70 65',
+        strokeNumber: 5,
+      },
+    ],
     radicals: ['生'],
     exampleWords: [
       {
@@ -554,6 +726,48 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'とき', romaji: 'toki' },
     ],
     strokes: 10,
+    strokeOrder: [
+      {
+        path: 'M 20 20 L 35 20',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 20 20 L 20 70',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 20 45 L 35 45',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 35 20 L 35 70 M 35 70 L 20 70',
+        strokeNumber: 4,
+      },
+      {
+        path: 'M 50 25 L 80 25',
+        strokeNumber: 5,
+      },
+      {
+        path: 'M 65 25 L 65 75',
+        strokeNumber: 6,
+      },
+      {
+        path: 'M 50 45 L 80 45',
+        strokeNumber: 7,
+      },
+      {
+        path: 'M 45 60 L 85 60',
+        strokeNumber: 8,
+      },
+      {
+        path: 'M 50 70 L 60 80',
+        strokeNumber: 9,
+      },
+      {
+        path: 'M 70 70 L 80 80',
+        strokeNumber: 10,
+      },
+    ],
     radicals: ['日', '寺'],
     exampleWords: [
       {
@@ -590,6 +804,24 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'て', romaji: 'te' },
     ],
     strokes: 4,
+    strokeOrder: [
+      {
+        path: 'M 30 30 L 70 30',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 50 30 L 50 60',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 25 50 L 75 50',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 30 65 L 70 65',
+        strokeNumber: 4,
+      },
+    ],
     radicals: ['手'],
     exampleWords: [
       {
