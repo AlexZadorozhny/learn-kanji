@@ -3,6 +3,7 @@ import { View, StyleSheet, Pressable, Animated } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
 import { KanjiCharacter } from '../../types/kanji';
 import { TTSService } from '../../services/audio/TTSService';
+import { HapticService } from '../../services/feedback/HapticService';
 
 interface FlashcardComponentProps {
   kanji: KanjiCharacter;
@@ -17,6 +18,10 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
   const handleFlip = () => {
     const toValue = showAnswer ? 0 : 180;
 
+    // Strong haptic feedback on flip (double tap for "sound effect")
+    HapticService.warning();
+    setTimeout(() => HapticService.light(), 80);
+
     Animated.spring(flipAnimation, {
       toValue,
       friction: 8,
@@ -25,6 +30,29 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
     }).start();
 
     setShowAnswer(!showAnswer);
+  };
+
+  const handleRate = (rating: number) => {
+    // Context-aware haptic feedback based on rating
+    if (rating === 1) {
+      // Again - double warning feedback (error sound effect)
+      HapticService.warning();
+      setTimeout(() => HapticService.light(), 100);
+    } else if (rating === 2) {
+      // Hard - double medium feedback (more noticeable)
+      HapticService.warning();
+      setTimeout(() => HapticService.light(), 60);
+    } else if (rating === 3) {
+      // Good - success feedback with echo
+      HapticService.success();
+      setTimeout(() => HapticService.light(), 80);
+    } else {
+      // Easy - double success feedback
+      HapticService.success();
+      setTimeout(() => HapticService.medium(), 100);
+    }
+
+    onRate(rating);
   };
 
   const handleSpeak = async () => {
@@ -154,7 +182,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
         <View style={styles.ratingButtons}>
           <Pressable
             style={[styles.ratingButton, styles.ratingAgain]}
-            onPress={() => onRate(1)}
+            onPress={() => handleRate(1)}
           >
             <Text style={styles.ratingButtonText}>Again</Text>
             <Text style={styles.ratingSubtext}>{'<1 day'}</Text>
@@ -162,7 +190,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
 
           <Pressable
             style={[styles.ratingButton, styles.ratingHard]}
-            onPress={() => onRate(2)}
+            onPress={() => handleRate(2)}
           >
             <Text style={styles.ratingButtonText}>Hard</Text>
             <Text style={styles.ratingSubtext}>{'<3 days'}</Text>
@@ -170,7 +198,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
 
           <Pressable
             style={[styles.ratingButton, styles.ratingGood]}
-            onPress={() => onRate(3)}
+            onPress={() => handleRate(3)}
           >
             <Text style={styles.ratingButtonText}>Good</Text>
             <Text style={styles.ratingSubtext}>{'~6 days'}</Text>
@@ -178,7 +206,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
 
           <Pressable
             style={[styles.ratingButton, styles.ratingEasy]}
-            onPress={() => onRate(4)}
+            onPress={() => handleRate(4)}
           >
             <Text style={styles.ratingButtonText}>Easy</Text>
             <Text style={styles.ratingSubtext}>{'2+ weeks'}</Text>
@@ -273,12 +301,12 @@ const styles = StyleSheet.create({
   ratingButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 13,
     marginBottom: 4,
   },
   ratingSubtext: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 10,
     opacity: 0.9,
   },
   ratingAgain: {

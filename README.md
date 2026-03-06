@@ -2,14 +2,15 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Milestone 5 Complete ✅
+## Current Status: Milestone 6 Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 5 sample characters)
 - ✅ **Milestone 3**: Navigation Flow (Detail screen with full kanji information)
 - ✅ **Milestone 4**: Audio/TTS Pronunciation (Japanese text-to-speech for all readings)
 - ✅ **Milestone 5**: Data Persistence (AsyncStorage integration with auto-save)
-- 🚧 **Next**: Milestone 6 - Flashcard Practice Mode
+- ✅ **Milestone 6**: Flashcard Practice Mode (SRS scheduling with flip animations)
+- 🚧 **Next**: Milestone 7 - Expand kanji dataset and additional features
 
 ## Prerequisites
 - Node.js >= 18
@@ -93,14 +94,24 @@ Use tunnel mode when:
   - Store study statistics (study time, streaks, mastered kanji)
   - Progress screen displays real-time statistics
   - Clear data functionality for testing
+- 🎴 **Flashcard Practice Mode**: SRS-based recognition practice:
+  - Smooth 3D flip animation with card interactions
+  - SM-2 spaced repetition algorithm for optimal review scheduling
+  - Self-rating system: Again, Hard, Good, Easy
+  - Review queue shows due and new cards
+  - Session results with accuracy and time statistics
+  - Recognition score tracking (0-100)
+  - Haptic feedback for card flips and button presses
+  - Context-aware vibration patterns for different ratings
+  - Auto-save progress after each card review
+  - Progress persistence across app sessions
 
 ### Planned
 - ✍️ **Stroke Order Practice**: Interactive drawing canvas
-- 📝 **Flashcard Mode**: SRS-based recognition practice
 - ❓ **Multiple Choice Quizzes**: Test kanji knowledge
 - 📚 **Context Practice**: Learn kanji in real words and phrases
-- 📊 **Progress Tracking**: Monitor learning progress with statistics
 - 🔥 **Streak System**: Daily study tracking
+- 📊 **Expanded Dataset**: Add more kanji characters
 
 ## Project Structure
 ```
@@ -114,20 +125,25 @@ simple-mobile/
 ├── assets/                    # Images and fonts
 └── src/
     ├── components/
-    │   └── kanji/
-    │       └── KanjiCard.tsx  # Kanji card component
+    │   ├── kanji/
+    │   │   └── KanjiCard.tsx  # Kanji card component
+    │   └── practice/
+    │       └── FlashcardComponent.tsx  # Flashcard with flip animation
     ├── data/
     │   └── sample-data.ts     # Sample kanji data (5 characters)
     ├── navigation/
     │   ├── RootNavigator.tsx
     │   ├── MainTabNavigator.tsx
     │   ├── HomeStackNavigator.tsx
+    │   ├── PracticeStackNavigator.tsx
     │   └── types.ts           # Navigation type definitions
     ├── screens/
     │   ├── home/
     │   │   └── HomeScreen.tsx
     │   ├── practice/
-    │   │   └── PracticeModeScreen.tsx
+    │   │   ├── PracticeModeScreen.tsx
+    │   │   ├── FlashcardScreen.tsx
+    │   │   └── ResultsScreen.tsx
     │   ├── progress/
     │   │   ├── ProgressScreen.tsx
     │   │   └── KanjiDetailScreen.tsx
@@ -136,11 +152,17 @@ simple-mobile/
     ├── services/
     │   ├── audio/
     │   │   └── TTSService.ts  # Text-to-speech wrapper (expo-speech)
-    │   └── storage/
-    │       └── StorageService.ts  # AsyncStorage wrapper for persistence
+    │   ├── storage/
+    │   │   └── StorageService.ts  # AsyncStorage wrapper for persistence
+    │   ├── practice/
+    │   │   └── SRSService.ts  # Spaced Repetition System (SM-2 algorithm)
+    │   └── feedback/
+    │       ├── HapticService.ts  # Haptic feedback wrapper
+    │       └── SoundService.ts   # Sound effects (placeholder)
     ├── store/
     │   ├── kanjiStore.ts      # Zustand: kanji data state
-    │   └── progressStore.ts   # Zustand: progress tracking with persistence
+    │   ├── progressStore.ts   # Zustand: progress tracking with persistence
+    │   └── practiceStore.ts   # Zustand: practice session management
     ├── theme/
     │   ├── theme.ts           # React Native Paper theme
     │   ├── colors.ts
@@ -175,6 +197,8 @@ simple-mobile/
 
 ### Utilities
 - **expo-speech** - Text-to-speech for pronunciation
+- **expo-haptics** - Haptic feedback for tactile interactions
+- **expo-av** - Audio playback for sound effects
 - **react-native-svg** - SVG rendering
 - **date-fns** - Date utilities
 - **react-native-reanimated** - Smooth animations
