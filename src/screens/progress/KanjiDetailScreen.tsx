@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Chip, Divider } from 'react-native-paper';
+import { Text, Card, Chip, Divider, IconButton } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useKanjiStore } from '../../store/kanjiStore';
 import { HomeStackParamList } from '../../navigation/types';
 import { typography } from '../../theme/theme';
+import { TTSService } from '../../services/audio/TTSService';
 
 type KanjiDetailRouteProp = RouteProp<HomeStackParamList, 'KanjiDetail'>;
 
@@ -12,8 +13,20 @@ export default function KanjiDetailScreen() {
   const route = useRoute<KanjiDetailRouteProp>();
   const { kanjiId } = route.params;
   const { getKanjiById } = useKanjiStore();
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
 
   const kanji = getKanjiById(kanjiId);
+
+  const handleSpeak = async (text: string, id: string) => {
+    try {
+      setSpeakingId(id);
+      await TTSService.speak(text);
+      setSpeakingId(null);
+    } catch (error) {
+      console.error('Failed to speak:', error);
+      setSpeakingId(null);
+    }
+  };
 
   if (!kanji) {
     return (
@@ -72,6 +85,12 @@ export default function KanjiDetailScreen() {
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
                 <Text style={styles.romajiText}>({reading.romaji})</Text>
+                <IconButton
+                  icon={speakingId === `on-${index}` ? "stop" : "volume-high"}
+                  size={20}
+                  onPress={() => handleSpeak(reading.reading, `on-${index}`)}
+                  style={styles.speakerButton}
+                />
               </View>
             ))}
           </Card.Content>
@@ -92,6 +111,12 @@ export default function KanjiDetailScreen() {
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
                 <Text style={styles.romajiText}>({reading.romaji})</Text>
+                <IconButton
+                  icon={speakingId === `kun-${index}` ? "stop" : "volume-high"}
+                  size={20}
+                  onPress={() => handleSpeak(reading.reading, `kun-${index}`)}
+                  style={styles.speakerButton}
+                />
               </View>
             ))}
           </Card.Content>
@@ -109,7 +134,15 @@ export default function KanjiDetailScreen() {
               <View key={index}>
                 {index > 0 && <Divider style={styles.divider} />}
                 <View style={styles.wordRow}>
-                  <Text style={styles.wordText}>{word.word}</Text>
+                  <View style={styles.wordHeader}>
+                    <Text style={styles.wordText}>{word.word}</Text>
+                    <IconButton
+                      icon={speakingId === `word-${index}` ? "stop" : "volume-high"}
+                      size={20}
+                      onPress={() => handleSpeak(word.word, `word-${index}`)}
+                      style={styles.speakerButton}
+                    />
+                  </View>
                   <Text style={styles.wordReading}>{word.reading}</Text>
                   <Text style={styles.wordRomaji}>({word.romaji})</Text>
                   <Text style={styles.wordMeaning}>{word.meaning}</Text>
@@ -186,14 +219,24 @@ const styles = StyleSheet.create({
   romajiText: {
     fontSize: 16,
     color: '#666',
+    flex: 1,
+  },
+  speakerButton: {
+    margin: 0,
   },
   wordRow: {
     paddingVertical: 12,
+  },
+  wordHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   wordText: {
     fontSize: 24,
     fontWeight: '500',
     marginBottom: 4,
+    flex: 1,
   },
   wordReading: {
     fontSize: 16,

@@ -2,12 +2,13 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Milestone 3 Complete ✅
+## Current Status: Milestone 4 Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 5 sample characters)
 - ✅ **Milestone 3**: Navigation Flow (Detail screen with full kanji information)
-- 🚧 **Next**: Milestone 4 - Audio/TTS pronunciation
+- ✅ **Milestone 4**: Audio/TTS Pronunciation (Japanese text-to-speech for all readings)
+- 🚧 **Next**: Milestone 5 - Data persistence with AsyncStorage
 
 ## Prerequisites
 - Node.js >= 18
@@ -79,9 +80,14 @@ Use tunnel mode when:
   - Kun-yomi (訓読み) readings with romaji
   - Example words with readings and translations
   - JLPT level indicators
+- 🔊 **Audio Pronunciation**: Text-to-speech for kanji readings:
+  - Japanese TTS (ja-JP) using expo-speech
+  - Tap speaker icons to hear on-yomi readings
+  - Tap speaker icons to hear kun-yomi readings
+  - Tap speaker icons to hear example word pronunciations
+  - Optimized speech rate (0.75x) for learning
 
 ### Planned
-- 🔊 **Audio Pronunciation**: TTS for kanji readings
 - ✍️ **Stroke Order Practice**: Interactive drawing canvas
 - 📝 **Flashcard Mode**: SRS-based recognition practice
 - ❓ **Multiple Choice Quizzes**: Test kanji knowledge
@@ -120,6 +126,9 @@ simple-mobile/
     │   │   └── KanjiDetailScreen.tsx
     │   └── settings/
     │       └── SettingsScreen.tsx
+    ├── services/
+    │   └── audio/
+    │       └── TTSService.ts  # Text-to-speech wrapper (expo-speech)
     ├── store/
     │   ├── kanjiStore.ts      # Zustand: kanji data state
     │   └── progressStore.ts   # Zustand: progress tracking
