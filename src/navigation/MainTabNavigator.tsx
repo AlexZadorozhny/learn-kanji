@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeStackNavigator from './HomeStackNavigator';
-import PracticeModeScreen from '../screens/practice/PracticeModeScreen';
+import PracticeStackNavigator from './PracticeStackNavigator';
 import ProgressScreen from '../screens/progress/ProgressScreen';
 import SettingsScreen from '../screens/settings/SettingsScreen';
 
@@ -28,8 +28,9 @@ export default function MainTabNavigator() {
       />
       <Tab.Screen
         name="Practice"
-        component={PracticeModeScreen}
+        component={PracticeStackNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="school" color={color} size={size} />
           ),
