@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { Text, Card, IconButton, ProgressBar, Button } from 'react-native-paper';
+import { Text, Card, IconButton, ProgressBar, Button, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -19,6 +19,7 @@ type ContextPracticeScreenNavigationProp = NativeStackNavigationProp<
 type ContextPracticeScreenRouteProp = RouteProp<PracticeStackParamList, 'ContextPracticeScreen'>;
 
 export default function ContextPracticeScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<ContextPracticeScreenNavigationProp>();
   const route = useRoute<ContextPracticeScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
@@ -166,8 +167,8 @@ export default function ContextPracticeScreen() {
   const exampleWords = currentKanji.exampleWords.slice(0, 3);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
@@ -190,17 +191,17 @@ export default function ContextPracticeScreen() {
       <View style={styles.content}>
         <Card style={styles.kanjiCard}>
           <Card.Content>
-            <Text variant="headlineLarge" style={styles.targetKanji}>
+            <Text variant="headlineLarge" style={[styles.targetKanji, { color: theme.colors.primary }]}>
               {currentKanji.character}
             </Text>
             {!showAnswer && (
-              <Text variant="bodyLarge" style={styles.hint}>
+              <Text variant="bodyLarge" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
                 Find this kanji in the words below
               </Text>
             )}
             {showAnswer && (
               <View style={styles.meaningsContainer}>
-                <Text variant="titleMedium" style={styles.meanings}>
+                <Text variant="titleMedium" style={[styles.meanings, { color: theme.colors.primary }]}>
                   {currentKanji.meanings.join(', ')}
                 </Text>
               </View>
@@ -219,7 +220,7 @@ export default function ContextPracticeScreen() {
                 <Card.Content style={styles.wordContent}>
                   <View style={styles.wordTextContainer}>
                     <View style={styles.wordRow}>
-                      <Text variant="headlineSmall" style={styles.wordText}>
+                      <Text variant="headlineSmall" style={[styles.wordText, { color: theme.colors.onSurface }]}>
                         {word.word}
                       </Text>
                       <IconButton
@@ -228,11 +229,11 @@ export default function ContextPracticeScreen() {
                         onPress={() => handleSpeak(word.reading)}
                       />
                     </View>
-                    <Text variant="bodyMedium" style={styles.readingText}>
+                    <Text variant="bodyMedium" style={[styles.readingText, { color: theme.colors.onSurfaceVariant }]}>
                       {word.reading} ({word.romaji})
                     </Text>
                     {showAnswer && (
-                      <Text variant="bodyMedium" style={styles.meaningText}>
+                      <Text variant="bodyMedium" style={[styles.meaningText, { color: theme.colors.onSurface }]}>
                         {word.meaning}
                       </Text>
                     )}
@@ -280,14 +281,12 @@ export default function ContextPracticeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
     paddingTop: 50,
-    backgroundColor: '#fff',
     elevation: 2,
   },
   progressContainer: {
@@ -309,12 +308,10 @@ const styles = StyleSheet.create({
   targetKanji: {
     fontSize: 80,
     fontWeight: 'bold',
-    color: '#6200ee',
     textAlign: 'center',
     marginBottom: 8,
   },
   hint: {
-    color: '#666',
     textAlign: 'center',
   },
   meaningsContainer: {
@@ -323,7 +320,6 @@ const styles = StyleSheet.create({
   meanings: {
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#6200ee',
   },
   wordsContainer: {
     flex: 1,
@@ -349,13 +345,10 @@ const styles = StyleSheet.create({
   },
   wordText: {
     fontWeight: 'bold',
-    color: '#000',
   },
   readingText: {
-    color: '#666',
   },
   meaningText: {
-    color: '#000',
     marginTop: 4,
   },
   button: {

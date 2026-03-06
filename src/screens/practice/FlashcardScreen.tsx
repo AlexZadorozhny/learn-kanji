@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, ProgressBar, IconButton } from 'react-native-paper';
+import { Text, ProgressBar, IconButton, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -18,6 +18,7 @@ type FlashcardScreenNavigationProp = NativeStackNavigationProp<
 type FlashcardScreenRouteProp = RouteProp<PracticeStackParamList, 'FlashcardScreen'>;
 
 export default function FlashcardScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<FlashcardScreenNavigationProp>();
   const route = useRoute<FlashcardScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
@@ -146,8 +147,8 @@ export default function FlashcardScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
@@ -177,14 +178,12 @@ export default function FlashcardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
     paddingTop: 50, // Account for status bar
-    backgroundColor: '#fff',
     elevation: 2,
   },
   progressContainer: {

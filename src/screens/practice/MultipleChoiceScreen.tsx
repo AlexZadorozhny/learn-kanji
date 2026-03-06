@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { Text, Card, IconButton, ProgressBar } from 'react-native-paper';
+import { Text, Card, IconButton, ProgressBar, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -18,6 +18,7 @@ type MultipleChoiceScreenNavigationProp = NativeStackNavigationProp<
 type MultipleChoiceScreenRouteProp = RouteProp<PracticeStackParamList, 'MultipleChoiceScreen'>;
 
 export default function MultipleChoiceScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<MultipleChoiceScreenNavigationProp>();
   const route = useRoute<MultipleChoiceScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
@@ -162,8 +163,8 @@ export default function MultipleChoiceScreen() {
   const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
@@ -184,7 +185,7 @@ export default function MultipleChoiceScreen() {
       </View>
 
       <View style={styles.content}>
-        <Card style={styles.questionCard}>
+        <Card style={[styles.questionCard, { backgroundColor: theme.colors.primary }]}>
           <Card.Content>
             <Text variant="labelLarge" style={styles.questionLabel}>
               QUESTION
@@ -210,7 +211,6 @@ export default function MultipleChoiceScreen() {
               >
                 <Card
                   style={[
-                    styles.optionCard,
                     showCorrect && styles.correctCard,
                     showIncorrect && styles.incorrectCard,
                   ]}
@@ -219,7 +219,7 @@ export default function MultipleChoiceScreen() {
                     <Text
                       variant="headlineSmall"
                       style={[
-                        styles.optionText,
+                        !showCorrect && !showIncorrect && { color: theme.colors.onSurface },
                         showCorrect && styles.correctText,
                         showIncorrect && styles.incorrectText,
                       ]}
@@ -257,14 +257,12 @@ export default function MultipleChoiceScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
     paddingTop: 50,
-    backgroundColor: '#fff',
     elevation: 2,
   },
   progressContainer: {
@@ -282,7 +280,6 @@ const styles = StyleSheet.create({
   questionCard: {
     marginBottom: 24,
     elevation: 2,
-    backgroundColor: '#6200ee',
   },
   questionLabel: {
     color: '#fff',
@@ -296,18 +293,11 @@ const styles = StyleSheet.create({
   optionsContainer: {
     gap: 12,
   },
-  optionCard: {
-    elevation: 2,
-    backgroundColor: '#fff',
-  },
   optionContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: 12,
-  },
-  optionText: {
-    fontWeight: '500',
   },
   correctCard: {
     backgroundColor: '#4caf50',

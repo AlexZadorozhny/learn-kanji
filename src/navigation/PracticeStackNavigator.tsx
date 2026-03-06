@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTheme } from 'react-native-paper';
 import { PracticeStackParamList } from './types';
 import PracticeModeScreen from '../screens/practice/PracticeModeScreen';
 import FlashcardScreen from '../screens/practice/FlashcardScreen';
@@ -11,8 +12,17 @@ import ResultsScreen from '../screens/practice/ResultsScreen';
 const Stack = createNativeStackNavigator<PracticeStackParamList>();
 
 export default function PracticeStackNavigator() {
+  const theme = useTheme();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.surface,
+        },
+        headerTintColor: theme.colors.onSurface,
+      }}
+    >
       <Stack.Screen
         name="PracticeModeScreen"
         component={PracticeModeScreen}

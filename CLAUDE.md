@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
+A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 8 Complete - Stroke Order Practice implemented, All 4 practice modes complete, Dataset: 25 kanji (5 with stroke data)
+**Current Status:** Milestone 9 Complete - Dark Theme implemented with Light/Dark/Auto modes, All 4 practice modes complete, Dataset: 25 kanji (5 with stroke data)
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -66,6 +66,7 @@ pkill -f "expo start"
 - **State Management**: Zustand stores (kanjiStore, progressStore, practiceStore)
 - **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters, 5 with stroke data)
 - **Key Features**:
+  - Dark theme support (Light/Dark/Auto modes with full UI coverage)
   - Kanji browsing and detail views with TTS pronunciation
   - Flashcard practice with SM-2 spaced repetition algorithm
   - Multiple choice quiz with 3 question types (kanji→meaning, meaning→kanji, kanji→reading)
@@ -195,6 +196,19 @@ rm -rf node_modules && npm install
 - Session management: max 5 kanji, tracks correct/total strokes
 - Updates writingScore (0-100) per kanji
 - Implemented in `src/components/kanji/StrokeOrderCanvas.tsx` (434 lines) and `src/screens/practice/StrokeOrderScreen.tsx`
+
+**Dark Theme:**
+- Three modes: Light, Dark, and Auto (follows system preference)
+- Persistent setting stored in AsyncStorage via settingsStore
+- Full coverage: all screens, navigation bars (top/bottom), and components
+- Material Design 3 color system with proper contrast ratios
+- Dynamic theme colors applied to:
+  - Background (`theme.colors.background`)
+  - Surfaces/Cards (`theme.colors.surface`)
+  - Text colors (`theme.colors.onSurface`, `theme.colors.onSurfaceVariant`)
+  - Navigation bars and headers
+- Semantic colors preserved (green/red for correct/incorrect, etc.)
+- Implemented in `src/store/settingsStore.ts`, `src/theme/theme.ts`, and navigation files
 
 ## Prerequisites
 

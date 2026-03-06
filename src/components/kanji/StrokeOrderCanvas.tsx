@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, PanResponder, Animated } from 'react-native';
-import { Text, IconButton } from 'react-native-paper';
+import { Text, IconButton, useTheme } from 'react-native-paper';
 import Svg, { Path, G } from 'react-native-svg';
 import { KanjiCharacter } from '../../types/kanji';
 import { HapticService } from '../../services/feedback/HapticService';
@@ -25,6 +25,7 @@ export default function StrokeOrderCanvas({
   onStrokeComplete,
   onAllStrokesComplete,
 }: StrokeOrderCanvasProps) {
+  const theme = useTheme();
   const [currentStrokeIndex, setCurrentStrokeIndex] = useState(0);
   const [userStrokes, setUserStrokes] = useState<UserStroke[]>([]);
   const [currentDrawing, setCurrentDrawing] = useState<Point[]>([]);
@@ -286,7 +287,7 @@ export default function StrokeOrderCanvas({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text variant="headlineLarge" style={styles.kanjiText}>
+        <Text variant="headlineLarge" style={[styles.kanjiText, { color: theme.colors.primary }]}>
           {kanji.character}
         </Text>
         <View style={styles.controls}>
@@ -326,7 +327,15 @@ export default function StrokeOrderCanvas({
         )}
       </View>
 
-      <View style={[styles.canvasContainer, { width: canvasSize, height: canvasSize }]}>
+      <View style={[
+        styles.canvasContainer,
+        {
+          width: canvasSize,
+          height: canvasSize,
+          backgroundColor: theme.colors.surface,
+          borderColor: theme.colors.outline,
+        }
+      ]}>
         <Svg
           width={canvasSize}
           height={canvasSize}
@@ -337,8 +346,8 @@ export default function StrokeOrderCanvas({
           {/* Background to show drawing area */}
           <Path
             d="M 0 0 L 100 0 L 100 100 L 0 100 Z"
-            fill="#ffffff"
-            stroke="#e0e0e0"
+            fill={theme.colors.surface}
+            stroke={theme.colors.outline}
             strokeWidth="0.5"
           />
           {/* Show guide strokes */}
@@ -426,7 +435,7 @@ export default function StrokeOrderCanvas({
         />
       </View>
 
-      <Text variant="bodyMedium" style={styles.hint}>
+      <Text variant="bodyMedium" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
         Draw the strokes in order. {showGuide ? 'Guide' : 'No guide'} mode.
       </Text>
     </View>
@@ -449,7 +458,7 @@ const styles = StyleSheet.create({
   kanjiText: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: '#6200ee',
+    // color set dynamically
   },
   controls: {
     flexDirection: 'row',
@@ -474,15 +483,15 @@ const styles = StyleSheet.create({
     color: '#f44336',
   },
   canvasContainer: {
-    backgroundColor: '#fff',
+    // backgroundColor set dynamically
     borderRadius: 8,
     elevation: 4,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    // borderColor set dynamically
   },
   hint: {
-    color: '#666',
+    // color set dynamically
     textAlign: 'center',
   },
 });

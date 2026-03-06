@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { Text, ActivityIndicator } from 'react-native-paper';
+import { Text, ActivityIndicator, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useKanjiStore } from '../../store/kanjiStore';
@@ -10,6 +10,7 @@ import { HomeStackParamList } from '../../navigation/types';
 type HomeScreenNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
 export default function HomeScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { kanjiData, loading, loadKanji } = useKanjiStore();
 
@@ -19,7 +20,7 @@ export default function HomeScreen() {
 
   if (loading) {
     return (
-      <View style={styles.centerContainer}>
+      <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
         <ActivityIndicator size="large" />
         <Text style={styles.loadingText}>Loading kanji...</Text>
       </View>
@@ -27,7 +28,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <FlatList
         data={kanjiData}
         keyExtractor={(item) => item.id}
@@ -39,8 +40,8 @@ export default function HomeScreen() {
         )}
         contentContainerStyle={styles.listContent}
         ListHeaderComponent={() => (
-          <View style={styles.header}>
-            <Text variant="bodyMedium" style={styles.subtitle}>
+          <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
+            <Text variant="bodyMedium" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
               {kanjiData.length} characters available
             </Text>
           </View>
@@ -53,7 +54,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   centerContainer: {
     flex: 1,
@@ -65,10 +65,9 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 16,
-    backgroundColor: '#fff',
   },
   subtitle: {
-    color: '#666',
+    // color set dynamically
   },
   listContent: {
     paddingVertical: 8,

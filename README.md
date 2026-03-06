@@ -2,7 +2,7 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Stroke Order Practice Complete ✅
+## Current Status: Dark Theme Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 25 sample characters)
@@ -12,8 +12,9 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 - ✅ **Milestone 6**: Flashcard Practice Mode (SRS scheduling with flip animations)
 - ✅ **Milestone 7**: Quiz & Context Practice Modes (Multiple choice questions and word practice)
 - ✅ **Milestone 8**: Stroke Order Practice (Interactive drawing canvas with validation)
+- ✅ **Milestone 9**: Dark Theme Support (Light/Dark/Auto modes with full UI coverage)
 - ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji (first 5 with stroke data)
-- 🚧 **Next**: Polish UI, Results Screen improvements, Settings
+- 🚧 **Next**: Streak tracking, Progress charts, Performance optimization
 
 ## Prerequisites
 - Node.js >= 18
@@ -76,6 +77,11 @@ Use tunnel mode when:
 ## Features
 
 ### Implemented
+- 🎨 **Dark Theme**: Complete dark mode support
+  - Three theme modes: Light, Dark, and Auto (follows system)
+  - Persistent preference across app restarts
+  - Full coverage: all screens, navigation bars, and components
+  - Material Design 3 color system
 - 📱 **Bottom Tab Navigation**: Home, Practice, Progress, Settings
 - 📝 **Kanji List**: Browse 25 most common kanji characters by frequency
 - 🔍 **Detail View**: View comprehensive kanji information:
@@ -134,9 +140,10 @@ Use tunnel mode when:
   - Uses React Native SVG and PanResponder for gesture handling
 
 ### Planned
-- 🔥 **Streak System**: Daily study tracking
-- 📊 **Expanded Dataset**: Add more kanji with stroke order data
-- 🎯 **Results Screen**: Enhanced session summary with detailed statistics
+- 🔥 **Streak System**: Daily study tracking with notifications
+- 📊 **Progress Charts**: Visual analytics for study statistics
+- 📈 **Expanded Dataset**: Add more kanji with stroke order data
+- ⚡ **Performance Optimization**: Lazy loading and caching
 
 ## Project Structure
 ```

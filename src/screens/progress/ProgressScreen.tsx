@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Button } from 'react-native-paper';
+import { Text, Card, Button, useTheme } from 'react-native-paper';
 import { useProgressStore } from '../../store/progressStore';
 
 export default function ProgressScreen() {
+  const theme = useTheme();
   const { studyStats, kanjiProgress, isLoaded, clearProgress } = useProgressStore();
 
   const totalKanjiWithProgress = Object.keys(kanjiProgress).length;
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Card style={styles.card}>
         <Card.Content>
           <Text variant="headlineMedium" style={styles.title}>
             Your Progress
           </Text>
-          <Text variant="bodySmall" style={styles.subtitle}>
+          <Text variant="bodySmall" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
             {isLoaded ? 'Data loaded from storage' : 'Loading...'}
           </Text>
         </Card.Content>
@@ -76,7 +77,7 @@ export default function ProgressScreen() {
           <Text variant="titleMedium" style={styles.sectionTitle}>
             Storage Test
           </Text>
-          <Text variant="bodySmall" style={styles.helpText}>
+          <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
             Progress is automatically saved. Clear data to reset your progress.
           </Text>
           <Button
@@ -98,7 +99,6 @@ export default function ProgressScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   card: {
     margin: 16,
@@ -110,14 +110,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   subtitle: {
-    color: '#666',
+    // color set dynamically
   },
   sectionTitle: {
     fontWeight: 'bold',
     marginBottom: 16,
   },
   helpText: {
-    color: '#666',
+    // color set dynamically
     marginBottom: 12,
   },
   statRow: {
@@ -125,8 +125,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   statValue: {
     fontWeight: 'bold',

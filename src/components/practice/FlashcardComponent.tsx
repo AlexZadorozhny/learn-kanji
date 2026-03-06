@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Pressable, Animated } from 'react-native';
-import { Card, Text, IconButton } from 'react-native-paper';
+import { Card, Text, IconButton, useTheme } from 'react-native-paper';
 import { KanjiCharacter } from '../../types/kanji';
 import { TTSService } from '../../services/audio/TTSService';
 import { HapticService } from '../../services/feedback/HapticService';
@@ -11,6 +11,7 @@ interface FlashcardComponentProps {
 }
 
 export default function FlashcardComponent({ kanji, onRate }: FlashcardComponentProps) {
+  const theme = useTheme();
   const [showAnswer, setShowAnswer] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const flipAnimation = useRef(new Animated.Value(0)).current;
@@ -116,10 +117,10 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
             },
           ]}
         >
-          <Card style={styles.innerCard}>
+          <Card style={[styles.innerCard, { backgroundColor: theme.colors.surface }]}>
             <View style={styles.content}>
-              <Text style={styles.kanjiText}>{kanji.character}</Text>
-              <Text variant="titleLarge" style={styles.hint}>
+              <Text style={[styles.kanjiText, { color: theme.colors.primary }]}>{kanji.character}</Text>
+              <Text variant="titleLarge" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
                 👆 Tap to reveal answer
               </Text>
             </View>
@@ -138,10 +139,10 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
               },
             ]}
           >
-          <Card style={styles.innerCard}>
+          <Card style={[styles.innerCard, { backgroundColor: theme.colors.surface }]}>
             <View style={styles.content}>
               <View style={styles.answerHeader}>
-                <Text style={styles.kanjiTextSmall}>{kanji.character}</Text>
+                <Text style={[styles.kanjiTextSmall, { color: theme.colors.primary }]}>{kanji.character}</Text>
                 <IconButton
                   icon={speaking ? 'stop' : 'volume-high'}
                   size={24}
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     elevation: 4,
-    backgroundColor: '#fff',
+    // backgroundColor set dynamically
   },
   content: {
     width: '100%',
@@ -250,16 +251,16 @@ const styles = StyleSheet.create({
   kanjiText: {
     fontSize: 120,
     fontWeight: 'bold',
-    color: '#6200ee',
+    // color set dynamically
     marginBottom: 20,
   },
   kanjiTextSmall: {
     fontSize: 60,
     fontWeight: 'bold',
-    color: '#6200ee',
+    // color set dynamically
   },
   hint: {
-    color: '#666',
+    // color set dynamically
     textAlign: 'center',
   },
   answerHeader: {

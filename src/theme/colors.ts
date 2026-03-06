@@ -1,4 +1,4 @@
-export const colors = {
+export const lightColors = {
   primary: '#6200EE',
   primaryLight: '#9D46FF',
   primaryDark: '#0A00B6',
@@ -17,3 +17,26 @@ export const colors = {
   border: '#E0E0E0',
   divider: '#EEEEEE',
 };
+
+export const darkColors = {
+  primary: '#BB86FC',
+  primaryLight: '#E1BEE7',
+  primaryDark: '#7F39FB',
+  secondary: '#03DAC6',
+  secondaryLight: '#66FFF9',
+  secondaryDark: '#00A896',
+  background: '#121212',
+  surface: '#1E1E1E',
+  error: '#CF6679',
+  success: '#81C784',
+  warning: '#FFB74D',
+  info: '#64B5F6',
+  text: '#FFFFFF',
+  textSecondary: '#B3B3B3',
+  textDisabled: '#666666',
+  border: '#2C2C2C',
+  divider: '#2C2C2C',
+};
+
+// For backward compatibility
+export const colors = lightColors;

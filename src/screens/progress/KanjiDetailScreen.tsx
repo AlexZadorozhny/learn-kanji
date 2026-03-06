@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Chip, Divider, IconButton } from 'react-native-paper';
+import { Text, Card, Chip, Divider, IconButton, useTheme } from 'react-native-paper';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useKanjiStore } from '../../store/kanjiStore';
 import { HomeStackParamList } from '../../navigation/types';
@@ -10,6 +10,7 @@ import { TTSService } from '../../services/audio/TTSService';
 type KanjiDetailRouteProp = RouteProp<HomeStackParamList, 'KanjiDetail'>;
 
 export default function KanjiDetailScreen() {
+  const theme = useTheme();
   const route = useRoute<KanjiDetailRouteProp>();
   const { kanjiId } = route.params;
   const { getKanjiById } = useKanjiStore();
@@ -30,14 +31,14 @@ export default function KanjiDetailScreen() {
 
   if (!kanji) {
     return (
-      <View style={styles.centerContainer}>
+      <View style={[styles.centerContainer, { backgroundColor: theme.colors.background }]}>
         <Text variant="titleLarge">Kanji not found</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {/* Main Kanji Display */}
       <Card style={styles.card}>
         <Card.Content style={styles.mainContent}>
@@ -78,13 +79,13 @@ export default function KanjiDetailScreen() {
             <Text variant="titleMedium" style={styles.sectionTitle}>
               On-yomi (音読み)
             </Text>
-            <Text variant="bodySmall" style={styles.helpText}>
+            <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
               Chinese reading
             </Text>
             {kanji.onYomi.map((reading, index) => (
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
-                <Text style={styles.romajiText}>({reading.romaji})</Text>
+                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>({reading.romaji})</Text>
                 <IconButton
                   icon={speakingId === `on-${index}` ? "stop" : "volume-high"}
                   size={20}
@@ -104,13 +105,13 @@ export default function KanjiDetailScreen() {
             <Text variant="titleMedium" style={styles.sectionTitle}>
               Kun-yomi (訓読み)
             </Text>
-            <Text variant="bodySmall" style={styles.helpText}>
+            <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
               Japanese reading
             </Text>
             {kanji.kunYomi.map((reading, index) => (
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
-                <Text style={styles.romajiText}>({reading.romaji})</Text>
+                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>({reading.romaji})</Text>
                 <IconButton
                   icon={speakingId === `kun-${index}` ? "stop" : "volume-high"}
                   size={20}
@@ -143,9 +144,9 @@ export default function KanjiDetailScreen() {
                       style={styles.speakerButton}
                     />
                   </View>
-                  <Text style={styles.wordReading}>{word.reading}</Text>
-                  <Text style={styles.wordRomaji}>({word.romaji})</Text>
-                  <Text style={styles.wordMeaning}>{word.meaning}</Text>
+                  <Text style={[styles.wordReading, { color: theme.colors.onSurface }]}>{word.reading}</Text>
+                  <Text style={[styles.wordRomaji, { color: theme.colors.onSurfaceVariant }]}>({word.romaji})</Text>
+                  <Text style={[styles.wordMeaning, { color: theme.colors.onSurface }]}>{word.meaning}</Text>
                 </View>
               </View>
             ))}
@@ -161,7 +162,6 @@ export default function KanjiDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   centerContainer: {
     flex: 1,
@@ -194,7 +194,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   helpText: {
-    color: '#666',
     marginBottom: 12,
   },
   meaningContainer: {
@@ -218,7 +217,6 @@ const styles = StyleSheet.create({
   },
   romajiText: {
     fontSize: 16,
-    color: '#666',
     flex: 1,
   },
   speakerButton: {
@@ -240,17 +238,14 @@ const styles = StyleSheet.create({
   },
   wordReading: {
     fontSize: 16,
-    color: '#444',
     marginBottom: 2,
   },
   wordRomaji: {
     fontSize: 14,
-    color: '#666',
     marginBottom: 4,
   },
   wordMeaning: {
     fontSize: 16,
-    color: '#333',
   },
   divider: {
     marginVertical: 8,

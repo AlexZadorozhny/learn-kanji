@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTheme } from 'react-native-paper';
 import HomeStackNavigator from './HomeStackNavigator';
 import PracticeStackNavigator from './PracticeStackNavigator';
 import ProgressScreen from '../screens/progress/ProgressScreen';
@@ -9,11 +10,21 @@ import SettingsScreen from '../screens/settings/SettingsScreen';
 const Tab = createBottomTabNavigator();
 
 export default function MainTabNavigator() {
+  const theme = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#6200EE',
-        tabBarInactiveTintColor: '#666666',
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
+        tabBarStyle: {
+          backgroundColor: theme.colors.surface,
+          borderTopColor: theme.colors.outline,
+        },
+        headerStyle: {
+          backgroundColor: theme.colors.surface,
+        },
+        headerTintColor: theme.colors.onSurface,
       }}
     >
       <Tab.Screen

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Button } from 'react-native-paper';
+import { Text, Card, Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -14,6 +14,7 @@ type PracticeModeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 export default function PracticeModeScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<PracticeModeScreenNavigationProp>();
   const { kanjiProgress } = useProgressStore();
   const { kanjiData } = useKanjiStore();
@@ -30,18 +31,18 @@ export default function PracticeModeScreen() {
   ).length;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <Text variant="headlineMedium" style={styles.title}>
           Practice Modes
         </Text>
-        <Text variant="bodyMedium" style={styles.subtitle}>
+        <Text variant="bodyMedium" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
           Choose how you want to practice
         </Text>
       </View>
 
       {availableCards > 0 && (
-        <Card style={styles.infoCard}>
+        <Card style={[styles.infoCard, { backgroundColor: theme.dark ? theme.colors.primaryContainer : '#e3f2fd' }]}>
           <Card.Content>
             <Text variant="titleMedium" style={styles.infoTitle}>
               📚 Cards Ready
@@ -58,7 +59,7 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             🎴 Flashcards
           </Text>
-          <Text variant="bodyMedium" style={styles.modeDescription}>
+          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
             Test your recognition with spaced repetition. See the kanji, recall the meaning
             and reading, then rate your confidence.
           </Text>
@@ -78,7 +79,7 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             ✍️ Stroke Order
           </Text>
-          <Text variant="bodyMedium" style={styles.modeDescription}>
+          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
             Practice writing kanji with correct stroke order. Draw each stroke and get
             instant feedback.
           </Text>
@@ -98,7 +99,7 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             ❓ Multiple Choice
           </Text>
-          <Text variant="bodyMedium" style={styles.modeDescription}>
+          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
             Test your knowledge with quiz questions. Choose the correct meaning, reading, or
             kanji from multiple options.
           </Text>
@@ -118,7 +119,7 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             📚 Context Practice
           </Text>
-          <Text variant="bodyMedium" style={styles.modeDescription}>
+          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
             Learn kanji in real words and phrases. See how kanji are used in Japanese
             language.
           </Text>
@@ -141,12 +142,10 @@ export default function PracticeModeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     padding: 20,
     paddingTop: 40,
-    backgroundColor: '#fff',
     elevation: 2,
   },
   title: {
@@ -154,12 +153,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   subtitle: {
-    color: '#666',
+    // color set dynamically
   },
   infoCard: {
     margin: 16,
     marginBottom: 8,
-    backgroundColor: '#e3f2fd',
+    // backgroundColor set dynamically
     elevation: 2,
   },
   infoTitle: {
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   modeDescription: {
-    color: '#666',
+    // color set dynamically
     marginBottom: 16,
     lineHeight: 20,
   },

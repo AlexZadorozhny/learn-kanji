@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Button, IconButton } from 'react-native-paper';
+import { Text, Card, Button, IconButton, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -14,6 +14,7 @@ type ResultsScreenNavigationProp = NativeStackNavigationProp<
 type ResultsScreenRouteProp = RouteProp<PracticeStackParamList, 'ResultsScreen'>;
 
 export default function ResultsScreen() {
+  const theme = useTheme();
   const navigation = useNavigation<ResultsScreenNavigationProp>();
   const route = useRoute<ResultsScreenRouteProp>();
   const { currentSession } = usePracticeStore();
@@ -31,8 +32,8 @@ export default function ResultsScreen() {
   const avgTime = totalCount > 0 ? totalTime / totalCount : 0;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
@@ -54,28 +55,28 @@ export default function ResultsScreen() {
 
           <View style={styles.statsGrid}>
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={styles.statValue}>
+              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
                 {correctCount}/{totalCount}
               </Text>
-              <Text variant="bodyMedium" style={styles.statLabel}>
+              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
                 Correct
               </Text>
             </View>
 
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={styles.statValue}>
+              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
                 {accuracy.toFixed(0)}%
               </Text>
-              <Text variant="bodyMedium" style={styles.statLabel}>
+              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
                 Accuracy
               </Text>
             </View>
 
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={styles.statValue}>
+              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
                 {avgTime.toFixed(0)}s
               </Text>
-              <Text variant="bodyMedium" style={styles.statLabel}>
+              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
                 Avg Time
               </Text>
             </View>
@@ -94,13 +95,13 @@ export default function ResultsScreen() {
             if (!kanji) return null;
 
             return (
-              <View key={index} style={styles.resultRow}>
-                <View style={styles.resultIcon}>
+              <View key={index} style={[styles.resultRow, { borderBottomColor: theme.colors.surfaceVariant }]}>
+                <View style={[styles.resultIcon, { backgroundColor: theme.colors.surfaceVariant }]}>
                   <Text style={styles.resultKanji}>{kanji.character}</Text>
                 </View>
                 <View style={styles.resultDetails}>
                   <Text variant="bodyLarge">{kanji.meanings[0]}</Text>
-                  <Text variant="bodySmall" style={styles.resultTime}>
+                  <Text variant="bodySmall" style={[styles.resultTime, { color: theme.colors.onSurfaceVariant }]}>
                     {result.timeSpent}s
                   </Text>
                 </View>
@@ -142,14 +143,12 @@ export default function ResultsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
     paddingTop: 50, // Account for status bar
-    backgroundColor: '#fff',
     elevation: 2,
   },
   headerTitle: {
@@ -179,10 +178,8 @@ const styles = StyleSheet.create({
   },
   statValue: {
     fontWeight: 'bold',
-    color: '#6200ee',
   },
   statLabel: {
-    color: '#666',
     marginTop: 4,
   },
   sectionTitle: {
@@ -194,13 +191,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
   },
   resultIcon: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -213,7 +208,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   resultTime: {
-    color: '#999',
     marginTop: 2,
   },
   actions: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { Card, Text, useTheme } from 'react-native-paper';
 import { KanjiCharacter } from '../../types/kanji';
 import { typography } from '../../theme/theme';
 
@@ -10,6 +10,8 @@ interface KanjiCardProps {
 }
 
 export default function KanjiCard({ kanji, onPress }: KanjiCardProps) {
+  const theme = useTheme();
+
   return (
     <Card style={styles.card} onPress={onPress}>
       <Card.Content>
@@ -19,7 +21,7 @@ export default function KanjiCard({ kanji, onPress }: KanjiCardProps) {
             <Text variant="titleMedium" style={styles.meanings}>
               {kanji.meanings.join(', ')}
             </Text>
-            <Text variant="bodySmall" style={styles.readings}>
+            <Text variant="bodySmall" style={[styles.readings, { color: theme.colors.onSurfaceVariant }]}>
               {kanji.onYomi.map(r => r.reading).join(', ')}
             </Text>
           </View>
@@ -53,6 +55,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   readings: {
-    color: '#666',
+    // color set dynamically
   },
 });
