@@ -9,14 +9,15 @@
 - ✅ **Phase 4**: Flashcard Practice Mode - SRS system, flip animations, haptic feedback, results screen
 - ✅ **Phase 5**: Stroke Order Writing - Interactive canvas with validation (simplified approach)
 - ✅ **Phase 6**: Quiz & Context Modes - Multiple choice questions, context word practice
-- ✅ **Phase 7 (Partial)**: Dark Theme - Light/Dark/Auto modes with full UI coverage
-- ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji (5 with stroke data)
+- ✅ **Phase 7**: Dark Theme & Complete Stroke Data - Light/Dark/Auto modes with full UI coverage
+- ✅ **Stroke Data Completion**: All 25 kanji now have complete stroke order data + randomized practice
 
 **Next Steps:**
-- 🚧 **Phase 7**: Complete remaining polish items (charts, streak tracking, optimization)
-- 🔜 **Phase 8**: Testing & Refinement
+- 🚧 **Phase 8**: Dataset expansion to 100 kanji with stroke order data
+- 🔜 **Phase 9**: Polish items (charts, streak tracking, performance optimization)
+- 🔜 **Phase 10**: Testing & Refinement
 
-**Current Dataset:** 25 kanji characters (frequency rank 1-25), 5 with stroke order data (一, 二, 三, 人, 日)
+**Current Dataset:** 25 kanji characters (frequency rank 1-25), **all 25 with complete stroke order data**
 
 ---
 
@@ -25,7 +26,7 @@
 Transform the minimal "Hello World" Expo app into a comprehensive Japanese Kanji learning application. The app will teach users to read, write, and pronounce kanji symbols through four practice modes: flashcard recognition, stroke order writing, multiple choice quizzes, and contextual word/phrase practice.
 
 **Original State**: Single-screen app (`App.tsx`) with basic Expo setup, no navigation or features.
-**Current State**: Full navigation system, 25 kanji dataset (5 with stroke data), all 4 practice modes complete (flashcards with SRS, multiple choice quiz, context practice, stroke order writing), comprehensive progress tracking, TTS pronunciation, haptic feedback.
+**Current State**: Full navigation system, 25 kanji dataset (all with complete stroke order data), all 4 practice modes complete (flashcards with SRS, multiple choice quiz, context practice, stroke order writing with randomized selection), comprehensive progress tracking, TTS pronunciation, haptic feedback, dark theme support.
 
 **User Requirements**:
 - **Data**: Local embedded database (offline-first)

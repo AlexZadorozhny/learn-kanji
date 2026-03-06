@@ -2,7 +2,7 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Dark Theme Complete ✅
+## Current Status: Full Stroke Order Data Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 25 sample characters)
@@ -13,8 +13,8 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 - ✅ **Milestone 7**: Quiz & Context Practice Modes (Multiple choice questions and word practice)
 - ✅ **Milestone 8**: Stroke Order Practice (Interactive drawing canvas with validation)
 - ✅ **Milestone 9**: Dark Theme Support (Light/Dark/Auto modes with full UI coverage)
-- ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji (first 5 with stroke data)
-- 🚧 **Next**: Streak tracking, Progress charts, Performance optimization
+- ✅ **Milestone 10**: Complete Stroke Order Data (All 25 kanji with stroke paths + randomized practice)
+- 🚧 **Next**: Dataset expansion to 100 kanji, Streak tracking, Progress charts
 
 ## Prerequisites
 - Node.js >= 18
@@ -135,8 +135,9 @@ Use tunnel mode when:
   - Incorrect strokes shown in red for 2 seconds
   - Undo and clear functionality
   - Writing score tracking (0-100)
-  - Supports multi-stroke kanji (一, 二, 三, 人, 日)
-  - Session management for up to 5 kanji
+  - **All 25 kanji supported** with complete stroke order data
+  - **Randomized selection**: Each session picks 5 random kanji for variety
+  - Session management for up to 5 kanji per practice
   - Uses React Native SVG and PanResponder for gesture handling
 
 ### Planned

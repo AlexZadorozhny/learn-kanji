@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 9 Complete - Dark Theme implemented with Light/Dark/Auto modes, All 4 practice modes complete, Dataset: 25 kanji (5 with stroke data)
+**Current Status:** Milestone 10 Complete - All 25 kanji now have complete stroke order data, All 4 practice modes complete with randomized stroke practice, Dark Theme implemented
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -183,7 +183,7 @@ rm -rf node_modules && npm install
 
 **Kanji Data:**
 - 25 most common kanji by frequency rank
-- First 5 kanji include stroke order data (SVG paths): 一, 二, 三, 人, 日
+- **All 25 kanji now include complete stroke order data** (SVG paths)
 - Each includes: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
 - Located in `src/data/sample-data.ts`
 
@@ -193,7 +193,8 @@ rm -rf node_modules && npm install
 - Validation: bounding box approach (50% overlap threshold, ±25 unit tolerance)
 - Visual feedback: guide strokes (dashed gray), user strokes (purple), incorrect (red for 2s)
 - **Critical pattern**: Uses refs (`currentDrawingRef`, `currentStrokeIndexRef`) to avoid React state closure bugs in gesture handlers
-- Session management: max 5 kanji, tracks correct/total strokes
+- **Random selection**: Each session randomly picks 5 kanji from all available stroke data for variety
+- Session management: max 5 kanji per session, tracks correct/total strokes
 - Updates writingScore (0-100) per kanji
 - Implemented in `src/components/kanji/StrokeOrderCanvas.tsx` (434 lines) and `src/screens/practice/StrokeOrderScreen.tsx`
 
