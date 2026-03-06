@@ -2,15 +2,16 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Milestone 6 Complete ✅
+## Current Status: Dataset Expansion Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
-- ✅ **Milestone 2**: Data Display (Kanji list with 5 sample characters)
+- ✅ **Milestone 2**: Data Display (Kanji list with 25 sample characters)
 - ✅ **Milestone 3**: Navigation Flow (Detail screen with full kanji information)
 - ✅ **Milestone 4**: Audio/TTS Pronunciation (Japanese text-to-speech for all readings)
 - ✅ **Milestone 5**: Data Persistence (AsyncStorage integration with auto-save)
 - ✅ **Milestone 6**: Flashcard Practice Mode (SRS scheduling with flip animations)
-- 🚧 **Next**: Milestone 7 - Expand kanji dataset and additional features
+- ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji
+- 🚧 **Next**: Milestone 7 - Stroke Order Practice or Quiz Modes
 
 ## Prerequisites
 - Node.js >= 18
@@ -74,7 +75,7 @@ Use tunnel mode when:
 
 ### Implemented
 - 📱 **Bottom Tab Navigation**: Home, Practice, Progress, Settings
-- 📝 **Kanji List**: Browse 5 sample kanji characters (一、二、三、人、日)
+- 📝 **Kanji List**: Browse 25 most common kanji characters by frequency
 - 🔍 **Detail View**: View comprehensive kanji information:
   - Character display with stroke count
   - English meanings
@@ -130,7 +131,7 @@ simple-mobile/
     │   └── practice/
     │       └── FlashcardComponent.tsx  # Flashcard with flip animation
     ├── data/
-    │   └── sample-data.ts     # Sample kanji data (5 characters)
+    │   └── sample-data.ts     # Sample kanji data (25 characters)
     ├── navigation/
     │   ├── RootNavigator.tsx
     │   ├── MainTabNavigator.tsx
@@ -218,12 +219,13 @@ Each kanji includes:
 - **Grade level**: Japanese school grade (1-6)
 
 ### Sample Data
-Currently includes 5 basic kanji:
-- **一** (ichi) - one
-- **二** (ni) - two
-- **三** (san) - three
-- **人** (hito) - person
-- **日** (hi) - day/sun
+Currently includes 25 most common kanji by frequency rank:
+- **Numbers**: 一 (one), 二 (two), 三 (three)
+- **People & Life**: 人 (person), 生 (life), 子 (child)
+- **Time**: 日 (day/sun), 年 (year), 時 (time), 月 (month), 分 (minute), 間 (interval)
+- **Places**: 国 (country), 上 (up), 下 (down), 中 (middle), 前 (front), 後 (back)
+- **Actions**: 出 (exit), 行 (go), 見 (see), 学 (study)
+- **Things**: 本 (book), 手 (hand), 大 (big)
 
 ## Development Tips
 
