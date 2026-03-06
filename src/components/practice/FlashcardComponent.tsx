@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Pressable } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, Pressable, Animated } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
 import { KanjiCharacter } from '../../types/kanji';
 import { TTSService } from '../../services/audio/TTSService';
@@ -12,8 +12,18 @@ interface FlashcardComponentProps {
 export default function FlashcardComponent({ kanji, onRate }: FlashcardComponentProps) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [speaking, setSpeaking] = useState(false);
+  const flipAnimation = useRef(new Animated.Value(0)).current;
 
   const handleFlip = () => {
+    const toValue = showAnswer ? 0 : 180;
+
+    Animated.spring(flipAnimation, {
+      toValue,
+      friction: 8,
+      tension: 10,
+      useNativeDriver: true,
+    }).start();
+
     setShowAnswer(!showAnswer);
   };
 
@@ -34,11 +44,26 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
     }
   };
 
+  const frontInterpolate = flipAnimation.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['0deg', '180deg'],
+  });
+
+  const backInterpolate = flipAnimation.interpolate({
+    inputRange: [0, 180],
+    outputRange: ['180deg', '360deg'],
+  });
+
   return (
     <View style={styles.container}>
-      {!showAnswer ? (
-        // Front of card - show kanji
-        <Pressable onPress={handleFlip} style={styles.cardContainer}>
+      <Pressable onPress={handleFlip} style={styles.cardContainer}>
+        {/* Front of card - show kanji */}
+        <Animated.View
+          style={[
+            styles.cardSide,
+            { transform: [{ rotateY: frontInterpolate }] },
+          ]}
+        >
           <Card style={styles.innerCard}>
             <View style={styles.content}>
               <Text style={styles.kanjiText}>{kanji.character}</Text>
@@ -47,10 +72,16 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
               </Text>
             </View>
           </Card>
-        </Pressable>
-      ) : (
-        // Back of card - show answer
-        <Pressable onPress={handleFlip} style={styles.cardContainer}>
+        </Animated.View>
+
+        {/* Back of card - show answer */}
+        <Animated.View
+          style={[
+            styles.cardSide,
+            styles.cardBack,
+            { transform: [{ rotateY: backInterpolate }] },
+          ]}
+        >
           <Card style={styles.innerCard}>
             <View style={styles.content}>
               <View style={styles.answerHeader}>
@@ -87,8 +118,8 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
               </View>
             </View>
           </Card>
-        </Pressable>
-      )}
+        </Animated.View>
+      </Pressable>
 
       {showAnswer && (
         <View style={styles.ratingButtons}>
@@ -140,6 +171,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 400,
     marginBottom: 20,
+  },
+  cardSide: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+  },
+  cardBack: {
+    transform: [{ rotateY: '180deg' }],
   },
   innerCard: {
     width: '100%',
