@@ -1,12 +1,17 @@
 import { create } from 'zustand';
 import { KanjiProgress, StudyStats } from '../types/progress';
+import { StorageService } from '../services/storage/StorageService';
 
 interface ProgressStore {
   kanjiProgress: Record<string, KanjiProgress>;
   studyStats: StudyStats;
+  isLoaded: boolean;
   updateKanjiProgress: (kanjiId: string, progress: Partial<KanjiProgress>) => void;
   getKanjiProgress: (kanjiId: string) => KanjiProgress | undefined;
   updateStudyStats: (stats: Partial<StudyStats>) => void;
+  loadProgress: () => Promise<void>;
+  saveProgress: () => Promise<void>;
+  clearProgress: () => Promise<void>;
 }
 
 const initialStudyStats: StudyStats = {
@@ -21,6 +26,7 @@ const initialStudyStats: StudyStats = {
 export const useProgressStore = create<ProgressStore>((set, get) => ({
   kanjiProgress: {},
   studyStats: initialStudyStats,
+  isLoaded: false,
 
   updateKanjiProgress: (kanjiId, progress) => {
     set((state) => ({
@@ -47,6 +53,8 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         },
       },
     }));
+    // Auto-save after update
+    get().saveProgress();
   },
 
   getKanjiProgress: (kanjiId) => {
@@ -60,5 +68,53 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         ...stats,
       },
     }));
+    // Auto-save after update
+    get().saveProgress();
+  },
+
+  loadProgress: async () => {
+    try {
+      const [savedProgress, savedStats] = await Promise.all([
+        StorageService.getUserProgress<Record<string, KanjiProgress>>(),
+        StorageService.getStudyStats<StudyStats>(),
+      ]);
+
+      set({
+        kanjiProgress: savedProgress || {},
+        studyStats: savedStats || initialStudyStats,
+        isLoaded: true,
+      });
+
+      console.log('Progress loaded from storage');
+    } catch (error) {
+      console.error('Failed to load progress:', error);
+      set({ isLoaded: true });
+    }
+  },
+
+  saveProgress: async () => {
+    try {
+      const { kanjiProgress, studyStats } = get();
+      await Promise.all([
+        StorageService.saveUserProgress(kanjiProgress),
+        StorageService.saveStudyStats(studyStats),
+      ]);
+      console.log('Progress saved to storage');
+    } catch (error) {
+      console.error('Failed to save progress:', error);
+    }
+  },
+
+  clearProgress: async () => {
+    try {
+      await StorageService.clearAll();
+      set({
+        kanjiProgress: {},
+        studyStats: initialStudyStats,
+      });
+      console.log('Progress cleared');
+    } catch (error) {
+      console.error('Failed to clear progress:', error);
+    }
   },
 }));

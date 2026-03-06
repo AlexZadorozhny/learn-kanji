@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { Text, ActivityIndicator } from 'react-native-paper';
+import { Text, ActivityIndicator, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useKanjiStore } from '../../store/kanjiStore';
+import { useProgressStore } from '../../store/progressStore';
 import KanjiCard from '../../components/kanji/KanjiCard';
 import { HomeStackParamList } from '../../navigation/types';
 
@@ -12,10 +13,19 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'H
 export default function HomeScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { kanjiData, loading, loadKanji } = useKanjiStore();
+  const { studyStats, updateStudyStats } = useProgressStore();
 
   useEffect(() => {
     loadKanji();
   }, []);
+
+  const handleTestPersistence = () => {
+    // Increment study stats to test persistence
+    updateStudyStats({
+      totalKanjiStudied: studyStats.totalKanjiStudied + 1,
+      totalStudyTimeMinutes: studyStats.totalStudyTimeMinutes + 5,
+    });
+  };
 
   if (loading) {
     return (
@@ -43,6 +53,14 @@ export default function HomeScreen() {
             <Text variant="bodyMedium" style={styles.subtitle}>
               {kanjiData.length} characters available
             </Text>
+            <Button
+              mode="outlined"
+              onPress={handleTestPersistence}
+              style={styles.testButton}
+              icon="test-tube"
+            >
+              Test Storage (+1 study)
+            </Button>
           </View>
         )}
       />
@@ -69,6 +87,10 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: '#666',
+    marginBottom: 12,
+  },
+  testButton: {
+    marginTop: 4,
   },
   listContent: {
     paddingVertical: 8,
