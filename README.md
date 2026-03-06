@@ -2,7 +2,7 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Quiz & Context Practice Complete ✅
+## Current Status: Stroke Order Practice Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 25 sample characters)
@@ -11,8 +11,9 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 - ✅ **Milestone 5**: Data Persistence (AsyncStorage integration with auto-save)
 - ✅ **Milestone 6**: Flashcard Practice Mode (SRS scheduling with flip animations)
 - ✅ **Milestone 7**: Quiz & Context Practice Modes (Multiple choice questions and word practice)
-- ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji
-- 🚧 **Next**: Polish UI, Results Screen improvements, Stroke Order Practice
+- ✅ **Milestone 8**: Stroke Order Practice (Interactive drawing canvas with validation)
+- ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji (first 5 with stroke data)
+- 🚧 **Next**: Polish UI, Results Screen improvements, Settings
 
 ## Prerequisites
 - Node.js >= 18
@@ -121,11 +122,20 @@ Use tunnel mode when:
   - Binary scoring: "Got It!" or "Need Practice"
   - Context score tracking (0-100)
   - Max 10 kanji per session
+- ✍️ **Stroke Order Practice**: Interactive drawing canvas:
+  - Draw each stroke in correct order with real-time validation
+  - Visual feedback with guide strokes (toggle on/off)
+  - Simplified bounding box validation (50% threshold, 25 unit tolerance)
+  - Incorrect strokes shown in red for 2 seconds
+  - Undo and clear functionality
+  - Writing score tracking (0-100)
+  - Supports multi-stroke kanji (一, 二, 三, 人, 日)
+  - Session management for up to 5 kanji
+  - Uses React Native SVG and PanResponder for gesture handling
 
 ### Planned
-- ✍️ **Stroke Order Practice**: Interactive drawing canvas
 - 🔥 **Streak System**: Daily study tracking
-- 📊 **Expanded Dataset**: Add more kanji characters
+- 📊 **Expanded Dataset**: Add more kanji with stroke order data
 - 🎯 **Results Screen**: Enhanced session summary with detailed statistics
 
 ## Project Structure
@@ -141,7 +151,8 @@ simple-mobile/
 └── src/
     ├── components/
     │   ├── kanji/
-    │   │   └── KanjiCard.tsx  # Kanji card component
+    │   │   ├── KanjiCard.tsx  # Kanji card component
+    │   │   └── StrokeOrderCanvas.tsx  # Interactive drawing canvas
     │   └── practice/
     │       └── FlashcardComponent.tsx  # Flashcard with flip animation
     ├── data/
@@ -158,6 +169,7 @@ simple-mobile/
     │   ├── practice/
     │   │   ├── PracticeModeScreen.tsx
     │   │   ├── FlashcardScreen.tsx
+    │   │   ├── StrokeOrderScreen.tsx
     │   │   ├── MultipleChoiceScreen.tsx
     │   │   ├── ContextPracticeScreen.tsx
     │   │   └── ResultsScreen.tsx

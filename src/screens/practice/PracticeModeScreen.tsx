@@ -24,6 +24,11 @@ export default function PracticeModeScreen() {
   const newKanji = SRSService.getNewKanji(allKanjiIds, kanjiProgress, 5);
   const availableCards = dueKanji.length + newKanji.length;
 
+  // Count kanji with stroke order data
+  const kanjiWithStrokeData = kanjiData.filter(
+    (k) => k.strokeOrder && k.strokeOrder.length > 0
+  ).length;
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -68,7 +73,7 @@ export default function PracticeModeScreen() {
         </Card.Content>
       </Card>
 
-      <Card style={[styles.card, styles.disabledCard]}>
+      <Card style={styles.card}>
         <Card.Content>
           <Text variant="titleLarge" style={styles.modeTitle}>
             ✍️ Stroke Order
@@ -77,8 +82,13 @@ export default function PracticeModeScreen() {
             Practice writing kanji with correct stroke order. Draw each stroke and get
             instant feedback.
           </Text>
-          <Button mode="outlined" disabled style={styles.button}>
-            Coming Soon
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate('StrokeOrderScreen', {})}
+            style={styles.button}
+            disabled={kanjiWithStrokeData === 0}
+          >
+            {kanjiWithStrokeData > 0 ? `Start Practice (${Math.min(kanjiWithStrokeData, 5)} kanji)` : 'No kanji available'}
           </Button>
         </Card.Content>
       </Card>

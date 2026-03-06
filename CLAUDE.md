@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 7 Complete - Context Practice and Multiple Choice Quiz modes implemented, Dataset expanded to 25 kanji
+**Current Status:** Milestone 8 Complete - Stroke Order Practice implemented, All 4 practice modes complete, Dataset: 25 kanji (5 with stroke data)
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -64,12 +64,13 @@ pkill -f "expo start"
 **Application Structure:**
 - **Navigation**: Bottom tabs (Home, Practice, Progress, Settings) + stack navigators
 - **State Management**: Zustand stores (kanjiStore, progressStore, practiceStore)
-- **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters)
+- **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters, 5 with stroke data)
 - **Key Features**:
   - Kanji browsing and detail views with TTS pronunciation
   - Flashcard practice with SM-2 spaced repetition algorithm
   - Multiple choice quiz with 3 question types (kanji→meaning, meaning→kanji, kanji→reading)
   - Context practice through example words with TTS
+  - Stroke order practice with interactive canvas and validation
   - Progress tracking with 4 score types (recognition, reading, writing, context)
   - Haptic feedback for interactions
 
@@ -181,8 +182,19 @@ rm -rf node_modules && npm install
 
 **Kanji Data:**
 - 25 most common kanji by frequency rank
+- First 5 kanji include stroke order data (SVG paths): 一, 二, 三, 人, 日
 - Each includes: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
 - Located in `src/data/sample-data.ts`
+
+**Stroke Order Practice:**
+- Uses React Native SVG + PanResponder (simplified approach, no Skia dependency)
+- Coordinate scaling: screen touch events → 100x100 SVG viewBox
+- Validation: bounding box approach (50% overlap threshold, ±25 unit tolerance)
+- Visual feedback: guide strokes (dashed gray), user strokes (purple), incorrect (red for 2s)
+- **Critical pattern**: Uses refs (`currentDrawingRef`, `currentStrokeIndexRef`) to avoid React state closure bugs in gesture handlers
+- Session management: max 5 kanji, tracks correct/total strokes
+- Updates writingScore (0-100) per kanji
+- Implemented in `src/components/kanji/StrokeOrderCanvas.tsx` (434 lines) and `src/screens/practice/StrokeOrderScreen.tsx`
 
 ## Prerequisites
 

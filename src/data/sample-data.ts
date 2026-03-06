@@ -15,6 +15,12 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ひとつ', romaji: 'hitotsu' },
     ],
     strokes: 1,
+    strokeOrder: [
+      {
+        path: 'M 10 50 L 90 50',
+        strokeNumber: 1,
+      },
+    ],
     radicals: ['一'],
     exampleWords: [
       {
@@ -52,6 +58,16 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ふたつ', romaji: 'futatsu' },
     ],
     strokes: 2,
+    strokeOrder: [
+      {
+        path: 'M 10 35 L 90 35',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 10 65 L 90 65',
+        strokeNumber: 2,
+      },
+    ],
     radicals: ['二'],
     exampleWords: [
       {
@@ -90,6 +106,20 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'みっつ', romaji: 'mittsu' },
     ],
     strokes: 3,
+    strokeOrder: [
+      {
+        path: 'M 10 25 L 90 25',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 10 50 L 90 50',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 10 75 L 90 75',
+        strokeNumber: 3,
+      },
+    ],
     radicals: ['一'],
     exampleWords: [
       {
@@ -127,6 +157,16 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ひと', romaji: 'hito' },
     ],
     strokes: 2,
+    strokeOrder: [
+      {
+        path: 'M 30 20 L 45 80',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 70 20 L 55 80',
+        strokeNumber: 2,
+      },
+    ],
     radicals: ['人'],
     exampleWords: [
       {
@@ -165,6 +205,24 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'か', romaji: 'ka' },
     ],
     strokes: 4,
+    strokeOrder: [
+      {
+        path: 'M 25 20 L 75 20',
+        strokeNumber: 1,
+      },
+      {
+        path: 'M 25 20 L 25 80',
+        strokeNumber: 2,
+      },
+      {
+        path: 'M 25 50 L 75 50',
+        strokeNumber: 3,
+      },
+      {
+        path: 'M 75 20 L 75 80 M 75 80 L 25 80',
+        strokeNumber: 4,
+      },
+    ],
     radicals: ['日'],
     exampleWords: [
       {

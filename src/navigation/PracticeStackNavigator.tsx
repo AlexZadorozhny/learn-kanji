@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from './types';
 import PracticeModeScreen from '../screens/practice/PracticeModeScreen';
 import FlashcardScreen from '../screens/practice/FlashcardScreen';
+import StrokeOrderScreen from '../screens/practice/StrokeOrderScreen';
 import MultipleChoiceScreen from '../screens/practice/MultipleChoiceScreen';
 import ContextPracticeScreen from '../screens/practice/ContextPracticeScreen';
 import ResultsScreen from '../screens/practice/ResultsScreen';
@@ -48,12 +49,11 @@ export default function PracticeStackNavigator() {
           headerShown: false, // Custom header in ContextPracticeScreen
         }}
       />
-      {/* Placeholder screen for future implementation */}
       <Stack.Screen
         name="StrokeOrderScreen"
-        component={PracticeModeScreen} // Placeholder
+        component={StrokeOrderScreen}
         options={{
-          title: 'Stroke Order Practice',
+          headerShown: false, // Custom header in StrokeOrderScreen
         }}
       />
     </Stack.Navigator>
