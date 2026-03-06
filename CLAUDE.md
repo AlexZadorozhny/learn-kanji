@@ -6,13 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A minimal React Native mobile application built with Expo. Targets iOS, Android, and Web platforms.
+A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
+
+**Current Status:** Milestone 6 Complete - Flashcard Practice Mode with SRS, Dataset expanded to 25 kanji
 
 **Tech Stack:**
 - Expo ~55.0.5
 - React Native 0.83.2
 - React 19.2.0
 - TypeScript 5.9.2 (strict mode enabled)
+- React Navigation v7 (bottom tabs + stack navigators)
+- React Native Paper v5 (Material Design 3 UI)
+- Zustand (state management)
+- AsyncStorage (local persistence)
 
 **Bundle Identifiers:**
 - iOS/Android: `com.simple.mobile`
@@ -48,15 +54,35 @@ pkill -f "expo start"
 
 **Entry Points:**
 - `index.ts` - Registers the root component via `registerRootComponent()`
-- `App.tsx` - Main application component with inline styles
+- `App.tsx` - Root navigation container with React Navigation and Paper theme provider
 
 **Configuration:**
 - `app.json` - Expo configuration for all platforms (avoid adding `updates` config for local dev)
 - `tsconfig.json` - Extends Expo's base config with strict mode
-- `babel.config.js` - **Required** - Uses `babel-preset-expo` for code transpilation
+- `babel.config.js` - **Required** - Uses `babel-preset-expo` + `react-native-reanimated/plugin`
 
-**Current Structure:**
-Single-file app architecture. All UI logic in `App.tsx` using React Native StyleSheet for styling.
+**Application Structure:**
+- **Navigation**: Bottom tabs (Home, Practice, Progress, Settings) + stack navigators
+- **State Management**: Zustand stores (kanjiStore, progressStore, practiceStore)
+- **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters)
+- **Key Features**:
+  - Kanji browsing and detail views with TTS pronunciation
+  - Flashcard practice with SM-2 spaced repetition algorithm
+  - Progress tracking with recognition scores
+  - Haptic feedback for interactions
+
+**Project Structure:**
+```
+src/
+├── components/       # Reusable UI components (KanjiCard, FlashcardComponent)
+├── data/            # Sample kanji data (25 characters)
+├── navigation/      # React Navigation setup (tabs, stacks, types)
+├── screens/         # Screen components (Home, Practice, Progress, Settings)
+├── services/        # Business logic (SRS, TTS, Storage, Haptics)
+├── store/           # Zustand state management
+├── theme/           # React Native Paper theme configuration
+└── types/           # TypeScript type definitions
+```
 
 ## Required Dependencies
 
@@ -71,9 +97,12 @@ module.exports = function(api) {
   api.cache(true);
   return {
     presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin'], // Must be last
   };
 };
 ```
+
+**IMPORTANT:** The `react-native-reanimated/plugin` must be the last item in the plugins array for animations to work correctly.
 
 ## Common Issues
 
@@ -107,6 +136,35 @@ rm -rf node_modules && npm install
 **Network Connection Issues:**
 - Use tunnel mode if device and computer are on different networks
 - Tunnel mode is slower but more reliable: `npx expo start --tunnel`
+
+## Key Implementation Details
+
+**Spaced Repetition System (SRS):**
+- Uses SM-2 algorithm for optimal review scheduling
+- Implemented in `src/services/practice/SRSService.ts`
+- Tracks easinessFactor, interval, and repetitions per kanji
+- Self-rating system: Again (1), Hard (2), Good (3), Easy (4)
+
+**Flashcard Animation:**
+- 3D flip animation using React Native Animated API
+- Conditional rendering prevents answer flash on card transitions
+- Key prop forces remount for clean state on each new card
+
+**Progress Tracking:**
+- AsyncStorage persistence via `src/services/storage/StorageService.ts`
+- Auto-save after every flashcard rating
+- Tracks recognition score (0-100) per kanji
+- Study stats: total time, streaks, mastered kanji count
+
+**Haptic Feedback:**
+- Context-aware vibration patterns for different ratings
+- Double-tap patterns simulate sound effects
+- Implemented in `src/services/feedback/HapticService.ts`
+
+**Kanji Data:**
+- 25 most common kanji by frequency rank
+- Each includes: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
+- Located in `src/data/sample-data.ts`
 
 ## Prerequisites
 
