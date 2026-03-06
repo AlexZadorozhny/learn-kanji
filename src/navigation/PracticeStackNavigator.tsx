@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from './types';
 import PracticeModeScreen from '../screens/practice/PracticeModeScreen';
 import FlashcardScreen from '../screens/practice/FlashcardScreen';
+import MultipleChoiceScreen from '../screens/practice/MultipleChoiceScreen';
+import ContextPracticeScreen from '../screens/practice/ContextPracticeScreen';
 import ResultsScreen from '../screens/practice/ResultsScreen';
 
 const Stack = createNativeStackNavigator<PracticeStackParamList>();
@@ -32,26 +34,26 @@ export default function PracticeStackNavigator() {
           gestureEnabled: false, // Prevent swipe back during results
         }}
       />
-      {/* Placeholder screens for future implementation */}
+      <Stack.Screen
+        name="MultipleChoiceScreen"
+        component={MultipleChoiceScreen}
+        options={{
+          headerShown: false, // Custom header in MultipleChoiceScreen
+        }}
+      />
+      <Stack.Screen
+        name="ContextPracticeScreen"
+        component={ContextPracticeScreen}
+        options={{
+          headerShown: false, // Custom header in ContextPracticeScreen
+        }}
+      />
+      {/* Placeholder screen for future implementation */}
       <Stack.Screen
         name="StrokeOrderScreen"
         component={PracticeModeScreen} // Placeholder
         options={{
           title: 'Stroke Order Practice',
-        }}
-      />
-      <Stack.Screen
-        name="MultipleChoiceScreen"
-        component={PracticeModeScreen} // Placeholder
-        options={{
-          title: 'Multiple Choice Quiz',
-        }}
-      />
-      <Stack.Screen
-        name="ContextPracticeScreen"
-        component={PracticeModeScreen} // Placeholder
-        options={{
-          title: 'Context Practice',
         }}
       />
     </Stack.Navigator>

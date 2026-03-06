@@ -83,7 +83,7 @@ export default function PracticeModeScreen() {
         </Card.Content>
       </Card>
 
-      <Card style={[styles.card, styles.disabledCard]}>
+      <Card style={styles.card}>
         <Card.Content>
           <Text variant="titleLarge" style={styles.modeTitle}>
             ❓ Multiple Choice
@@ -92,13 +92,18 @@ export default function PracticeModeScreen() {
             Test your knowledge with quiz questions. Choose the correct meaning, reading, or
             kanji from multiple options.
           </Text>
-          <Button mode="outlined" disabled style={styles.button}>
-            Coming Soon
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate('MultipleChoiceScreen', {})}
+            style={styles.button}
+            disabled={kanjiData.length === 0}
+          >
+            {kanjiData.length > 0 ? `Start Quiz (${Math.min(kanjiData.length, 10)} questions)` : 'No questions available'}
           </Button>
         </Card.Content>
       </Card>
 
-      <Card style={[styles.card, styles.disabledCard]}>
+      <Card style={styles.card}>
         <Card.Content>
           <Text variant="titleLarge" style={styles.modeTitle}>
             📚 Context Practice
@@ -107,8 +112,13 @@ export default function PracticeModeScreen() {
             Learn kanji in real words and phrases. See how kanji are used in Japanese
             language.
           </Text>
-          <Button mode="outlined" disabled style={styles.button}>
-            Coming Soon
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate('ContextPracticeScreen', {})}
+            style={styles.button}
+            disabled={kanjiData.length === 0}
+          >
+            {kanjiData.length > 0 ? `Start Practice (${Math.min(kanjiData.length, 10)} kanji)` : 'No kanji available'}
           </Button>
         </Card.Content>
       </Card>
