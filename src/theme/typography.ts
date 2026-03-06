@@ -1,0 +1,23 @@
+export const typography = {
+  kanji: {
+    large: 80,
+    medium: 60,
+    small: 40,
+  },
+  heading: {
+    h1: 32,
+    h2: 28,
+    h3: 24,
+    h4: 20,
+  },
+  body: {
+    large: 18,
+    medium: 16,
+    small: 14,
+  },
+  label: {
+    large: 16,
+    medium: 14,
+    small: 12,
+  },
+};
