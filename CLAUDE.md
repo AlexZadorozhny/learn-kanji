@@ -6,9 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
+A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 6 Complete - Flashcard Practice Mode with SRS, Dataset expanded to 25 kanji
+**Current Status:** Milestone 7 Complete - Context Practice and Multiple Choice Quiz modes implemented, Dataset expanded to 25 kanji
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -68,7 +68,9 @@ pkill -f "expo start"
 - **Key Features**:
   - Kanji browsing and detail views with TTS pronunciation
   - Flashcard practice with SM-2 spaced repetition algorithm
-  - Progress tracking with recognition scores
+  - Multiple choice quiz with 3 question types (kanji→meaning, meaning→kanji, kanji→reading)
+  - Context practice through example words with TTS
+  - Progress tracking with 4 score types (recognition, reading, writing, context)
   - Haptic feedback for interactions
 
 **Project Structure:**
@@ -160,6 +162,22 @@ rm -rf node_modules && npm install
 - Context-aware vibration patterns for different ratings
 - Double-tap patterns simulate sound effects
 - Implemented in `src/services/feedback/HapticService.ts`
+
+**Multiple Choice Quiz:**
+- Three question types generated randomly per kanji
+- QuizService generates intelligent distractors (similar stroke count, actual readings/meanings)
+- Visual feedback with color coding (green = correct, red = incorrect)
+- Auto-advance after 1.5 seconds with haptic feedback
+- Updates readingScore (0-100) per kanji
+- Implemented in `src/services/practice/QuizService.ts`
+
+**Context Practice:**
+- Shows 3 example words per kanji demonstrating real usage
+- TTS pronunciation on tap for any word
+- Binary scoring: "Got It!" vs "Need Practice"
+- Updates contextScore (0-100) per kanji
+- Max 10 kanji per session
+- Implemented in `src/screens/practice/ContextPracticeScreen.tsx`
 
 **Kanji Data:**
 - 25 most common kanji by frequency rank

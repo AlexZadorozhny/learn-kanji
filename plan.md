@@ -1,17 +1,17 @@
 # Japanese Kanji Learning App - Implementation Plan
 
-## Current Status (Updated 2026-03-05)
+## Current Status (Updated 2026-03-06)
 
 **Completed Phases:**
 - ✅ **Phase 1**: Foundation & Setup - Navigation, UI framework, project structure
 - ✅ **Phase 2**: Data Layer & Storage - TypeScript types, Zustand stores, AsyncStorage
 - ✅ **Phase 3**: Home & Progress Screens - Kanji browsing, detail views, TTS pronunciation
 - ✅ **Phase 4**: Flashcard Practice Mode - SRS system, flip animations, haptic feedback, results screen
+- ✅ **Phase 6**: Quiz & Context Modes - Multiple choice questions, context word practice
 - ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji
 
 **Next Steps:**
 - 🔜 **Phase 5**: Stroke Order Writing (requires React Native Skia)
-- 🔜 **Phase 6**: Quiz & Context Modes
 - 🔜 **Phase 7**: Polish & Settings
 - 🔜 **Phase 8**: Testing & Refinement
 
@@ -425,34 +425,51 @@ Root Navigator
 
 ---
 
-### Phase 6: Quiz & Context Modes (Week 6)
-**Goal**: Complete remaining practice modes
+### Phase 6: Quiz & Context Modes (Week 6) ✅ COMPLETED
+**Status**: Fully implemented and tested (2026-03-06)
 
-**Tasks**:
-1. Implement `MultipleChoiceScreen` with 4-option questions
-2. Create `QuizService` for question generation
-   - Generate distractors (similar meanings, readings, appearance)
-   - Question types: meaning → kanji, kanji → meaning, reading quiz
-3. Build `ContextPracticeScreen` for word/phrase practice
-4. Display example words with target kanji highlighted
-5. Integrate TTS for word pronunciation
-6. Implement scoring for both modes
-7. Connect to `progressStore` and update kanji progress
+**Completed Tasks**:
+1. ✅ Implemented `MultipleChoiceScreen` with 4-option questions
+2. ✅ Created `QuizService` for question generation
+   - Intelligent distractors (similar stroke count, actual readings/meanings)
+   - Three question types: kanji→meaning, meaning→kanji, kanji→reading
+   - Fisher-Yates shuffle for randomization
+3. ✅ Built `ContextPracticeScreen` for word/phrase practice
+4. ✅ Display 3 example words per kanji showing real usage
+5. ✅ Integrated TTS for word pronunciation (tap to hear)
+6. ✅ Implemented scoring for both modes (readingScore & contextScore)
+7. ✅ Connected to `progressStore` and update kanji progress
+8. ✅ Updated `PracticeModeScreen` to enable both new modes
 
-**Critical Files**:
-- `src/screens/practice/MultipleChoiceScreen.tsx` - Quiz UI
-- `src/screens/practice/ContextPracticeScreen.tsx` - Context practice UI
-- `src/components/practice/QuizQuestion.tsx` - Quiz component
-- `src/services/practice/QuizService.ts` - Quiz generation
+**Implementation Notes**:
+- **Multiple Choice Quiz**:
+  - Visual feedback: green for correct, red for incorrect
+  - Auto-advance after 1.5 seconds
+  - Haptic feedback based on result (success/warning)
+  - Updates `readingScore` (0-100) per kanji
+  - Max 10 questions per session
+- **Context Practice**:
+  - Shows 3 example words per kanji
+  - Tap word to hear TTS pronunciation
+  - "Show Meanings" button reveals translations
+  - Binary scoring: "Got It!" or "Need Practice"
+  - Updates `contextScore` (0-100) per kanji
+  - Max 10 kanji per session
+- **QuizService**:
+  - Generates distractors from other kanji in dataset
+  - Prefers similar stroke count for kanji distractors
+  - Fallback options if not enough distractors available
 
-**Verification**:
-- Start multiple choice quiz
-- Verify 4 options display with one correct answer
-- Test immediate feedback (correct/incorrect)
-- Start context practice
-- Verify example words display correctly
-- Tap to hear TTS pronunciation of words
-- All 4 practice modes now complete
+**Files Created**:
+- `src/screens/practice/MultipleChoiceScreen.tsx` - Quiz UI (320 lines)
+- `src/screens/practice/ContextPracticeScreen.tsx` - Context practice UI (280 lines)
+- `src/services/practice/QuizService.ts` - Quiz generation (230 lines)
+
+**Files Modified**:
+- `src/navigation/PracticeStackNavigator.tsx` - Registered new screens
+- `src/screens/practice/PracticeModeScreen.tsx` - Enabled quiz and context buttons
+
+**Next Steps**: Test on Android device (tasks #45, #50)
 
 ---
 

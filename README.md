@@ -2,7 +2,7 @@
 
 A React Native mobile application built with Expo for learning Japanese Kanji characters through interactive practice modes.
 
-## Current Status: Dataset Expansion Complete ✅
+## Current Status: Quiz & Context Practice Complete ✅
 
 - ✅ **Milestone 1**: Basic Navigation (4 tabs: Home, Practice, Progress, Settings)
 - ✅ **Milestone 2**: Data Display (Kanji list with 25 sample characters)
@@ -10,8 +10,9 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 - ✅ **Milestone 4**: Audio/TTS Pronunciation (Japanese text-to-speech for all readings)
 - ✅ **Milestone 5**: Data Persistence (AsyncStorage integration with auto-save)
 - ✅ **Milestone 6**: Flashcard Practice Mode (SRS scheduling with flip animations)
+- ✅ **Milestone 7**: Quiz & Context Practice Modes (Multiple choice questions and word practice)
 - ✅ **Dataset Expansion**: Expanded from 5 to 25 most common kanji
-- 🚧 **Next**: Milestone 7 - Stroke Order Practice or Quiz Modes
+- 🚧 **Next**: Polish UI, Results Screen improvements, Stroke Order Practice
 
 ## Prerequisites
 - Node.js >= 18
@@ -106,13 +107,26 @@ Use tunnel mode when:
   - Context-aware vibration patterns for different ratings
   - Auto-save progress after each card review
   - Progress persistence across app sessions
+- ❓ **Multiple Choice Quiz Mode**: Test knowledge with randomized questions:
+  - Three question types: kanji→meaning, meaning→kanji, kanji→reading
+  - 4-option questions with intelligent distractors
+  - Visual feedback (green for correct, red for incorrect)
+  - Auto-advance after 1.5 seconds
+  - Reading score tracking (0-100)
+  - QuizService generates randomized questions
+- 📚 **Context Practice Mode**: Learn kanji through example words:
+  - Display 3 example words per kanji showing real usage
+  - Tap words to hear TTS pronunciation
+  - Show/hide translations with reveal button
+  - Binary scoring: "Got It!" or "Need Practice"
+  - Context score tracking (0-100)
+  - Max 10 kanji per session
 
 ### Planned
 - ✍️ **Stroke Order Practice**: Interactive drawing canvas
-- ❓ **Multiple Choice Quizzes**: Test kanji knowledge
-- 📚 **Context Practice**: Learn kanji in real words and phrases
 - 🔥 **Streak System**: Daily study tracking
 - 📊 **Expanded Dataset**: Add more kanji characters
+- 🎯 **Results Screen**: Enhanced session summary with detailed statistics
 
 ## Project Structure
 ```
@@ -144,6 +158,8 @@ simple-mobile/
     │   ├── practice/
     │   │   ├── PracticeModeScreen.tsx
     │   │   ├── FlashcardScreen.tsx
+    │   │   ├── MultipleChoiceScreen.tsx
+    │   │   ├── ContextPracticeScreen.tsx
     │   │   └── ResultsScreen.tsx
     │   ├── progress/
     │   │   ├── ProgressScreen.tsx
@@ -156,7 +172,8 @@ simple-mobile/
     │   ├── storage/
     │   │   └── StorageService.ts  # AsyncStorage wrapper for persistence
     │   ├── practice/
-    │   │   └── SRSService.ts  # Spaced Repetition System (SM-2 algorithm)
+    │   │   ├── SRSService.ts  # Spaced Repetition System (SM-2 algorithm)
+    │   │   └── QuizService.ts  # Quiz question generation with distractors
     │   └── feedback/
     │       ├── HapticService.ts  # Haptic feedback wrapper
     │       └── SoundService.ts   # Sound effects (placeholder)
