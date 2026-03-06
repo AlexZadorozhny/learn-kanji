@@ -54,6 +54,26 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
     outputRange: ['180deg', '360deg'],
   });
 
+  const frontOpacity = flipAnimation.interpolate({
+    inputRange: [0, 89, 90, 180],
+    outputRange: [1, 1, 0, 0],
+  });
+
+  const backOpacity = flipAnimation.interpolate({
+    inputRange: [0, 89, 90, 180],
+    outputRange: [0, 0, 1, 1],
+  });
+
+  const frontZIndex = flipAnimation.interpolate({
+    inputRange: [0, 90, 91, 180],
+    outputRange: [2, 2, 1, 1],
+  });
+
+  const backZIndex = flipAnimation.interpolate({
+    inputRange: [0, 90, 91, 180],
+    outputRange: [1, 1, 2, 2],
+  });
+
   return (
     <View style={styles.container}>
       <Pressable onPress={handleFlip} style={styles.cardContainer}>
@@ -61,7 +81,11 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
         <Animated.View
           style={[
             styles.cardSide,
-            { transform: [{ rotateY: frontInterpolate }] },
+            {
+              transform: [{ rotateY: frontInterpolate }],
+              opacity: frontOpacity,
+              zIndex: frontZIndex,
+            },
           ]}
         >
           <Card style={styles.innerCard}>
@@ -74,14 +98,18 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
           </Card>
         </Animated.View>
 
-        {/* Back of card - show answer */}
-        <Animated.View
-          style={[
-            styles.cardSide,
-            styles.cardBack,
-            { transform: [{ rotateY: backInterpolate }] },
-          ]}
-        >
+        {/* Back of card - show answer - only render after first interaction */}
+        {showAnswer && (
+          <Animated.View
+            style={[
+              styles.cardSide,
+              {
+                transform: [{ rotateY: backInterpolate }],
+                opacity: backOpacity,
+                zIndex: backZIndex,
+              },
+            ]}
+          >
           <Card style={styles.innerCard}>
             <View style={styles.content}>
               <View style={styles.answerHeader}>
@@ -119,6 +147,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
             </View>
           </Card>
         </Animated.View>
+        )}
       </Pressable>
 
       {showAnswer && (
@@ -176,10 +205,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backfaceVisibility: 'hidden',
-  },
-  cardBack: {
-    transform: [{ rotateY: '180deg' }],
   },
   innerCard: {
     width: '100%',

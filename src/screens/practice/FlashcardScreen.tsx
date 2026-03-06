@@ -32,6 +32,7 @@ export default function FlashcardScreen() {
   } = usePracticeStore();
 
   const [sessionStartTime] = useState(Date.now());
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     // Get kanji IDs from route params or use review queue
@@ -111,7 +112,12 @@ export default function FlashcardScreen() {
 
     // Move to next card or show results
     if (currentSession.currentIndex + 1 < currentSession.kanjiIds.length) {
-      nextCard();
+      // Add brief transition to ensure clean state
+      setIsTransitioning(true);
+      setTimeout(() => {
+        nextCard();
+        setIsTransitioning(false);
+      }, 100);
     } else {
       // Session complete
       endSession();
@@ -161,7 +167,9 @@ export default function FlashcardScreen() {
         </View>
       </View>
 
-      <FlashcardComponent kanji={currentKanji} onRate={handleRate} />
+      {!isTransitioning && (
+        <FlashcardComponent key={currentKanji.id} kanji={currentKanji} onRate={handleRate} />
+      )}
     </View>
   );
 }
