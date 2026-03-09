@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 10 Complete - All 25 kanji now have complete stroke order data, All 4 practice modes complete with randomized stroke practice, Dark Theme implemented
+**Current Status:** Milestone 11 Complete - Direct stroke practice from Kanji Detail screen, All 25 kanji with complete stroke order data, All 4 practice modes complete, Dark Theme implemented
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -64,10 +64,11 @@ pkill -f "expo start"
 **Application Structure:**
 - **Navigation**: Bottom tabs (Home, Practice, Progress, Settings) + stack navigators
 - **State Management**: Zustand stores (kanjiStore, progressStore, practiceStore)
-- **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters, 5 with stroke data)
+- **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters, all with complete stroke data)
 - **Key Features**:
   - Dark theme support (Light/Dark/Auto modes with full UI coverage)
   - Kanji browsing and detail views with TTS pronunciation
+  - Direct stroke practice from kanji detail screen (single-kanji focused practice)
   - Flashcard practice with SM-2 spaced repetition algorithm
   - Multiple choice quiz with 3 question types (kanji→meaning, meaning→kanji, kanji→reading)
   - Context practice through example words with TTS
@@ -210,6 +211,18 @@ rm -rf node_modules && npm install
   - Navigation bars and headers
 - Semantic colors preserved (green/red for correct/incorrect, etc.)
 - Implemented in `src/store/settingsStore.ts`, `src/theme/theme.ts`, and navigation files
+
+**Stroke Practice from Kanji Detail:**
+- Dedicated "Practice Stroke Order" button on KanjiDetailScreen for immediate focused practice
+- Enables single-kanji practice sessions directly from kanji detail view
+- Cross-stack navigation from Home tab → Practice tab → StrokeOrderScreen
+- Context preservation through explicit `fromKanjiDetail` and `detailKanjiId` params
+- Customized ResultsScreen buttons when accessed from kanji detail:
+  - "Practice Again" restarts practice with same kanji (uses `navigation.reset` for clean state)
+  - "Back to Kanji Details" returns to original kanji detail screen
+- Navigation uses `CommonActions.reset` to maintain clean stack and prevent accumulation
+- StrokeOrderScreen uses `sessionKey` param for reliable session initialization
+- Implemented in `src/screens/progress/KanjiDetailScreen.tsx`, `src/screens/practice/ResultsScreen.tsx`, and updated navigation types
 
 ## Prerequisites
 

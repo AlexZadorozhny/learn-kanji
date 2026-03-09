@@ -31,13 +31,37 @@ export default function StrokeOrderScreen() {
     getSessionProgress,
   } = usePracticeStore();
 
-  const [sessionStartTime] = useState(Date.now());
+  const [sessionStartTime, setSessionStartTime] = useState(Date.now());
   const [correctStrokes, setCorrectStrokes] = useState(0);
   const [totalStrokes, setTotalStrokes] = useState(0);
+  const [fromKanjiDetail, setFromKanjiDetail] = useState(false);
+  const [detailKanjiId, setDetailKanjiId] = useState<string | undefined>();
 
   useEffect(() => {
+    // Reset session state for new practice session
+    setSessionStartTime(Date.now());
+    setCorrectStrokes(0);
+    setTotalStrokes(0);
+
     // Get kanji IDs from route params or use kanji with stroke data
     let kanjiIds = route.params?.kanjiIds;
+
+    // Check if this is from KanjiDetailScreen - use explicit params if provided
+    const explicitFromKanjiDetail = route.params?.fromKanjiDetail;
+    const explicitDetailKanjiId = route.params?.detailKanjiId;
+
+    if (explicitFromKanjiDetail !== undefined) {
+      // Use explicitly passed params
+      setFromKanjiDetail(explicitFromKanjiDetail);
+      setDetailKanjiId(explicitDetailKanjiId);
+    } else if (kanjiIds && kanjiIds.length === 1) {
+      // Infer from single kanji in array (backward compatibility)
+      setFromKanjiDetail(true);
+      setDetailKanjiId(kanjiIds[0]);
+    } else {
+      setFromKanjiDetail(false);
+      setDetailKanjiId(undefined);
+    }
 
     if (!kanjiIds || kanjiIds.length === 0) {
       // Only use kanji that have stroke order data
@@ -57,7 +81,7 @@ export default function StrokeOrderScreen() {
     }
 
     startSession('writing', kanjiIds);
-  }, []);
+  }, [route.params?.sessionKey]);
 
   const handleStrokeComplete = (correct: boolean) => {
     setTotalStrokes((prev) => prev + 1);
@@ -133,7 +157,11 @@ export default function StrokeOrderScreen() {
         totalStudyTimeMinutes: studyStats.totalStudyTimeMinutes + sessionDuration,
       });
 
-      navigation.navigate('ResultsScreen', { sessionId: currentSession.id });
+      navigation.push('ResultsScreen', {
+        sessionId: currentSession.id,
+        returnTo: fromKanjiDetail ? 'KanjiDetail' : undefined,
+        returnKanjiId: detailKanjiId,
+      });
     }
   };
 

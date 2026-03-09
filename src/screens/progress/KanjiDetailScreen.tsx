@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text, Card, Chip, Divider, IconButton, useTheme } from 'react-native-paper';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { Text, Card, Chip, Divider, IconButton, Button, useTheme } from 'react-native-paper';
+import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useKanjiStore } from '../../store/kanjiStore';
-import { HomeStackParamList } from '../../navigation/types';
+import { HomeStackParamList, MainTabParamList } from '../../navigation/types';
 import { typography } from '../../theme/theme';
 import { TTSService } from '../../services/audio/TTSService';
 
@@ -15,8 +16,10 @@ export default function KanjiDetailScreen() {
   const { kanjiId } = route.params;
   const { getKanjiById } = useKanjiStore();
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const tabNavigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
 
   const kanji = getKanjiById(kanjiId);
+  const hasStrokeData = kanji?.strokeOrder && kanji.strokeOrder.length > 0;
 
   const handleSpeak = async (text: string, id: string) => {
     try {
@@ -27,6 +30,18 @@ export default function KanjiDetailScreen() {
       console.error('Failed to speak:', error);
       setSpeakingId(null);
     }
+  };
+
+  const handleStrokePractice = () => {
+    tabNavigation.navigate('Practice', {
+      screen: 'StrokeOrderScreen',
+      params: {
+        kanjiIds: [kanji.id],
+        sessionKey: Date.now(),
+        fromKanjiDetail: true,
+        detailKanjiId: kanji.id
+      }
+    });
   };
 
   if (!kanji) {
@@ -55,6 +70,25 @@ export default function KanjiDetailScreen() {
           </View>
         </Card.Content>
       </Card>
+
+      {/* Practice Modes */}
+      {hasStrokeData && (
+        <Card style={styles.card}>
+          <Card.Content>
+            <Text variant="titleMedium" style={styles.sectionTitle}>
+              Practice
+            </Text>
+            <Button
+              mode="contained"
+              icon="draw"
+              onPress={handleStrokePractice}
+              style={styles.practiceButton}
+            >
+              Practice Stroke Order
+            </Button>
+          </Card.Content>
+        </Card>
+      )}
 
       {/* Meanings */}
       <Card style={styles.card}>
@@ -249,6 +283,9 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginVertical: 8,
+  },
+  practiceButton: {
+    marginTop: 8,
   },
   bottomPadding: {
     height: 20,

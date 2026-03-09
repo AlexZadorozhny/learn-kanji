@@ -48,14 +48,20 @@ const mockStrokeOrderCanvas = StrokeOrderCanvasMock;
 // Mock navigation
 const mockGoBack = jest.fn();
 const mockNavigate = jest.fn();
+const mockPush = jest.fn();
 jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: () => ({
     navigate: mockNavigate,
     goBack: mockGoBack,
+    push: mockPush,
   }),
   useRoute: () => ({
-    params: { kanjiIds: ['U+4E00'] },
+    params: {
+      kanjiIds: ['U+4E00'],
+      fromKanjiDetail: false,
+      detailKanjiId: undefined,
+    },
   }),
 }));
 
@@ -551,7 +557,11 @@ describe('StrokeOrderScreen', () => {
     });
 
     expect(mockEndSession).toHaveBeenCalled();
-    expect(mockNavigate).toHaveBeenCalledWith('ResultsScreen', { sessionId: 'session1' });
+    expect(mockPush).toHaveBeenCalledWith('ResultsScreen', {
+      sessionId: 'session1',
+      returnTo: undefined,
+      returnKanjiId: undefined,
+    });
   });
 
   it('updates study stats on session complete', () => {

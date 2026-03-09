@@ -2,8 +2,8 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 
 // Tab Navigator Params
 export type MainTabParamList = {
-  Home: undefined;
-  Practice: undefined;
+  Home: NavigatorScreenParams<HomeStackParamList> | undefined;
+  Practice: NavigatorScreenParams<PracticeStackParamList> | undefined;
   Progress: undefined;
   Settings: undefined;
 };
@@ -25,6 +25,9 @@ export type PracticeStackParamList = {
   };
   StrokeOrderScreen: {
     kanjiIds?: string[];
+    sessionKey?: number;
+    fromKanjiDetail?: boolean;
+    detailKanjiId?: string;
   };
   MultipleChoiceScreen: {
     kanjiIds?: string[];
@@ -34,6 +37,8 @@ export type PracticeStackParamList = {
   };
   ResultsScreen: {
     sessionId: string;
+    returnTo?: 'KanjiDetail';
+    returnKanjiId?: string;
   };
 };
 

@@ -85,7 +85,7 @@ export default function PracticeModeScreen() {
           </Text>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate('StrokeOrderScreen', {})}
+            onPress={() => navigation.navigate('StrokeOrderScreen', { sessionKey: Date.now() })}
             style={styles.button}
             disabled={kanjiWithStrokeData === 0}
           >

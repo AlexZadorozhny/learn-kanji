@@ -281,7 +281,9 @@ describe('PracticeModeScreen', () => {
     const button = getByText(/Start Practice \(2 kanji\)/);
     fireEvent.press(button);
 
-    expect(mockNavigate).toHaveBeenCalledWith('StrokeOrderScreen', {});
+    expect(mockNavigate).toHaveBeenCalledWith('StrokeOrderScreen', expect.objectContaining({
+      sessionKey: expect.any(Number)
+    }));
   });
 
   it('navigates to MultipleChoiceScreen when multiple choice button is pressed', () => {

@@ -159,11 +159,11 @@ export const sampleKanjiData: KanjiCharacter[] = [
     strokes: 2,
     strokeOrder: [
       {
-        path: 'M 30 20 L 45 80',
+        path: 'M 45 15 L 15 90',
         strokeNumber: 1,
       },
       {
-        path: 'M 70 20 L 55 80',
+        path: 'M 55 15 L 85 90',
         strokeNumber: 2,
       },
     ],
@@ -219,7 +219,7 @@ export const sampleKanjiData: KanjiCharacter[] = [
         strokeNumber: 3,
       },
       {
-        path: 'M 75 20 L 75 80 M 75 80 L 25 80',
+        path: 'M 75 20 L 75 80',
         strokeNumber: 4,
       },
     ],
@@ -331,23 +331,23 @@ export const sampleKanjiData: KanjiCharacter[] = [
     strokes: 5,
     strokeOrder: [
       {
-        path: 'M 50 20 L 50 70',
+        path: 'M 20 35 L 80 35',
         strokeNumber: 1,
       },
       {
-        path: 'M 20 40 L 80 40',
+        path: 'M 50 15 L 50 90',
         strokeNumber: 2,
       },
       {
-        path: 'M 30 55 L 45 75',
+        path: 'M 50 55 L 20 85',
         strokeNumber: 3,
       },
       {
-        path: 'M 55 55 L 70 75',
+        path: 'M 50 55 L 80 85',
         strokeNumber: 4,
       },
       {
-        path: 'M 40 75 L 60 75',
+        path: 'M 35 75 L 65 75',
         strokeNumber: 5,
       },
     ],
@@ -391,15 +391,15 @@ export const sampleKanjiData: KanjiCharacter[] = [
     strokes: 3,
     strokeOrder: [
       {
-        path: 'M 50 20 L 50 75',
+        path: 'M 15 35 L 85 35',
         strokeNumber: 1,
       },
       {
-        path: 'M 20 35 L 80 65',
+        path: 'M 50 10 L 10 90',
         strokeNumber: 2,
       },
       {
-        path: 'M 80 35 L 20 65',
+        path: 'M 50 35 L 90 90',
         strokeNumber: 3,
       },
     ],
@@ -511,11 +511,11 @@ export const sampleKanjiData: KanjiCharacter[] = [
         strokeNumber: 2,
       },
       {
-        path: 'M 25 30 L 25 70 L 75 70 L 75 30',
+        path: 'M 20 70 L 80 70',
         strokeNumber: 3,
       },
       {
-        path: 'M 50 50 L 50 50',
+        path: 'M 80 30 L 80 70',
         strokeNumber: 4,
       },
     ],
@@ -740,7 +740,7 @@ export const sampleKanjiData: KanjiCharacter[] = [
         strokeNumber: 3,
       },
       {
-        path: 'M 35 20 L 35 70 M 35 70 L 20 70',
+        path: 'M 35 20 L 35 70',
         strokeNumber: 4,
       },
       {
@@ -756,7 +756,7 @@ export const sampleKanjiData: KanjiCharacter[] = [
         strokeNumber: 7,
       },
       {
-        path: 'M 45 60 L 85 60',
+        path: 'M 50 70 L 80 70',
         strokeNumber: 8,
       },
       {
@@ -948,7 +948,7 @@ export const sampleKanjiData: KanjiCharacter[] = [
         strokeNumber: 6,
       },
       {
-        path: 'M 40 50 L 40 75 M 40 75 L 25 75',
+        path: 'M 40 50 L 40 75',
         strokeNumber: 7,
       },
       {

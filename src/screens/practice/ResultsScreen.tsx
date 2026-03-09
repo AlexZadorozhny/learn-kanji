@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Button, IconButton, useTheme } from 'react-native-paper';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp, CommonActions } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { PracticeStackParamList } from '../../navigation/types';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { PracticeStackParamList, MainTabParamList } from '../../navigation/types';
 import { usePracticeStore } from '../../store/practiceStore';
 import { useKanjiStore } from '../../store/kanjiStore';
 
@@ -16,9 +17,13 @@ type ResultsScreenRouteProp = RouteProp<PracticeStackParamList, 'ResultsScreen'>
 export default function ResultsScreen() {
   const theme = useTheme();
   const navigation = useNavigation<ResultsScreenNavigationProp>();
+  const tabNavigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
   const route = useRoute<ResultsScreenRouteProp>();
   const { currentSession } = usePracticeStore();
   const { kanjiData } = useKanjiStore();
+
+  const { returnTo, returnKanjiId } = route.params;
+  const isFromKanjiDetail = returnTo === 'KanjiDetail' && returnKanjiId;
 
   if (!currentSession) {
     return null;
@@ -31,13 +36,52 @@ export default function ResultsScreen() {
   const totalTime = results.reduce((sum, r) => sum + r.timeSpent, 0);
   const avgTime = totalCount > 0 ? totalTime / totalCount : 0;
 
+  const handlePracticeAgain = () => {
+    if (isFromKanjiDetail) {
+      // Practice the same kanji again - use CommonActions for explicit reset
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'PracticeModeScreen' },
+            {
+              name: 'StrokeOrderScreen',
+              params: {
+                kanjiIds: [returnKanjiId],
+                sessionKey: Date.now(),
+                fromKanjiDetail: true,
+                detailKanjiId: returnKanjiId
+              }
+            }
+          ]
+        })
+      );
+    } else {
+      // Start new random practice session
+      navigation.navigate('FlashcardScreen', {});
+    }
+  };
+
+  const handleBackButton = () => {
+    if (isFromKanjiDetail) {
+      // Navigate back to Home tab -> KanjiDetail screen
+      tabNavigation.navigate('Home', {
+        screen: 'KanjiDetail',
+        params: { kanjiId: returnKanjiId }
+      });
+    } else {
+      // Navigate to practice mode selection
+      navigation.navigate('PracticeModeScreen');
+    }
+  };
+
   return (
     <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
-          onPress={() => navigation.navigate('PracticeModeScreen')}
+          onPress={handleBackButton}
         />
         <Text variant="headlineSmall" style={styles.headerTitle}>
           Session Complete!
@@ -119,7 +163,7 @@ export default function ResultsScreen() {
       <View style={styles.actions}>
         <Button
           mode="contained"
-          onPress={() => navigation.navigate('FlashcardScreen', {})}
+          onPress={handlePracticeAgain}
           style={styles.button}
           icon="refresh"
         >
@@ -128,10 +172,10 @@ export default function ResultsScreen() {
 
         <Button
           mode="outlined"
-          onPress={() => navigation.navigate('PracticeModeScreen')}
+          onPress={handleBackButton}
           style={styles.button}
         >
-          Back to Practice
+          {isFromKanjiDetail ? 'Back to Kanji Details' : 'Back to Practice'}
         </Button>
       </View>
 
