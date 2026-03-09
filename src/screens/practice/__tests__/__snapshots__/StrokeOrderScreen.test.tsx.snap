@@ -265,6 +265,9 @@ exports[`StrokeOrderScreen renders correctly with active session 1`] = `
           </View>
         </View>
       </View>
+      <View
+        testID="mock-stroke-canvas"
+      />
     </View>
   </View>
 </RNCSafeAreaProvider>
