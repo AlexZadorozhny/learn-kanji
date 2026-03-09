@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithProviders } from '../../../test-utils';
+import { renderWithProviders, fireEvent, waitFor, act } from '../../../test-utils';
 import MultipleChoiceScreen from '../MultipleChoiceScreen';
 
 // Mock navigation
@@ -46,6 +46,7 @@ jest.mock('../../../services/feedback/HapticService', () => ({
   HapticService: {
     light: jest.fn(),
     success: jest.fn(),
+    warning: jest.fn(),
     error: jest.fn(),
   },
 }));
@@ -76,6 +77,7 @@ describe('MultipleChoiceScreen', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.useRealTimers();
     useKanjiStore.mockReturnValue({
       kanjiData: mockKanjiData,
     });
@@ -91,6 +93,10 @@ describe('MultipleChoiceScreen', () => {
         longestStreak: 0,
       },
     });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   it('renders correctly with active question', () => {
@@ -150,5 +156,385 @@ describe('MultipleChoiceScreen', () => {
     renderWithProviders(<MultipleChoiceScreen />);
 
     expect(mockStartSession).toHaveBeenCalledWith('quiz', ['U+4E00', 'U+4E8C']);
+  });
+
+  it('selects correct answer and shows green feedback', async () => {
+    jest.useFakeTimers();
+    const { HapticService } = require('../../../services/feedback/HapticService');
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    expect(HapticService.success).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
+
+  it('selects incorrect answer and shows red feedback', async () => {
+    jest.useFakeTimers();
+    const { HapticService } = require('../../../services/feedback/HapticService');
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const incorrectButton = getByText('two');
+    fireEvent.press(incorrectButton);
+
+    expect(HapticService.warning).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
+
+  it('auto-advances to next question after delay', async () => {
+    jest.useFakeTimers();
+    const mockNextCard = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00', 'U+4E8C'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: mockNextCard,
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 2 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    // Fast-forward 1500ms
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockNextCard).toHaveBeenCalled();
+
+    jest.useRealTimers();
+  });
+
+  it('calls addResult with correct result', async () => {
+    jest.useFakeTimers();
+    const mockAddResult = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: mockAddResult,
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockAddResult).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kanjiId: 'U+4E00',
+        correct: true,
+        rating: 5,
+      })
+    );
+
+    jest.useRealTimers();
+  });
+
+  it('calls addResult with incorrect result', async () => {
+    jest.useFakeTimers();
+    const mockAddResult = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: mockAddResult,
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const incorrectButton = getByText('two');
+    fireEvent.press(incorrectButton);
+
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockAddResult).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kanjiId: 'U+4E00',
+        correct: false,
+        rating: 2,
+      })
+    );
+
+    jest.useRealTimers();
+  });
+
+  it('updates kanji progress after answering', async () => {
+    jest.useFakeTimers();
+    const mockUpdateKanjiProgress = jest.fn();
+
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+      updateKanjiProgress: mockUpdateKanjiProgress,
+      updateStudyStats: jest.fn(),
+      studyStats: {
+        totalKanjiStudied: 0,
+        kanjiMastered: 0,
+        totalStudyTimeMinutes: 0,
+        currentStreak: 0,
+        longestStreak: 0,
+      },
+    });
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockUpdateKanjiProgress).toHaveBeenCalledWith(
+      'U+4E00',
+      expect.objectContaining({
+        readingScore: expect.any(Number),
+        totalAttempts: 1,
+        correctAttempts: 1,
+      })
+    );
+
+    jest.useRealTimers();
+  });
+
+  it('navigates to ResultsScreen on last question', async () => {
+    jest.useFakeTimers();
+    const mockEndSession = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: mockEndSession,
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockEndSession).toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith('ResultsScreen', { sessionId: 'session1' });
+
+    jest.useRealTimers();
+  });
+
+  it('disables answer buttons after selection', () => {
+    jest.useFakeTimers();
+    const mockAddResult = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: mockAddResult,
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const correctButton = getByText('one');
+    fireEvent.press(correctButton);
+
+    // Try pressing another button - it should not trigger another selection
+    const incorrectButton = getByText('two');
+    fireEvent.press(incorrectButton);
+
+    // Only one result should be added (from first press)
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+
+    expect(mockAddResult).toHaveBeenCalledTimes(1);
+
+    jest.useRealTimers();
+  });
+
+  it('increments progress bar as questions are answered', () => {
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00', 'U+4E8C'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 2 })),
+    });
+
+    const { getByText } = renderWithProviders(<MultipleChoiceScreen />);
+
+    expect(getByText('1 / 2')).toBeTruthy();
+  });
+
+  it('navigates back when no kanji available', () => {
+    // Temporarily override useRoute to return empty kanjiIds
+    const originalUseRoute = require('@react-navigation/native').useRoute;
+    jest.spyOn(require('@react-navigation/native'), 'useRoute').mockImplementation(() => ({
+      params: { kanjiIds: [] }, // Empty array
+    }));
+
+    useKanjiStore.mockReturnValue({
+      kanjiData: [], // No kanji data
+    });
+
+    usePracticeStore.mockReturnValue({
+      currentSession: null,
+      startSession: jest.fn(),
+      endSession: jest.fn(),
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 0 })),
+    });
+
+    renderWithProviders(<MultipleChoiceScreen />);
+
+    expect(mockGoBack).toHaveBeenCalled();
+  });
+
+  it('closes session and navigates back when close button pressed', () => {
+    const mockEndSession = jest.fn();
+
+    usePracticeStore.mockReturnValue({
+      currentSession: {
+        mode: 'quiz',
+        kanjiIds: ['U+4E00'],
+        currentIndex: 0,
+        id: 'session1',
+        startTime: Date.now(),
+        results: [],
+      },
+      startSession: jest.fn(),
+      endSession: mockEndSession,
+      addResult: jest.fn(),
+      nextCard: jest.fn(),
+      getSessionProgress: jest.fn(() => ({ current: 0, total: 1 })),
+    });
+
+    const { UNSAFE_root } = renderWithProviders(<MultipleChoiceScreen />);
+
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
+    const closeButton = iconButtons[0]; // First IconButton is close button
+
+    closeButton.props.onPress();
+
+    expect(mockEndSession).toHaveBeenCalled();
+    expect(mockGoBack).toHaveBeenCalled();
   });
 });

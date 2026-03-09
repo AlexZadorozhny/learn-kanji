@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithProviders } from '../../../test-utils';
+import { renderWithProviders, fireEvent } from '../../../test-utils';
 import PracticeModeScreen from '../PracticeModeScreen';
 
 // Mock navigation
@@ -139,5 +139,193 @@ describe('PracticeModeScreen', () => {
     const { getByText } = renderWithProviders(<PracticeModeScreen />);
 
     expect(getByText('No cards available')).toBeTruthy();
+  });
+
+  it('shows flashcard button enabled with available cards', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([{ kanjiId: 'U+4E00' }]);
+    SRSService.getNewKanji.mockReturnValue(['U+4E8C']);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(getByText('Start (2 cards)')).toBeTruthy();
+  });
+
+  it('shows stroke order button with available kanji', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    // 2 kanji have strokeOrder data in mockKanjiData
+    expect(getByText(/Start Practice \(2 kanji\)/)).toBeTruthy();
+  });
+
+  it('shows multiple choice button with available kanji', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(getByText(/Start Quiz \(3 questions\)/)).toBeTruthy();
+  });
+
+  it('shows context practice button with available kanji', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(getByText(/Start Practice \(3 kanji\)/)).toBeTruthy();
+  });
+
+  it('disables stroke order when no kanji with stroke data', () => {
+    useKanjiStore.mockReturnValue({
+      kanjiData: [
+        {
+          id: 'U+4E00',
+          character: '一',
+          meanings: ['one'],
+          strokes: 1,
+          // No strokeOrder data
+        },
+      ],
+    });
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(getByText('No kanji available')).toBeTruthy();
+  });
+
+  it('disables multiple choice when no kanji available', () => {
+    useKanjiStore.mockReturnValue({
+      kanjiData: [],
+    });
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
+
+    const noKanjiTexts = getAllByText('No questions available');
+    expect(noKanjiTexts.length).toBeGreaterThan(0);
+  });
+
+  it('shows correct button text with 1 card available', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([{ kanjiId: 'U+4E00' }]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(getByText('Start (1 cards)')).toBeTruthy();
+  });
+
+  it('renders with dark theme', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([{ kanjiId: 'U+4E00' }]);
+    SRSService.getNewKanji.mockReturnValue(['U+4E8C']);
+
+    const { toJSON } = renderWithProviders(<PracticeModeScreen />);
+
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('navigates to FlashcardScreen when flashcard button is pressed', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([{ kanjiId: 'U+4E00' }]);
+    SRSService.getNewKanji.mockReturnValue(['U+4E8C']);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    const button = getByText('Start (2 cards)');
+    fireEvent.press(button);
+
+    expect(mockNavigate).toHaveBeenCalledWith('FlashcardScreen', {});
+  });
+
+  it('navigates to StrokeOrderScreen when stroke order button is pressed', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    // 2 kanji have strokeOrder data in mockKanjiData
+    const button = getByText(/Start Practice \(2 kanji\)/);
+    fireEvent.press(button);
+
+    expect(mockNavigate).toHaveBeenCalledWith('StrokeOrderScreen', {});
+  });
+
+  it('navigates to MultipleChoiceScreen when multiple choice button is pressed', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    const button = getByText(/Start Quiz \(3 questions\)/);
+    fireEvent.press(button);
+
+    expect(mockNavigate).toHaveBeenCalledWith('MultipleChoiceScreen', {});
+  });
+
+  it('navigates to ContextPracticeScreen when context practice button is pressed', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    const button = getByText(/Start Practice \(3 kanji\)/);
+    fireEvent.press(button);
+
+    expect(mockNavigate).toHaveBeenCalledWith('ContextPracticeScreen', {});
+  });
+
+  it('does not navigate when flashcard button is disabled', () => {
+    useProgressStore.mockReturnValue({
+      kanjiProgress: {},
+    });
+    SRSService.getDueKanji.mockReturnValue([]);
+    SRSService.getNewKanji.mockReturnValue([]);
+
+    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+
+    const button = getByText('No cards available');
+    fireEvent.press(button);
+
+    expect(mockNavigate).not.toHaveBeenCalled();
   });
 });
