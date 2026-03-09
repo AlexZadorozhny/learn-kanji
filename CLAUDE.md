@@ -224,6 +224,46 @@ rm -rf node_modules && npm install
 - StrokeOrderScreen uses `sessionKey` param for reliable session initialization
 - Implemented in `src/screens/progress/KanjiDetailScreen.tsx`, `src/screens/practice/ResultsScreen.tsx`, and updated navigation types
 
+## Development Workflow
+
+### Testing Before Commits
+
+**CRITICAL: Always run tests before committing or pushing to GitHub**
+
+```bash
+# Run all tests
+npm test
+
+# Run tests for specific files
+npm test -- --testPathPattern="ComponentName"
+
+# Run tests without coverage report (faster)
+npm test -- --no-coverage
+```
+
+**Workflow:**
+1. Make code changes
+2. Run `npm test` to verify all tests pass
+3. If tests fail, fix issues before proceeding
+4. Only commit and push after all tests pass (294/294 passing)
+5. Update documentation if adding new features
+6. Create descriptive commit messages
+
+**Test Coverage:**
+- Target: Maintain high test coverage (currently 84%+)
+- All new features should include unit tests
+- Update existing tests when modifying functionality
+- Test files located in `__tests__` directories alongside source files
+
+### Git Commit Guidelines
+
+When creating commits:
+- Ensure all 294 tests pass before committing
+- Write clear, descriptive commit messages
+- Document breaking changes or new features
+- Update CLAUDE.md and MEMORY.md for significant changes
+- Use Co-Authored-By tag: `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`
+
 ## Prerequisites
 
 - Node.js >= 18
