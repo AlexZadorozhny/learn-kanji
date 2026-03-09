@@ -58,6 +58,7 @@ jest.mock('react-native-svg', () => {
     Path: (props) => React.createElement('Path', props),
     G: ({ children, ...props }) => React.createElement('G', props, children),
     Circle: (props) => React.createElement('Circle', props),
+    Polygon: (props) => React.createElement('Polygon', props),
   };
 });
 

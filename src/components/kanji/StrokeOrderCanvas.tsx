@@ -4,6 +4,10 @@ import { Text, IconButton, useTheme } from 'react-native-paper';
 import Svg, { Path, G } from 'react-native-svg';
 import { KanjiCharacter } from '../../types/kanji';
 import { HapticService } from '../../services/feedback/HapticService';
+import StrokeDirectionIndicator from './StrokeDirectionIndicator';
+import StrokeProgressIndicator from './StrokeProgressIndicator';
+import { BasicStrokeValidator } from '../../services/validation/BasicStrokeValidator';
+import { FeedbackMessageService } from '../../services/validation/FeedbackMessageService';
 
 interface Point {
   x: number;
@@ -32,6 +36,7 @@ export default function StrokeOrderCanvas({
   const [incorrectStroke, setIncorrectStroke] = useState<Point[] | null>(null);
   const [showGuide, setShowGuide] = useState(true);
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const [showSuccessGlow, setShowSuccessGlow] = useState<boolean>(false);
   const clearTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const currentDrawingRef = useRef<Point[]>([]); // Ref to track points synchronously
   const currentStrokeIndexRef = useRef<number>(0); // Ref to track stroke index synchronously
@@ -124,8 +129,10 @@ export default function StrokeOrderCanvas({
           currentDrawingRef.current = [];
           setCurrentDrawing([]);
 
-          // Show success feedback
+          // Show success feedback with green glow
           setFeedbackMessage('✓ Correct!');
+          setShowSuccessGlow(true);
+          setTimeout(() => setShowSuccessGlow(false), 500);
 
           onStrokeComplete(true);
 
@@ -188,58 +195,20 @@ export default function StrokeOrderCanvas({
     const targetStroke = kanji.strokeOrder[strokeIndex];
     console.log('Target stroke path:', targetStroke.path);
 
-    // Simple validation: check if most points are within a tolerance of the stroke path
-    // For this simplified version, we'll use a generous bounding box approach
+    // Convert user points to SVG path
+    const userPath = convertUserStrokeToPath(points);
+    console.log('User path:', userPath);
 
-    // Parse the SVG path to get approximate bounding box
-    const bbox = getStrokeBoundingBox(targetStroke.path);
-    console.log('Bounding box:', bbox);
+    // Use geometric validation
+    const result = BasicStrokeValidator.validate(userPath, targetStroke.path);
+    console.log('Validation result:', result);
 
-    // Check if at least 50% of user's points are within the bounding box (with tolerance)
-    const tolerance = 25; // units in 0-100 coordinate system (increased)
-    let pointsInside = 0;
-
-    for (const point of points) {
-      // Points are already in 0-100 coordinate system
-      if (
-        point.x >= bbox.minX - tolerance &&
-        point.x <= bbox.maxX + tolerance &&
-        point.y >= bbox.minY - tolerance &&
-        point.y <= bbox.maxY + tolerance
-      ) {
-        pointsInside++;
-      }
+    // Update feedback message based on validation
+    if (!result.valid && result.reason) {
+      setFeedbackMessage(`✗ ${result.reason}`);
     }
 
-    const percentInside = (pointsInside / points.length) * 100;
-    console.log(`Points inside: ${pointsInside}/${points.length} (${percentInside.toFixed(1)}%)`);
-    console.log('Required: 50%');
-
-    return percentInside >= 50; // Lowered from 60% to 50%
-  };
-
-  const getStrokeBoundingBox = (pathData: string): {
-    minX: number;
-    minY: number;
-    maxX: number;
-    maxY: number;
-  } => {
-    // Parse simple SVG path (M x y L x y format)
-    const numbers = pathData.match(/[\d.]+/g);
-    if (!numbers || numbers.length < 4) {
-      return { minX: 0, minY: 0, maxX: 100, maxY: 100 };
-    }
-
-    const coords = numbers.map(Number);
-    const xCoords = coords.filter((_, i) => i % 2 === 0);
-    const yCoords = coords.filter((_, i) => i % 2 === 1);
-
-    return {
-      minX: Math.min(...xCoords),
-      minY: Math.min(...yCoords),
-      maxX: Math.max(...xCoords),
-      maxY: Math.max(...yCoords),
-    };
+    return result.valid;
   };
 
   const handleUndo = () => {
@@ -381,18 +350,32 @@ export default function StrokeOrderCanvas({
             </G>
           )}
 
-          {/* User's completed strokes */}
-          {userStrokes.map((userStroke, index) => (
-            <Path
-              key={`user-${index}`}
-              d={convertUserStrokeToPath(userStroke.points)}
-              stroke="#6200ee"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {/* Direction indicators for current stroke */}
+          {showGuide && currentStrokeIndex < (kanji.strokeOrder?.length || 0) && (
+            <StrokeDirectionIndicator
+              strokePath={kanji.strokeOrder![currentStrokeIndex].path}
+              visible={true}
             />
-          ))}
+          )}
+
+          {/* User's completed strokes */}
+          {userStrokes.map((userStroke, index) => {
+            const isLastStroke = index === userStrokes.length - 1;
+            const shouldGlow = isLastStroke && showSuccessGlow;
+
+            return (
+              <Path
+                key={`user-${index}`}
+                d={convertUserStrokeToPath(userStroke.points)}
+                stroke={shouldGlow ? "#4caf50" : "#6200ee"}
+                strokeWidth={shouldGlow ? 4 : 3}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity={shouldGlow ? 1 : 0.9}
+              />
+            );
+          })}
 
           {/* Current drawing stroke (while drawing) */}
           {currentDrawing.length > 0 && (
@@ -434,6 +417,15 @@ export default function StrokeOrderCanvas({
           onTouchMove={() => console.log('Native touch moved!')}
         />
       </View>
+
+      {/* Stroke progress indicator */}
+      {kanji.strokeOrder && (
+        <StrokeProgressIndicator
+          totalStrokes={kanji.strokes}
+          currentStrokeIndex={currentStrokeIndex}
+          strokePaths={kanji.strokeOrder.map(s => s.path)}
+        />
+      )}
 
       <Text variant="bodyMedium" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
         Draw the strokes in order. {showGuide ? 'Guide' : 'No guide'} mode.

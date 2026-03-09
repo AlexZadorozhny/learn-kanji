@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Milestone 11 Complete - Direct stroke practice from Kanji Detail screen, All 25 kanji with complete stroke order data, All 4 practice modes complete, Dark Theme implemented
+**Current Status:** Phase 1 & 2 Complete - Enhanced stroke validation with geometric validation (start/end/direction), visual direction indicators, stroke progress display, All 25 kanji with complete stroke order data, All 4 practice modes complete, Dark Theme implemented
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -191,13 +191,21 @@ rm -rf node_modules && npm install
 **Stroke Order Practice:**
 - Uses React Native SVG + PanResponder (simplified approach, no Skia dependency)
 - Coordinate scaling: screen touch events → 100x100 SVG viewBox
-- Validation: bounding box approach (50% overlap threshold, ±25 unit tolerance)
-- Visual feedback: guide strokes (dashed gray), user strokes (purple), incorrect (red for 2s)
+- **Enhanced Validation System (Phase 1 & 2):**
+  - **Visual Indicators**: Direction arrows (start dot + end arrow) on current guide stroke
+  - **Progress Display**: Horizontal thumbnail bar showing completed/current/future strokes
+  - **Geometric Validation**: Validates start point (±15 units), end point (±15 units), direction (±45°)
+  - **Weighted Accuracy Scoring**: 40% start point + 40% end point + 20% direction
+  - **Helpful Feedback Messages**: Specific guidance ("Begin your stroke higher and to the right")
+  - **Fallback Validation**: Bounding box validation (±25 units) for edge cases
+  - **Services**: `PathParserService`, `BasicStrokeValidator`, `FeedbackMessageService`
+  - **Expected Accuracy**: 80%+ validation accuracy (up from 60%)
+- Visual feedback: guide strokes (dashed gray), user strokes (purple with green glow on correct), incorrect (red for 2s)
 - **Critical pattern**: Uses refs (`currentDrawingRef`, `currentStrokeIndexRef`) to avoid React state closure bugs in gesture handlers
 - **Random selection**: Each session randomly picks 5 kanji from all available stroke data for variety
 - Session management: max 5 kanji per session, tracks correct/total strokes
 - Updates writingScore (0-100) per kanji
-- Implemented in `src/components/kanji/StrokeOrderCanvas.tsx` (434 lines) and `src/screens/practice/StrokeOrderScreen.tsx`
+- Implemented in `src/components/kanji/StrokeOrderCanvas.tsx` and `src/screens/practice/StrokeOrderScreen.tsx`
 
 **Dark Theme:**
 - Three modes: Light, Dark, and Auto (follows system preference)
@@ -251,6 +259,7 @@ npm test -- --no-coverage
 
 **Test Coverage:**
 - Target: Maintain high test coverage (currently 84%+)
+- Current: 400 tests passing across 26 test suites
 - All new features should include unit tests
 - Update existing tests when modifying functionality
 - Test files located in `__tests__` directories alongside source files
