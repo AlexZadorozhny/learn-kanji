@@ -1,0 +1,867 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders correctly with kanji data 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        ListHeaderComponent={[Function]}
+        contentContainerStyle={
+          {
+            "paddingVertical": 8,
+          }
+        }
+        data={
+          [
+            {
+              "character": "一",
+              "exampleWords": [
+                {
+                  "meaning": "one person; alone",
+                  "reading": "ひとり",
+                  "romaji": "hitori",
+                  "word": "一人",
+                },
+                {
+                  "meaning": "one (thing)",
+                  "reading": "ひとつ",
+                  "romaji": "hitotsu",
+                  "word": "一つ",
+                },
+              ],
+              "frequencyRank": 1,
+              "gradeLevel": 1,
+              "id": "U+4E00",
+              "jlptLevel": 5,
+              "kunYomi": [
+                {
+                  "reading": "ひと",
+                  "romaji": "hito",
+                },
+              ],
+              "meanings": [
+                "one",
+                "single",
+              ],
+              "onYomi": [
+                {
+                  "reading": "イチ",
+                  "romaji": "ichi",
+                },
+                {
+                  "reading": "イツ",
+                  "romaji": "itsu",
+                },
+              ],
+              "radicals": [
+                "一",
+              ],
+              "strokes": 1,
+            },
+            {
+              "character": "二",
+              "exampleWords": [
+                {
+                  "meaning": "two people",
+                  "reading": "ふたり",
+                  "romaji": "futari",
+                  "word": "二人",
+                },
+              ],
+              "frequencyRank": 2,
+              "gradeLevel": 1,
+              "id": "U+4E8C",
+              "jlptLevel": 5,
+              "kunYomi": [
+                {
+                  "reading": "ふた",
+                  "romaji": "futa",
+                },
+              ],
+              "meanings": [
+                "two",
+              ],
+              "onYomi": [
+                {
+                  "reading": "ニ",
+                  "romaji": "ni",
+                },
+              ],
+              "radicals": [
+                "二",
+              ],
+              "strokes": 2,
+            },
+          ]
+        }
+        getItem={[Function]}
+        getItemCount={[Function]}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={0.0001}
+        stickyHeaderIndices={[]}
+        viewabilityConfigCallbackPairs={[]}
+      >
+        <View>
+          <View
+            collapsable={false}
+            onLayout={[Function]}
+          >
+            <View
+              style={
+                [
+                  {
+                    "padding": 16,
+                  },
+                  {
+                    "backgroundColor": "#FFFFFF",
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "#000000",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "400",
+                        "letterSpacing": 0.25,
+                        "lineHeight": 20,
+                      },
+                      [
+                        {},
+                        {
+                          "color": "rgba(73, 69, 79, 1)",
+                        },
+                      ],
+                    ],
+                  ]
+                }
+              >
+                2
+                 characters available
+              </Text>
+            </View>
+          </View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "rgba(247, 243, 249, 1)",
+                  "borderRadius": 12,
+                  "marginHorizontal": 16,
+                  "marginVertical": 8,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "rgba(247, 243, 249, 1)",
+                    "borderRadius": 12,
+                    "elevation": 2,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "fontFamily": "System",
+                                "fontWeight": "400",
+                                "letterSpacing": 0,
+                              },
+                              {
+                                "writingDirection": "ltr",
+                              },
+                              {
+                                "fontSize": 60,
+                                "fontWeight": "bold",
+                                "marginRight": 20,
+                                "minWidth": 80,
+                                "textAlign": "center",
+                              },
+                            ]
+                          }
+                        >
+                          一
+                        </Text>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#000000",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "marginBottom": 4,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            one, single
+                          </Text>
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#000000",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 12,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.4,
+                                    "lineHeight": 16,
+                                  },
+                                  [
+                                    {},
+                                    {
+                                      "color": "rgba(73, 69, 79, 1)",
+                                    },
+                                  ],
+                                ],
+                              ]
+                            }
+                          >
+                            イチ, イツ
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onFocusCapture={[Function]}
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "rgba(247, 243, 249, 1)",
+                  "borderRadius": 12,
+                  "marginHorizontal": 16,
+                  "marginVertical": 8,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "rgba(247, 243, 249, 1)",
+                    "borderRadius": 12,
+                    "elevation": 2,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "fontFamily": "System",
+                                "fontWeight": "400",
+                                "letterSpacing": 0,
+                              },
+                              {
+                                "writingDirection": "ltr",
+                              },
+                              {
+                                "fontSize": 60,
+                                "fontWeight": "bold",
+                                "marginRight": 20,
+                                "minWidth": 80,
+                                "textAlign": "center",
+                              },
+                            ]
+                          }
+                        >
+                          二
+                        </Text>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#000000",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "marginBottom": 4,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            two
+                          </Text>
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#000000",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 12,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.4,
+                                    "lineHeight": 16,
+                                  },
+                                  [
+                                    {},
+                                    {
+                                      "color": "rgba(73, 69, 79, 1)",
+                                    },
+                                  ],
+                                ],
+                              ]
+                            }
+                          >
+                            ニ
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`HomeScreen shows loading state 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityRole="progressbar"
+        accessibilityState={
+          {
+            "busy": true,
+          }
+        }
+        accessible={true}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 48,
+              "opacity": 1,
+              "width": 48,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 48,
+                  "transform": [
+                    {
+                      "rotate": "45deg",
+                    },
+                  ],
+                  "width": 48,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "height": 24,
+                    "overflow": "hidden",
+                    "width": 48,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "height": 48,
+                      "transform": [
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "rotate": "-165deg",
+                        },
+                      ],
+                      "width": 48,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 24,
+                        "overflow": "hidden",
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "borderColor": "#6200EE",
+                          "borderRadius": 24,
+                          "borderWidth": 4.8,
+                          "height": 48,
+                          "width": 48,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "height": 48,
+                  "transform": [
+                    {
+                      "rotate": "45deg",
+                    },
+                  ],
+                  "width": 48,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "height": 24,
+                    "overflow": "hidden",
+                    "top": 24,
+                    "width": 48,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "height": 48,
+                      "transform": [
+                        {
+                          "translateY": -24,
+                        },
+                        {
+                          "rotate": "345deg",
+                        },
+                      ],
+                      "width": 48,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "height": 24,
+                        "overflow": "hidden",
+                        "width": 48,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        {
+                          "borderColor": "#6200EE",
+                          "borderRadius": 24,
+                          "borderWidth": 4.8,
+                          "height": 48,
+                          "width": 48,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "#000000",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            {
+              "marginTop": 10,
+            },
+          ]
+        }
+      >
+        Loading kanji...
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;

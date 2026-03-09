@@ -1,0 +1,2580 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PracticeModeScreen renders correctly with available cards 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTScrollView
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            [
+              {
+                "elevation": 2,
+                "padding": 20,
+                "paddingTop": 40,
+              },
+              {
+                "backgroundColor": "#FFFFFF",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#000000",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 28,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 36,
+                  },
+                  {
+                    "fontWeight": "bold",
+                    "marginBottom": 8,
+                  },
+                ],
+              ]
+            }
+          >
+            Practice Modes
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#000000",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {},
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Choose how you want to practice
+          </Text>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#e3f2fd",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#e3f2fd",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 16,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.15,
+                          "lineHeight": 24,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  📚 Cards Ready
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 16,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.15,
+                          "lineHeight": 24,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  1
+                   due for review • 
+                  2
+                   new
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  🎴 Flashcards
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Test your recognition with spaced repetition. See the kanji, recall the meaning and reading, then rate your confidence.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start (3 cards)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  ✍️ Stroke Order
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Practice writing kanji with correct stroke order. Draw each stroke and get instant feedback.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Practice (2 kanji)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  ❓ Multiple Choice
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Test your knowledge with quiz questions. Choose the correct meaning, reading, or kanji from multiple options.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Quiz (3 questions)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  📚 Context Practice
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Learn kanji in real words and phrases. See how kanji are used in Japanese language.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Practice (3 kanji)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "height": 20,
+            }
+          }
+        />
+      </View>
+    </RCTScrollView>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTScrollView
+      style={
+        [
+          {
+            "flex": 1,
+          },
+          {
+            "backgroundColor": "#FFFFFF",
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            [
+              {
+                "elevation": 2,
+                "padding": 20,
+                "paddingTop": 40,
+              },
+              {
+                "backgroundColor": "#FFFFFF",
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#000000",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 28,
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
+                    "lineHeight": 36,
+                  },
+                  {
+                    "fontWeight": "bold",
+                    "marginBottom": 8,
+                  },
+                ],
+              ]
+            }
+          >
+            Practice Modes
+          </Text>
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#000000",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {},
+                    {
+                      "color": "rgba(73, 69, 79, 1)",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Choose how you want to practice
+          </Text>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  🎴 Flashcards
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Test your recognition with spaced repetition. See the kanji, recall the meaning and reading, then rate your confidence.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "rgba(28, 27, 31, 0.12)",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "rgba(28, 27, 31, 0.12)",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": true,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(28, 27, 31, 0.38)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          No cards available
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  ✍️ Stroke Order
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Practice writing kanji with correct stroke order. Draw each stroke and get instant feedback.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Practice (2 kanji)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  ❓ Multiple Choice
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Test your knowledge with quiz questions. Choose the correct meaning, reading, or kanji from multiple options.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Quiz (3 questions)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "rgba(247, 243, 249, 1)",
+              "borderRadius": 12,
+              "margin": 16,
+              "marginBottom": 8,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="card-container-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "rgba(247, 243, 249, 1)",
+                "borderRadius": 12,
+                "elevation": 2,
+                "flex": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="card-container"
+          >
+            <View
+              style={
+                [
+                  {
+                    "flexShrink": 1,
+                  },
+                  undefined,
+                ]
+              }
+              testID="card"
+            >
+              <View
+                borderRadiusStyles={{}}
+                style={
+                  [
+                    {
+                      "paddingHorizontal": 16,
+                    },
+                    {
+                      "paddingVertical": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 22,
+                          "fontWeight": "400",
+                          "letterSpacing": 0,
+                          "lineHeight": 28,
+                        },
+                        {
+                          "fontWeight": "bold",
+                          "marginBottom": 8,
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  📚 Context Practice
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "textAlign": "left",
+                      },
+                      {
+                        "color": "#000000",
+                        "writingDirection": "ltr",
+                      },
+                      [
+                        {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "400",
+                          "letterSpacing": 0.25,
+                          "lineHeight": 20,
+                        },
+                        [
+                          {
+                            "lineHeight": 20,
+                            "marginBottom": 16,
+                          },
+                          {
+                            "color": "rgba(73, 69, 79, 1)",
+                          },
+                        ],
+                      ],
+                    ]
+                  }
+                >
+                  Learn kanji in real words and phrases. See how kanji are used in Japanese language.
+                </Text>
+                <View
+                  collapsable={false}
+                  style={
+                    {
+                      "backgroundColor": "#6200EE",
+                      "borderRadius": 20,
+                      "marginTop": 8,
+                      "shadowColor": "#000",
+                      "shadowOffset": {
+                        "height": 0,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0,
+                      "shadowRadius": 0,
+                    }
+                  }
+                  testID="button-container-outer-layer"
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      {
+                        "backgroundColor": "#6200EE",
+                        "borderColor": "transparent",
+                        "borderRadius": 20,
+                        "borderStyle": "solid",
+                        "borderWidth": 0,
+                        "flex": undefined,
+                        "minWidth": 64,
+                        "shadowColor": "#000",
+                        "shadowOffset": {
+                          "height": 0,
+                          "width": 0,
+                        },
+                        "shadowOpacity": 0,
+                        "shadowRadius": 0,
+                      }
+                    }
+                    testID="button-container"
+                  >
+                    <View
+                      accessibilityRole="button"
+                      accessibilityState={
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
+                          "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
+                        }
+                      }
+                      accessible={true}
+                      collapsable={false}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        [
+                          {
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 20,
+                          },
+                        ]
+                      }
+                      testID="button"
+                    >
+                      <View
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        <Text
+                          numberOfLines={1}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#000000",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 14,
+                                  "fontWeight": "500",
+                                  "letterSpacing": 0.1,
+                                  "lineHeight": 20,
+                                },
+                                [
+                                  {
+                                    "marginHorizontal": 16,
+                                    "marginVertical": 9,
+                                    "textAlign": "center",
+                                  },
+                                  false,
+                                  {
+                                    "marginHorizontal": 24,
+                                    "marginVertical": 10,
+                                  },
+                                  undefined,
+                                  false,
+                                  {
+                                    "color": "rgba(255, 255, 255, 1)",
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "500",
+                                    "letterSpacing": 0.1,
+                                    "lineHeight": 20,
+                                  },
+                                  undefined,
+                                ],
+                              ],
+                            ]
+                          }
+                          testID="button-text"
+                        >
+                          Start Practice (3 kanji)
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "height": 20,
+            }
+          }
+        />
+      </View>
+    </RCTScrollView>
+  </View>
+</RNCSafeAreaProvider>
+`;
