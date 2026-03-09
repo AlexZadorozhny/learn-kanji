@@ -6,8 +6,9 @@ import { KanjiCharacter } from '../../types/kanji';
 import { HapticService } from '../../services/feedback/HapticService';
 import StrokeDirectionIndicator from './StrokeDirectionIndicator';
 import StrokeProgressIndicator from './StrokeProgressIndicator';
-import { BasicStrokeValidator } from '../../services/validation/BasicStrokeValidator';
-import { FeedbackMessageService } from '../../services/validation/FeedbackMessageService';
+import { AdvancedStrokeValidator } from '../../services/validation/AdvancedStrokeValidator';
+import { PerformanceMonitor } from '../../services/validation/PerformanceMonitor';
+import { ValidationConfig } from '../../services/validation/ValidationConfig';
 
 interface Point {
   x: number;
@@ -37,6 +38,7 @@ export default function StrokeOrderCanvas({
   const [showGuide, setShowGuide] = useState(true);
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
   const [showSuccessGlow, setShowSuccessGlow] = useState<boolean>(false);
+  const [strokeAttempts, setStrokeAttempts] = useState<Record<number, number>>({});
   const clearTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const currentDrawingRef = useRef<Point[]>([]); // Ref to track points synchronously
   const currentStrokeIndexRef = useRef<number>(0); // Ref to track stroke index synchronously
@@ -183,7 +185,7 @@ export default function StrokeOrderCanvas({
   ).current;
 
   const validateStroke = (points: Point[], strokeIndex: number): boolean => {
-    console.log('=== Validating stroke ===');
+    console.log('=== Validating stroke (Advanced) ===');
     console.log('Stroke index:', strokeIndex);
     console.log('Total points drawn:', points.length);
 
@@ -199,14 +201,63 @@ export default function StrokeOrderCanvas({
     const userPath = convertUserStrokeToPath(points);
     console.log('User path:', userPath);
 
-    // Use geometric validation
-    const result = BasicStrokeValidator.validate(userPath, targetStroke.path);
+    // Get current attempt count for this stroke
+    const attemptCount = (strokeAttempts[strokeIndex] || 0) + 1;
+
+    // Start performance monitoring
+    const startTime = Date.now();
+
+    // Use advanced validation with adaptive thresholds
+    const result = AdvancedStrokeValidator.validate(
+      userPath,
+      targetStroke.path,
+      kanji.strokes,
+      attemptCount
+    );
+
+    // End performance monitoring
+    const validationTime = Date.now() - startTime;
+
     console.log('Validation result:', result);
+    console.log(`Validation time: ${validationTime}ms`);
+    console.log(`Accuracy: ${result.accuracy}%`);
+
+    // Determine stroke type for performance tracking
+    const strokeType = ValidationConfig.shouldUseFrechetDistance(
+      kanji.strokeOrder
+        .slice(strokeIndex, strokeIndex + 1)
+        .map((s) => s.path)
+    )
+      ? 'curved'
+      : 'straight';
+
+    // Record performance metrics
+    PerformanceMonitor.recordValidation(
+      strokeType,
+      validationTime,
+      result.accuracy,
+      result.valid,
+      kanji.strokes,
+      strokeType === 'curved'
+    );
+
+    // Log performance stats in dev mode (every 10 validations)
+    if (__DEV__ && PerformanceMonitor.getStats().totalValidations % 10 === 0) {
+      console.log(PerformanceMonitor.getPerformanceReport());
+    }
 
     // Update feedback message based on validation
     if (!result.valid && result.reason) {
-      setFeedbackMessage(`✗ ${result.reason}`);
+      setFeedbackMessage(`✗ ${result.reason} (${result.accuracy}% match)`);
+    } else if (result.valid) {
+      setFeedbackMessage(`✓ Correct! (${result.accuracy}% match)`);
     }
+
+    // Update attempt count
+    setStrokeAttempts((prev) => ({
+      ...prev,
+      [strokeIndex]: attemptCount,
+    }));
 
     return result.valid;
   };
@@ -238,6 +289,7 @@ export default function StrokeOrderCanvas({
     setIncorrectStroke(null);
     setFeedbackMessage('');
     setCurrentStrokeIndex(0);
+    setStrokeAttempts({}); // Reset attempt counts
     currentStrokeIndexRef.current = 0;
     currentDrawingRef.current = [];
     HapticService.medium();
@@ -309,8 +361,8 @@ export default function StrokeOrderCanvas({
           width={canvasSize}
           height={canvasSize}
           viewBox={`0 0 100 100`}
-          style={StyleSheet.absoluteFill}
-          pointerEvents="none"
+          style={[StyleSheet.absoluteFill, { zIndex: 1 }]}
+          pointerEvents="box-none"
         >
           {/* Background to show drawing area */}
           <Path
@@ -409,7 +461,7 @@ export default function StrokeOrderCanvas({
             StyleSheet.absoluteFill,
             {
               backgroundColor: 'transparent',
-              zIndex: 1000,
+              zIndex: 10,
             },
           ]}
           {...panResponder.panHandlers}

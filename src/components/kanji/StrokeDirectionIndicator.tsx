@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import Svg, { Circle, Polygon } from 'react-native-svg';
+import { G, Circle, Polygon } from 'react-native-svg';
 
 interface StrokeDirectionIndicatorProps {
   strokePath: string;
@@ -11,6 +10,8 @@ interface StrokeDirectionIndicatorProps {
  * Component that displays directional indicators on stroke guide:
  * - Green dot at stroke start point
  * - Blue arrow at stroke end showing direction
+ *
+ * NOTE: Returns SVG elements directly (no wrapper) to avoid nested SVG issues on Android
  */
 export default function StrokeDirectionIndicator({
   strokePath,
@@ -34,12 +35,7 @@ export default function StrokeDirectionIndicator({
   const arrowPoints = calculateArrowPoints(endPoint.x, endPoint.y, angle, arrowSize);
 
   return (
-    <Svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 100 100"
-      style={styles.svg}
-    >
+    <G>
       {/* Start point indicator (green dot) */}
       <Circle
         cx={startPoint.x}
@@ -55,7 +51,7 @@ export default function StrokeDirectionIndicator({
         fill="#2196f3"
         opacity={0.85}
       />
-    </Svg>
+    </G>
   );
 }
 
@@ -184,11 +180,3 @@ function calculateArrowPoints(
 
   return `${tipX},${tipY} ${base1X},${base1Y} ${base2X},${base2Y}`;
 }
-
-const styles = StyleSheet.create({
-  svg: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  },
-});
