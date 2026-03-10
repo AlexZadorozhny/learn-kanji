@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "simple-mobile",
-    "slug": "simple-mobile",
+    "name": "learn-kanji",
+    "slug": "learn-kanji",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +13,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.simple.mobile"
+      "bundleIdentifier": "com.learn.kanji"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +23,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.simple.mobile"
+      "package": "com.learn.kanji"
     },
     "web": {
       "favicon": "./assets/favicon.png"

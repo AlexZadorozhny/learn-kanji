@@ -182,7 +182,7 @@ Use tunnel mode when:
 
 ## Project Structure
 ```
-simple-mobile/
+learn-kanji/
 ├── App.tsx                    # Root component with navigation
 ├── index.ts                   # App entry point
 ├── app.json                   # Expo configuration
@@ -391,7 +391,7 @@ watchman watch-del-all
 
 3. **Remove old cached projects** in Expo Go:
    - Tap three dots (⋮) → Recently opened
-   - Delete any old "simple-mobile" entries
+   - Delete any old "learn-kanji" entries
 
 4. **Use tunnel mode** (slower but more reliable):
    ```bash

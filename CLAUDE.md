@@ -21,7 +21,7 @@ A Japanese Kanji learning mobile application built with Expo and React Native. F
 - AsyncStorage (local persistence)
 
 **Bundle Identifiers:**
-- iOS/Android: `com.simple.mobile`
+- iOS/Android: `com.learn.kanji`
 
 ## Development Commands
 
