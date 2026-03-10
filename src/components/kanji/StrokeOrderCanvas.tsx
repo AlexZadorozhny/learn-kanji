@@ -382,24 +382,25 @@ export default function StrokeOrderCanvas({
           {/* Show guide strokes */}
           {showGuide && kanji.strokeOrder && (
             <G>
-              {/* Completed strokes in black */}
+              {/* Completed strokes - theme-aware */}
               {kanji.strokeOrder.slice(0, currentStrokeIndex).map((stroke, index) => (
                 <Path
                   key={`guide-${index}`}
                   d={stroke.path}
-                  stroke="#000"
+                  stroke={theme.colors.onSurface}
                   strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  opacity={0.7}
                 />
               ))}
 
-              {/* Current stroke in light gray */}
+              {/* Current stroke guide - theme-aware */}
               {currentStrokeIndex < kanji.strokeOrder.length && (
                 <Path
                   d={kanji.strokeOrder[currentStrokeIndex].path}
-                  stroke="#ccc"
+                  stroke={theme.colors.outline}
                   strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
