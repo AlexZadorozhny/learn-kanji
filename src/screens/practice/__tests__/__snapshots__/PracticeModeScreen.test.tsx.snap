@@ -32,6 +32,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
           },
         ]
       }
+      testID="practice-mode-scroll-view"
     >
       <View>
         <View
@@ -370,7 +371,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-flashcard-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -392,7 +393,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-flashcard-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -435,7 +436,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-flashcard-button"
                     >
                       <View
                         style={
@@ -495,7 +496,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-flashcard-button-text"
                         >
                           Start (3 cards)
                         </Text>
@@ -647,7 +648,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-stroke-order-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -669,7 +670,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-stroke-order-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -712,7 +713,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-stroke-order-button"
                     >
                       <View
                         style={
@@ -772,7 +773,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-stroke-order-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>
@@ -924,7 +925,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-multiple-choice-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -946,7 +947,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-multiple-choice-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -989,7 +990,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-multiple-choice-button"
                     >
                       <View
                         style={
@@ -1049,7 +1050,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-multiple-choice-button-text"
                         >
                           Start Quiz (3 questions)
                         </Text>
@@ -1201,7 +1202,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-context-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -1223,7 +1224,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-context-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -1266,7 +1267,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-context-button"
                     >
                       <View
                         style={
@@ -1326,7 +1327,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-context-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>
@@ -1383,6 +1384,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
           },
         ]
       }
+      testID="practice-mode-scroll-view"
     >
       <View>
         <View
@@ -1598,7 +1600,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-flashcard-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -1620,7 +1622,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-flashcard-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -1663,7 +1665,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-flashcard-button"
                     >
                       <View
                         style={
@@ -1723,7 +1725,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-flashcard-button-text"
                         >
                           No cards available
                         </Text>
@@ -1875,7 +1877,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-stroke-order-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -1897,7 +1899,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-stroke-order-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -1940,7 +1942,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-stroke-order-button"
                     >
                       <View
                         style={
@@ -2000,7 +2002,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-stroke-order-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>
@@ -2152,7 +2154,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-multiple-choice-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -2174,7 +2176,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-multiple-choice-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -2217,7 +2219,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-multiple-choice-button"
                     >
                       <View
                         style={
@@ -2277,7 +2279,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-multiple-choice-button-text"
                         >
                           Start Quiz (3 questions)
                         </Text>
@@ -2429,7 +2431,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-context-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -2451,7 +2453,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-context-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -2494,7 +2496,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-context-button"
                     >
                       <View
                         style={
@@ -2554,7 +2556,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-context-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>
@@ -2611,6 +2613,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
           },
         ]
       }
+      testID="practice-mode-scroll-view"
     >
       <View>
         <View
@@ -2949,7 +2952,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-flashcard-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -2971,7 +2974,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-flashcard-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -3014,7 +3017,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-flashcard-button"
                     >
                       <View
                         style={
@@ -3074,7 +3077,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-flashcard-button-text"
                         >
                           Start (2 cards)
                         </Text>
@@ -3226,7 +3229,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-stroke-order-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -3248,7 +3251,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-stroke-order-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -3291,7 +3294,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-stroke-order-button"
                     >
                       <View
                         style={
@@ -3351,7 +3354,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-stroke-order-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>
@@ -3503,7 +3506,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-multiple-choice-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -3525,7 +3528,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-multiple-choice-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -3568,7 +3571,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-multiple-choice-button"
                     >
                       <View
                         style={
@@ -3628,7 +3631,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-multiple-choice-button-text"
                         >
                           Start Quiz (3 questions)
                         </Text>
@@ -3780,7 +3783,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="button-container-outer-layer"
+                  testID="practice-mode-context-button-container-outer-layer"
                 >
                   <View
                     collapsable={false}
@@ -3802,7 +3805,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                         "shadowRadius": 0,
                       }
                     }
-                    testID="button-container"
+                    testID="practice-mode-context-button-container"
                   >
                     <View
                       accessibilityRole="button"
@@ -3845,7 +3848,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                           },
                         ]
                       }
-                      testID="button"
+                      testID="practice-mode-context-button"
                     >
                       <View
                         style={
@@ -3905,7 +3908,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                               ],
                             ]
                           }
-                          testID="button-text"
+                          testID="practice-mode-context-button-text"
                         >
                           Start Practice (3 kanji)
                         </Text>

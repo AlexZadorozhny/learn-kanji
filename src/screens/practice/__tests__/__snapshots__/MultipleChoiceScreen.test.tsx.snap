@@ -56,6 +56,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
           },
         ]
       }
+      testID="multiple-choice-container"
     >
       <View
         style={
@@ -91,7 +92,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
               "width": 40,
             }
           }
-          testID="icon-button-container-outer-layer"
+          testID="multiple-choice-close-button-container-outer-layer"
         >
           <View
             collapsable={false}
@@ -113,7 +114,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="icon-button-container"
+            testID="multiple-choice-close-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -172,7 +173,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
                   ],
                 ]
               }
-              testID="icon-button"
+              testID="multiple-choice-close-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -433,6 +434,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            testID="multiple-choice-option-0"
           >
             <View
               collapsable={false}
@@ -565,6 +567,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            testID="multiple-choice-option-1"
           >
             <View
               collapsable={false}
@@ -697,6 +700,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            testID="multiple-choice-option-2"
           >
             <View
               collapsable={false}
@@ -829,6 +833,7 @@ exports[`MultipleChoiceScreen renders correctly with active question 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            testID="multiple-choice-option-3"
           >
             <View
               collapsable={false}

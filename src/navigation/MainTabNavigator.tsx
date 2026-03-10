@@ -33,7 +33,7 @@ export default function MainTabNavigator() {
         component={HomeStackNavigator}
         options={{
           headerShown: false,
-          tabBarTestID: 'tab-home',
+          tabBarButtonTestID: 'tab-home',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
@@ -65,7 +65,7 @@ export default function MainTabNavigator() {
         component={PracticeStackNavigator}
         options={{
           headerShown: false,
-          tabBarTestID: 'tab-practice',
+          tabBarButtonTestID: 'tab-practice',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="school" color={color} size={size} />
           ),
@@ -96,7 +96,7 @@ export default function MainTabNavigator() {
         name="Progress"
         component={ProgressScreen}
         options={{
-          tabBarTestID: 'tab-progress',
+          tabBarButtonTestID: 'tab-progress',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="chart-line" color={color} size={size} />
           ),
@@ -107,7 +107,7 @@ export default function MainTabNavigator() {
         component={SettingsStackNavigator}
         options={{
           headerShown: false,
-          tabBarTestID: 'tab-settings',
+          tabBarButtonTestID: 'tab-settings',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),

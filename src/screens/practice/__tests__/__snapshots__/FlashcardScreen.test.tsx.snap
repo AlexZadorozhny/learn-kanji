@@ -56,6 +56,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
           },
         ]
       }
+      testID="flashcard-screen-container"
     >
       <View
         style={
@@ -91,7 +92,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
               "width": 40,
             }
           }
-          testID="icon-button-container-outer-layer"
+          testID="flashcard-close-button-container-outer-layer"
         >
           <View
             collapsable={false}
@@ -113,7 +114,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="icon-button-container"
+            testID="flashcard-close-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -172,7 +173,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
                   ],
                 ]
               }
-              testID="icon-button"
+              testID="flashcard-close-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -274,6 +275,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
             "padding": 20,
           }
         }
+        testID="flashcard-container"
       >
         <View
           accessibilityState={
@@ -312,6 +314,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
               "width": "100%",
             }
           }
+          testID="flashcard-card"
         >
           <View
             collapsable={false}
@@ -425,6 +428,7 @@ exports[`FlashcardScreen renders correctly with active session 1`] = `
                           ],
                         ]
                       }
+                      testID="flashcard-front-character"
                     >
                       一
                     </Text>

@@ -32,6 +32,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
           },
         ]
       }
+      testID="results-scroll-view"
     >
       <View>
         <View
@@ -68,7 +69,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                 "width": 40,
               }
             }
-            testID="icon-button-container-outer-layer"
+            testID="results-close-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -90,7 +91,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="icon-button-container"
+              testID="results-close-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -149,7 +150,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                     ],
                   ]
                 }
-                testID="icon-button"
+                testID="results-close-button"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -1168,7 +1169,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-practice-again-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -1190,7 +1191,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-practice-again-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -1233,7 +1234,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-practice-again-button"
               >
                 <View
                   style={
@@ -1261,7 +1262,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                         false,
                       ]
                     }
-                    testID="button-icon-container"
+                    testID="results-practice-again-button-icon-container"
                   >
                     <Text
                       accessibilityElementsHidden={true}
@@ -1329,7 +1330,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-practice-again-button-text"
                   >
                     Practice Again
                   </Text>
@@ -1353,7 +1354,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-back-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -1375,7 +1376,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-back-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -1418,7 +1419,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-back-button"
               >
                 <View
                   style={
@@ -1478,7 +1479,7 @@ exports[`ResultsScreen renders correctly with high accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-back-button-text"
                   >
                     Back to Practice
                   </Text>
@@ -1532,6 +1533,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
           },
         ]
       }
+      testID="results-scroll-view"
     >
       <View>
         <View
@@ -1568,7 +1570,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                 "width": 40,
               }
             }
-            testID="icon-button-container-outer-layer"
+            testID="results-close-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -1590,7 +1592,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="icon-button-container"
+              testID="results-close-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -1649,7 +1651,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                     ],
                   ]
                 }
-                testID="icon-button"
+                testID="results-close-button"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -2668,7 +2670,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-practice-again-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -2690,7 +2692,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-practice-again-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -2733,7 +2735,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-practice-again-button"
               >
                 <View
                   style={
@@ -2761,7 +2763,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                         false,
                       ]
                     }
-                    testID="button-icon-container"
+                    testID="results-practice-again-button-icon-container"
                   >
                     <Text
                       accessibilityElementsHidden={true}
@@ -2829,7 +2831,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-practice-again-button-text"
                   >
                     Practice Again
                   </Text>
@@ -2853,7 +2855,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-back-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -2875,7 +2877,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-back-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -2918,7 +2920,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-back-button"
               >
                 <View
                   style={
@@ -2978,7 +2980,7 @@ exports[`ResultsScreen renders correctly with low accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-back-button-text"
                   >
                     Back to Practice
                   </Text>
@@ -3032,6 +3034,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
           },
         ]
       }
+      testID="results-scroll-view"
     >
       <View>
         <View
@@ -3068,7 +3071,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                 "width": 40,
               }
             }
-            testID="icon-button-container-outer-layer"
+            testID="results-close-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -3090,7 +3093,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="icon-button-container"
+              testID="results-close-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -3149,7 +3152,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                     ],
                   ]
                 }
-                testID="icon-button"
+                testID="results-close-button"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -4168,7 +4171,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-practice-again-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -4190,7 +4193,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-practice-again-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -4233,7 +4236,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-practice-again-button"
               >
                 <View
                   style={
@@ -4261,7 +4264,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                         false,
                       ]
                     }
-                    testID="button-icon-container"
+                    testID="results-practice-again-button-icon-container"
                   >
                     <Text
                       accessibilityElementsHidden={true}
@@ -4329,7 +4332,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-practice-again-button-text"
                   >
                     Practice Again
                   </Text>
@@ -4353,7 +4356,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="button-container-outer-layer"
+            testID="results-back-button-container-outer-layer"
           >
             <View
               collapsable={false}
@@ -4375,7 +4378,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container"
+              testID="results-back-button-container"
             >
               <View
                 accessibilityRole="button"
@@ -4418,7 +4421,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                     },
                   ]
                 }
-                testID="button"
+                testID="results-back-button"
               >
                 <View
                   style={
@@ -4478,7 +4481,7 @@ exports[`ResultsScreen renders correctly with medium accuracy session 1`] = `
                         ],
                       ]
                     }
-                    testID="button-text"
+                    testID="results-back-button-text"
                   >
                     Back to Practice
                   </Text>

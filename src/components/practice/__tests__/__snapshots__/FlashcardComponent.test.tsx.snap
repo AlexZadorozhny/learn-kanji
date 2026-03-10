@@ -30,6 +30,7 @@ exports[`FlashcardComponent renders correctly with kanji on front 1`] = `
           "padding": 20,
         }
       }
+      testID="flashcard-container"
     >
       <View
         accessibilityState={
@@ -68,6 +69,7 @@ exports[`FlashcardComponent renders correctly with kanji on front 1`] = `
             "width": "100%",
           }
         }
+        testID="flashcard-card"
       >
         <View
           collapsable={false}
@@ -181,6 +183,7 @@ exports[`FlashcardComponent renders correctly with kanji on front 1`] = `
                         ],
                       ]
                     }
+                    testID="flashcard-front-character"
                   >
                     一
                   </Text>

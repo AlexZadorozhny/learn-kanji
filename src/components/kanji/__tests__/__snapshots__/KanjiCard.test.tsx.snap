@@ -38,7 +38,7 @@ exports[`KanjiCard renders correctly with different kanji 1`] = `
           "shadowRadius": 3,
         }
       }
-      testID="card-container-outer-layer"
+      testID="kanji-card-二-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -57,7 +57,7 @@ exports[`KanjiCard renders correctly with different kanji 1`] = `
             "shadowRadius": 1,
           }
         }
-        testID="card-container"
+        testID="kanji-card-二-container"
       >
         <View
           style={
@@ -68,7 +68,7 @@ exports[`KanjiCard renders correctly with different kanji 1`] = `
               undefined,
             ]
           }
-          testID="card"
+          testID="kanji-card-二"
         >
           <View
             borderRadiusStyles={{}}
@@ -116,6 +116,7 @@ exports[`KanjiCard renders correctly with different kanji 1`] = `
                     },
                   ]
                 }
+                testID="kanji-character-二"
               >
                 二
               </Text>
@@ -231,7 +232,7 @@ exports[`KanjiCard renders correctly with kanji data 1`] = `
           "shadowRadius": 3,
         }
       }
-      testID="card-container-outer-layer"
+      testID="kanji-card-一-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -250,7 +251,7 @@ exports[`KanjiCard renders correctly with kanji data 1`] = `
             "shadowRadius": 1,
           }
         }
-        testID="card-container"
+        testID="kanji-card-一-container"
       >
         <View
           style={
@@ -261,7 +262,7 @@ exports[`KanjiCard renders correctly with kanji data 1`] = `
               undefined,
             ]
           }
-          testID="card"
+          testID="kanji-card-一"
         >
           <View
             borderRadiusStyles={{}}
@@ -309,6 +310,7 @@ exports[`KanjiCard renders correctly with kanji data 1`] = `
                     },
                   ]
                 }
+                testID="kanji-character-一"
               >
                 一
               </Text>
@@ -424,7 +426,7 @@ exports[`KanjiCard renders correctly with onPress handler 1`] = `
           "shadowRadius": 3,
         }
       }
-      testID="card-container-outer-layer"
+      testID="kanji-card-一-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -443,7 +445,7 @@ exports[`KanjiCard renders correctly with onPress handler 1`] = `
             "shadowRadius": 1,
           }
         }
-        testID="card-container"
+        testID="kanji-card-一-container"
       >
         <View
           accessibilityState={
@@ -485,7 +487,7 @@ exports[`KanjiCard renders correctly with onPress handler 1`] = `
                 undefined,
               ]
             }
-            testID="card"
+            testID="kanji-card-一"
           >
             <View
               borderRadiusStyles={{}}
@@ -533,6 +535,7 @@ exports[`KanjiCard renders correctly with onPress handler 1`] = `
                       },
                     ]
                   }
+                  testID="kanji-character-一"
                 >
                   一
                 </Text>

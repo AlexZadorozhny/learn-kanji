@@ -97,6 +97,7 @@ exports[`KanjiDetailScreen renders correctly with full kanji data 1`] = `
           },
         ]
       }
+      testID="kanji-detail-scroll-view"
     >
       <View>
         <View
