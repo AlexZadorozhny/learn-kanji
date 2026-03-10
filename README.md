@@ -160,9 +160,9 @@ Use tunnel mode when:
   - **Android optimized**: Fixed SVG rendering for proper display on all platforms
 - 🗂️ **KanjiVG Integration**: Professional stroke order data for 6,355+ kanji:
   - **Three-tier architecture**: Bundled (instant) → Cached (offline) → On-demand (internet)
-  - **4 pre-bundled kanji** for instant offline access (<50ms load time)
-  - **6,351+ on-demand kanji** fetched from GitHub with permanent AsyncStorage caching
-  - **Legacy fallback** to original 25 kanji ensures zero regression
+  - **25 pre-bundled kanji** for instant offline access (<50ms load time)
+  - **6,330+ on-demand kanji** fetched from GitHub with permanent AsyncStorage caching
+  - **Legacy fallback** (deprecated) - bundled kanji now provide all stroke data
   - **Smart caching**: Automatic memory cache + persistent storage with LRU eviction
   - **Cache management UI**: View stats, clear cache, download all (Settings screen)
   - **Performance**: <50ms bundled, <100ms cached, <2s fresh fetch
@@ -197,9 +197,9 @@ simple-mobile/
     │   └── practice/
     │       └── FlashcardComponent.tsx  # Flashcard with flip animation
     ├── data/
-    │   ├── sample-data.ts     # Sample kanji data (25 characters)
-    │   └── kanjivg-bundled/   # Pre-bundled KanjiVG SVG files (4 sample kanji)
-    │       └── index.ts       # Bundled kanji ID registry
+    │   ├── sample-data.ts     # Sample kanji metadata (25 characters, no stroke data)
+    │   └── kanjivg-bundled/   # Pre-bundled KanjiVG SVG data (25 kanji as embedded strings)
+    │       └── index.ts       # Bundled kanji registry with embedded SVG content
     ├── navigation/
     │   ├── RootNavigator.tsx
     │   ├── MainTabNavigator.tsx
@@ -306,13 +306,15 @@ Each kanji includes:
 - **Grade level**: Japanese school grade (1-6)
 
 ### Sample Data
-Currently includes 25 most common kanji by frequency rank:
+Currently includes 25 most common kanji by frequency rank with professional KanjiVG stroke order data:
 - **Numbers**: 一 (one), 二 (two), 三 (three)
 - **People & Life**: 人 (person), 生 (life), 子 (child)
 - **Time**: 日 (day/sun), 年 (year), 時 (time), 月 (month), 分 (minute), 間 (interval)
 - **Places**: 国 (country), 上 (up), 下 (down), 中 (middle), 前 (front), 後 (back)
 - **Actions**: 出 (exit), 行 (go), 見 (see), 学 (study)
 - **Things**: 本 (book), 手 (hand), 大 (big)
+
+**Note:** All 25 kanji use professional KanjiVG stroke order data bundled as embedded SVG strings. Manual stroke paths have been replaced with industry-standard stroke data.
 
 ## Development Tips
 
