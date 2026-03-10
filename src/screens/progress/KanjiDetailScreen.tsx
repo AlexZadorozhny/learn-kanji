@@ -259,6 +259,7 @@ const styles = StyleSheet.create({
   },
   metaInfo: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
   },
   chip: {
