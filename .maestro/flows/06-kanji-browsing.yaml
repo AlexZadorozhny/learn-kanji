@@ -1,0 +1,143 @@
+appId: com.learn.kanji
+name: Kanji Browsing Flow
+tags:
+  - e2e
+  - home
+  - kanji
+  - browsing
+---
+# Test kanji list browsing and detail view navigation
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Home tab
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+
+# Verify home screen loaded
+- assertVisible:
+    id: "home-screen-container"
+- assertVisible:
+    id: "home-kanji-list"
+
+# Verify kanji count is displayed
+- assertVisible: "characters available"
+
+# Test scrolling through kanji list
+- scroll:
+    direction: DOWN
+- wait: 500
+
+- scroll:
+    direction: DOWN
+- wait: 500
+
+- scroll:
+    direction: UP
+- wait: 500
+
+# Tap on first kanji card (日 - sun/day)
+- tapOn:
+    id: "kanji-card-日"
+- waitForAnimationToEnd
+
+# Verify detail screen loaded
+- assertVisible:
+    id: "kanji-detail-scroll-view"
+- assertVisible: "Meanings"
+- assertVisible: "strokes"
+
+# Scroll down to see more details
+- scroll:
+    direction: DOWN
+- wait: 500
+
+# Look for readings section
+- assertVisible: "On-yomi"
+- assertVisible: "Kun-yomi"
+
+# Scroll down more to see example words
+- scroll:
+    direction: DOWN
+- wait: 500
+
+# Go back to list
+- back
+- waitForAnimationToEnd
+
+# Verify we're back at home screen
+- assertVisible:
+    id: "home-screen-container"
+- assertVisible:
+    id: "home-kanji-list"
+
+# Test tapping on different kanji cards
+# Tap on another common kanji (人 - person, or 一 - one)
+- scrollUntilVisible:
+    element:
+      id: "kanji-card-人"
+    direction: DOWN
+    timeout: 5000
+
+- tapOn:
+    id: "kanji-card-人"
+- waitForAnimationToEnd
+
+# Verify detail screen
+- assertVisible:
+    id: "kanji-detail-scroll-view"
+- assertVisible: "Meanings"
+
+# Go back
+- back
+- waitForAnimationToEnd
+
+# Try one more kanji (一 - one)
+- scrollUntilVisible:
+    element:
+      id: "kanji-card-一"
+    direction: DOWN
+    timeout: 5000
+
+- tapOn:
+    id: "kanji-card-一"
+- waitForAnimationToEnd
+
+# Verify detail screen
+- assertVisible:
+    id: "kanji-detail-scroll-view"
+
+# Go back
+- back
+- waitForAnimationToEnd
+
+# Verify home screen and test tab reset behavior
+- assertVisible:
+    id: "home-screen-container"
+
+# Navigate away and back to test stack reset
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+- assertVisible: "Practice Modes"
+
+# Tap Home tab again (should reset to root)
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+
+# Verify we're at root home screen
+- assertVisible:
+    id: "home-screen-container"
+- assertVisible:
+    id: "home-kanji-list"
+
+# Verify we can see the first kanji again (scroll to top)
+- scroll:
+    direction: UP
+- wait: 500
+
+- assertVisible:
+    id: "kanji-card-日"

@@ -84,12 +84,16 @@ export default function ResultsScreen() {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="results-scroll-view"
+    >
       <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
           size={24}
           onPress={handleBackButton}
+          testID="results-close-button"
         />
         <Text variant="headlineSmall" style={styles.headerTitle}>
           Session Complete!
@@ -174,6 +178,7 @@ export default function ResultsScreen() {
           onPress={handlePracticeAgain}
           style={styles.button}
           icon="refresh"
+          testID="results-practice-again-button"
         >
           Practice Again
         </Button>
@@ -182,6 +187,7 @@ export default function ResultsScreen() {
           mode="outlined"
           onPress={handleBackButton}
           style={styles.button}
+          testID="results-back-button"
         >
           {isFromKanjiDetail ? 'Back to Kanji Details' : 'Back to Practice'}
         </Button>

@@ -78,7 +78,10 @@ export default function KanjiDetailScreen() {
   }
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="kanji-detail-scroll-view"
+    >
       {/* Main Kanji Display */}
       <Card style={styles.card}>
         <Card.Content style={styles.mainContent}>
@@ -124,6 +127,7 @@ export default function KanjiDetailScreen() {
               icon="draw"
               onPress={handleStrokePractice}
               style={styles.practiceButton}
+              testID="kanji-detail-practice-stroke-button"
             >
               Practice Stroke Order
             </Button>

@@ -163,7 +163,10 @@ export default function MultipleChoiceScreen() {
   const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="multiple-choice-container"
+    >
       <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
@@ -172,6 +175,7 @@ export default function MultipleChoiceScreen() {
             endSession();
             navigation.goBack();
           }}
+          testID="multiple-choice-close-button"
         />
         <View style={styles.progressContainer}>
           <Text variant="bodyMedium">
@@ -208,6 +212,7 @@ export default function MultipleChoiceScreen() {
                 key={index}
                 onPress={() => handleAnswerSelect(option)}
                 disabled={showFeedback}
+                testID={`multiple-choice-option-${index}`}
               >
                 <Card
                   style={[

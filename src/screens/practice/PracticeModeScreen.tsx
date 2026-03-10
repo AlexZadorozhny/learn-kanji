@@ -32,7 +32,10 @@ export default function PracticeModeScreen() {
   ).length;
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="practice-mode-scroll-view"
+    >
       <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <Text variant="headlineMedium" style={styles.title}>
           Practice Modes
@@ -69,6 +72,7 @@ export default function PracticeModeScreen() {
             onPress={() => navigation.navigate('FlashcardScreen', {})}
             style={styles.button}
             disabled={availableCards === 0}
+            testID="practice-mode-flashcard-button"
           >
             {availableCards > 0 ? `Start (${availableCards} cards)` : 'No cards available'}
           </Button>
@@ -89,6 +93,7 @@ export default function PracticeModeScreen() {
             onPress={() => navigation.navigate('StrokeOrderScreen', { sessionKey: Date.now() })}
             style={styles.button}
             disabled={kanjiWithStrokeData === 0}
+            testID="practice-mode-stroke-order-button"
           >
             {kanjiWithStrokeData > 0 ? `Start Practice (${Math.min(kanjiWithStrokeData, 5)} kanji)` : 'No kanji available'}
           </Button>
@@ -109,6 +114,7 @@ export default function PracticeModeScreen() {
             onPress={() => navigation.navigate('MultipleChoiceScreen', {})}
             style={styles.button}
             disabled={kanjiData.length === 0}
+            testID="practice-mode-multiple-choice-button"
           >
             {kanjiData.length > 0 ? `Start Quiz (${Math.min(kanjiData.length, 10)} questions)` : 'No questions available'}
           </Button>
@@ -129,6 +135,7 @@ export default function PracticeModeScreen() {
             onPress={() => navigation.navigate('ContextPracticeScreen', {})}
             style={styles.button}
             disabled={kanjiData.length === 0}
+            testID="practice-mode-context-button"
           >
             {kanjiData.length > 0 ? `Start Practice (${Math.min(kanjiData.length, 10)} kanji)` : 'No kanji available'}
           </Button>

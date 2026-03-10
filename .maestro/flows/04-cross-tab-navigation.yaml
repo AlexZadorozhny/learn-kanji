@@ -1,0 +1,103 @@
+appId: com.learn.kanji
+name: Cross-Tab Navigation Flow
+tags:
+  - e2e
+  - navigation
+  - cross-tab
+---
+# Test complex cross-tab navigation: Home → Practice → Results → Back to Home
+# This is the most complex navigation flow in the app
+
+- launchApp
+- waitForAnimationToEnd
+
+# Start on Home tab
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "home-screen-container"
+
+# Verify kanji list is loaded
+- assertVisible:
+    id: "home-kanji-list"
+
+# Tap on the first kanji card (日 - sun/day, typically first)
+# We use dynamic testID based on character
+- tapOn:
+    id: "kanji-card-日"
+- waitForAnimationToEnd
+
+# Verify kanji detail screen loaded
+- assertVisible:
+    id: "kanji-detail-scroll-view"
+- assertVisible: "Meanings"
+
+# Scroll down to find the Practice Stroke Order button
+- scrollUntilVisible:
+    element:
+      id: "kanji-detail-practice-stroke-button"
+    direction: DOWN
+    timeout: 3000
+
+# Tap Practice Stroke Order button
+# This should navigate to Practice tab → StrokeOrderScreen
+- tapOn:
+    id: "kanji-detail-practice-stroke-button"
+- waitForAnimationToEnd
+
+# Wait for stroke order screen to load
+- wait: 2000
+
+# Verify we're now in the Practice tab
+# The tab bar should show Practice as active
+- assertVisible: "Stroke Order Practice"
+
+# For E2E testing, we'll simulate completion by going back
+# Real stroke practice is tested in stroke-order-practice.yaml
+- back
+- waitForAnimationToEnd
+
+# Verify we're back at practice mode screen
+- assertVisible: "Practice Modes"
+
+# Navigate back to Home tab
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+
+# Verify we're back on home screen
+- assertVisible:
+    id: "home-screen-container"
+- assertVisible:
+    id: "home-kanji-list"
+
+# Test alternate flow: Practice → Home tab reset
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+- assertVisible: "Practice Modes"
+
+# Start a flashcard session
+- tapOn:
+    id: "practice-mode-flashcard-button"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "flashcard-screen-container"
+
+# Now switch to Home tab (should reset Practice stack)
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "home-screen-container"
+
+# Switch back to Practice tab
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+
+# Verify Practice stack was reset to root (PracticeModeScreen)
+- assertVisible: "Practice Modes"
+- assertVisible:
+    id: "practice-mode-scroll-view"

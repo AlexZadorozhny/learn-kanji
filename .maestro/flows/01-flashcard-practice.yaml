@@ -1,0 +1,82 @@
+appId: com.learn.kanji
+name: Flashcard Practice Flow
+tags:
+  - e2e
+  - flashcard
+  - practice
+---
+# Test the complete flashcard practice flow with spaced repetition
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Practice tab
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+- assertVisible: "Practice Modes"
+
+# Verify flashcard button is available and tap it
+- assertVisible:
+    id: "practice-mode-flashcard-button"
+- tapOn:
+    id: "practice-mode-flashcard-button"
+- waitForAnimationToEnd
+
+# Wait for flashcard screen to load
+- assertVisible:
+    id: "flashcard-screen-container"
+- assertVisible:
+    id: "flashcard-container"
+
+# Complete 10 flashcards (or until session ends)
+# Each iteration: flip card, then rate it
+- repeat:
+    times: 10
+    commands:
+      # Flip the card to see the answer
+      - tapOn:
+          id: "flashcard-card"
+      - waitForAnimationToEnd
+
+      # Wait for rating buttons to appear
+      - assertVisible:
+          id: "flashcard-rating-good-button"
+
+      # Rate the card (alternating between Good and Easy for variety)
+      - runFlow:
+          when:
+            visible:
+              id: "flashcard-rating-good-button"
+          commands:
+            - tapOn:
+                id: "flashcard-rating-good-button"
+            - waitForAnimationToEnd
+
+      # If we're still in flashcard screen, continue
+      # Otherwise, we've reached results
+      - runFlow:
+          when:
+            visible:
+              id: "flashcard-container"
+          commands:
+            - wait: 500
+
+# Verify results screen appears
+- assertVisible:
+    id: "results-scroll-view"
+- assertVisible: "Session Complete!"
+
+# Verify session statistics are shown
+- assertVisible: "Correct"
+- assertVisible: "Accuracy"
+
+# Tap back to practice mode
+- tapOn:
+    id: "results-back-button"
+- waitForAnimationToEnd
+
+# Verify we're back at practice mode screen
+- assertVisible: "Practice Modes"
+- assertVisible:
+    id: "practice-mode-scroll-view"

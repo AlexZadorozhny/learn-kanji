@@ -1,0 +1,60 @@
+appId: com.learn.kanji
+name: Stroke Order Practice Flow
+tags:
+  - e2e
+  - stroke-order
+  - practice
+---
+# Test stroke order practice UI and navigation
+# Note: Actual drawing gestures are complex in Maestro, so we focus on UI verification
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Practice tab
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+- assertVisible: "Practice Modes"
+
+# Tap Stroke Order button
+- assertVisible:
+    id: "practice-mode-stroke-order-button"
+- tapOn:
+    id: "practice-mode-stroke-order-button"
+- waitForAnimationToEnd
+
+# Wait for stroke order screen to load
+# The screen loads kanji data asynchronously, so give it time
+- wait: 2000
+
+# Verify stroke order canvas UI elements are present
+# We look for common UI elements that should be visible
+- assertVisible: "Stroke Order Practice"
+
+# Scroll down to find the canvas and controls
+- scrollUntilVisible:
+    element: "Clear"
+    direction: DOWN
+    timeout: 3000
+
+# Verify control buttons exist
+- assertVisible: "Clear"
+
+# For E2E purposes, we'll navigate back without completing strokes
+# Real drawing validation is covered by unit tests
+- extendedWaitUntil:
+    visible: "Practice Modes"
+    timeout: 5000
+
+# Alternative: tap back/close if available
+# Most screens have a back button or close icon in the header
+- scroll:
+    direction: UP
+
+# Return to practice mode using device back button or close icon
+# This depends on screen implementation
+- back
+
+# Verify we're back at practice mode
+- assertVisible: "Practice Modes"

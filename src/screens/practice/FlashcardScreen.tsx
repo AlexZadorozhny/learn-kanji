@@ -147,7 +147,10 @@ export default function FlashcardScreen() {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="flashcard-screen-container"
+    >
       <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
         <IconButton
           icon="close"
@@ -156,6 +159,7 @@ export default function FlashcardScreen() {
             endSession();
             navigation.goBack();
           }}
+          testID="flashcard-close-button"
         />
         <View style={styles.progressContainer}>
           <Text variant="bodyMedium">

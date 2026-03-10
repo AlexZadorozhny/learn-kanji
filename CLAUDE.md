@@ -274,8 +274,10 @@ rm -rf node_modules && npm install
 
 **CRITICAL: Always run tests before committing or pushing to GitHub**
 
+#### Unit Tests
+
 ```bash
-# Run all tests
+# Run all unit tests
 npm test
 
 # Run tests for specific files
@@ -285,20 +287,81 @@ npm test -- --testPathPattern="ComponentName"
 npm test -- --no-coverage
 ```
 
-**Workflow:**
-1. Make code changes
-2. Run `npm test` to verify all tests pass
-3. If tests fail, fix issues before proceeding
-4. Only commit and push after all tests pass (700/700 passing)
-5. Update documentation if adding new features
-6. Create descriptive commit messages
-
-**Test Coverage:**
+**Unit Test Coverage:**
 - Target: Maintain high test coverage (currently 84%+)
 - Current: 700 tests passing across 37 test suites
 - All new features should include unit tests
 - Update existing tests when modifying functionality
 - Test files located in `__tests__` directories alongside source files
+
+#### E2E Tests (Maestro)
+
+**Prerequisites:**
+1. Maestro CLI installed (`curl -Ls "https://get.maestro.mobile.dev" | bash`)
+2. iOS Simulator or Android Emulator running
+3. Expo development server started (`npm start`)
+
+```bash
+# Run all E2E flows (~4 minutes total)
+npm run test:e2e
+
+# Platform-specific
+npm run test:e2e:ios        # iOS Simulator
+npm run test:e2e:android    # Android Emulator
+
+# Run single flow (for targeted testing)
+npm run test:e2e:single .maestro/flows/01-flashcard-practice.yaml
+
+# Interactive development mode (highly recommended)
+npm run maestro:studio
+```
+
+**E2E Test Coverage:**
+- 6 comprehensive flows covering all major user journeys
+- Flashcard practice with spaced repetition
+- Multiple choice quiz with auto-advance
+- Stroke order practice UI verification
+- Complex cross-tab navigation
+- Theme switching and persistence
+- Kanji browsing and detail views
+
+**E2E Test Files:**
+- `.maestro/flows/01-flashcard-practice.yaml` - Flashcard session flow
+- `.maestro/flows/02-multiple-choice-quiz.yaml` - Quiz session flow
+- `.maestro/flows/03-stroke-order-practice.yaml` - Stroke order UI verification
+- `.maestro/flows/04-cross-tab-navigation.yaml` - Complex navigation patterns
+- `.maestro/flows/05-theme-switching.yaml` - Theme and settings toggles
+- `.maestro/flows/06-kanji-browsing.yaml` - Kanji list and detail views
+
+**See `.maestro/README.md` for detailed E2E testing documentation.**
+
+#### Complete Testing Workflow
+
+**Full workflow (recommended before major commits):**
+
+1. Make code changes
+2. Run `npm test` to verify all unit tests pass (700/700)
+3. Start simulator and launch app
+4. Run `npm run test:e2e` to verify E2E flows (6/6 passing)
+5. If any tests fail, fix issues before proceeding
+6. Update documentation if adding new features
+7. Create descriptive commit messages
+8. Commit and push only after all tests pass
+
+**Quick workflow (for minor changes):**
+
+1. Make code changes
+2. Run `npm test` (unit tests only)
+3. Test manually in simulator if UI changes
+4. Commit if unit tests pass
+
+**When to run E2E tests:**
+- Before major releases
+- After significant navigation changes
+- When modifying cross-tab flows
+- When updating practice mode logic
+- After theme/styling changes
+- Before merging feature branches
 
 ### Git Commit Guidelines
 

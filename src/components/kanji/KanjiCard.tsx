@@ -13,10 +13,12 @@ export default function KanjiCard({ kanji, onPress }: KanjiCardProps) {
   const theme = useTheme();
 
   return (
-    <Card style={styles.card} onPress={onPress}>
+    <Card style={styles.card} onPress={onPress} testID={`kanji-card-${kanji.character}`}>
       <Card.Content>
         <View style={styles.content}>
-          <Text style={styles.character}>{kanji.character}</Text>
+          <Text style={styles.character} testID={`kanji-character-${kanji.character}`}>
+            {kanji.character}
+          </Text>
           <View style={styles.info}>
             <Text variant="titleMedium" style={styles.meanings}>
               {kanji.meanings.join(', ')}

@@ -104,8 +104,8 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
   });
 
   return (
-    <View style={styles.container}>
-      <Pressable onPress={handleFlip} style={styles.cardContainer}>
+    <View style={styles.container} testID="flashcard-container">
+      <Pressable onPress={handleFlip} style={styles.cardContainer} testID="flashcard-card">
         {/* Front of card - show kanji */}
         <Animated.View
           style={[
@@ -119,7 +119,12 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
         >
           <Card style={[styles.innerCard, { backgroundColor: theme.colors.surface }]}>
             <View style={styles.content}>
-              <Text style={[styles.kanjiText, { color: theme.colors.primary }]}>{kanji.character}</Text>
+              <Text
+                style={[styles.kanjiText, { color: theme.colors.primary }]}
+                testID="flashcard-front-character"
+              >
+                {kanji.character}
+              </Text>
               <Text variant="titleLarge" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
                 👆 Tap to reveal answer
               </Text>
@@ -184,6 +189,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
           <Pressable
             style={[styles.ratingButton, styles.ratingAgain]}
             onPress={() => handleRate(1)}
+            testID="flashcard-rating-again-button"
           >
             <Text style={styles.ratingButtonText}>Again</Text>
             <Text style={styles.ratingSubtext}>{'<1 day'}</Text>
@@ -192,6 +198,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
           <Pressable
             style={[styles.ratingButton, styles.ratingHard]}
             onPress={() => handleRate(2)}
+            testID="flashcard-rating-hard-button"
           >
             <Text style={styles.ratingButtonText}>Hard</Text>
             <Text style={styles.ratingSubtext}>{'<3 days'}</Text>
@@ -200,6 +207,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
           <Pressable
             style={[styles.ratingButton, styles.ratingGood]}
             onPress={() => handleRate(3)}
+            testID="flashcard-rating-good-button"
           >
             <Text style={styles.ratingButtonText}>Good</Text>
             <Text style={styles.ratingSubtext}>{'~6 days'}</Text>
@@ -208,6 +216,7 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
           <Pressable
             style={[styles.ratingButton, styles.ratingEasy]}
             onPress={() => handleRate(4)}
+            testID="flashcard-rating-easy-button"
           >
             <Text style={styles.ratingButtonText}>Easy</Text>
             <Text style={styles.ratingSubtext}>{'2+ weeks'}</Text>

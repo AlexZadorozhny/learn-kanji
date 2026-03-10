@@ -1,0 +1,8 @@
+appId: com.learn.kanji
+name: Learn Kanji E2E Tests
+platform:
+  - ios
+  - android
+tags:
+  - e2e
+  - regression

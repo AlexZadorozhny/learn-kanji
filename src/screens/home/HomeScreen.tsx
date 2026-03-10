@@ -28,10 +28,14 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      testID="home-screen-container"
+    >
       <FlatList
         data={kanjiData}
         keyExtractor={(item) => item.id}
+        testID="home-kanji-list"
         renderItem={({ item }) => (
           <KanjiCard
             kanji={item}

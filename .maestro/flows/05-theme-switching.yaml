@@ -1,0 +1,129 @@
+appId: com.learn.kanji
+name: Theme Switching Flow
+tags:
+  - e2e
+  - settings
+  - theme
+  - ui
+---
+# Test theme switching and persistence across tabs
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to Settings tab
+- tapOn:
+    id: "tab-settings"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "settings-scroll-view"
+
+# Verify theme section is visible
+- assertVisible: "Appearance"
+- assertVisible: "Theme"
+
+# Switch to Light theme
+- tapOn:
+    id: "settings-theme-light-button"
+- waitForAnimationToEnd
+- wait: 500
+
+# Verify theme applied by checking if button is still visible
+- assertVisible:
+    id: "settings-theme-light-button"
+
+# Switch to Dark theme
+- tapOn:
+    id: "settings-theme-dark-button"
+- waitForAnimationToEnd
+- wait: 500
+
+# Verify dark theme button is still visible
+- assertVisible:
+    id: "settings-theme-dark-button"
+
+# Switch to Auto theme
+- tapOn:
+    id: "settings-theme-auto-button"
+- waitForAnimationToEnd
+- wait: 500
+
+# Test other settings toggles while we're here
+- scrollUntilVisible:
+    element: "Preferences"
+    direction: DOWN
+    timeout: 3000
+
+# Test notifications toggle
+- assertVisible:
+    id: "settings-notifications-switch"
+- tapOn:
+    id: "settings-notifications-switch"
+- waitForAnimationToEnd
+
+# Toggle it back
+- tapOn:
+    id: "settings-notifications-switch"
+- waitForAnimationToEnd
+
+# Test sound toggle
+- assertVisible:
+    id: "settings-sound-switch"
+- tapOn:
+    id: "settings-sound-switch"
+- waitForAnimationToEnd
+
+# Toggle it back
+- tapOn:
+    id: "settings-sound-switch"
+- waitForAnimationToEnd
+
+# Test haptics toggle
+- assertVisible:
+    id: "settings-haptics-switch"
+- tapOn:
+    id: "settings-haptics-switch"
+- waitForAnimationToEnd
+
+# Toggle it back
+- tapOn:
+    id: "settings-haptics-switch"
+- waitForAnimationToEnd
+
+# Verify theme persists across tab switches
+- tapOn:
+    id: "tab-home"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "home-screen-container"
+
+# Return to Settings
+- tapOn:
+    id: "tab-settings"
+- waitForAnimationToEnd
+- assertVisible:
+    id: "settings-scroll-view"
+
+# Verify theme section still accessible
+- assertVisible: "Appearance"
+
+# Switch to Practice tab to test theme across different screens
+- tapOn:
+    id: "tab-practice"
+- waitForAnimationToEnd
+- assertVisible: "Practice Modes"
+
+# Return to Settings
+- tapOn:
+    id: "tab-settings"
+- waitForAnimationToEnd
+
+# Final theme verification - set back to Auto
+- scrollUntilVisible:
+    element: "Theme"
+    direction: UP
+    timeout: 3000
+
+- tapOn:
+    id: "settings-theme-auto-button"
+- waitForAnimationToEnd

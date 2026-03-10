@@ -43,6 +43,11 @@ yarn-error.*
 # testing
 coverage/
 
+# Maestro
+.maestro/.maestro/
+.maestro/reports/
+maestro-output/
+
 # Claude Code
 .claude/
 

@@ -139,6 +139,7 @@ export default function SettingsScreen() {
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       contentContainerStyle={styles.contentContainer}
+      testID="settings-scroll-view"
     >
       <View style={styles.section}>
         <Text variant="titleMedium" style={[styles.sectionTitle, { color: theme.colors.primary }]}>
@@ -160,16 +161,19 @@ export default function SettingsScreen() {
                   value: 'light',
                   label: 'Light',
                   icon: 'white-balance-sunny',
+                  testID: 'settings-theme-light-button',
                 },
                 {
                   value: 'dark',
                   label: 'Dark',
                   icon: 'moon-waning-crescent',
+                  testID: 'settings-theme-dark-button',
                 },
                 {
                   value: 'auto',
                   label: 'Auto',
                   icon: 'brightness-auto',
+                  testID: 'settings-theme-auto-button',
                 },
               ]}
             />
@@ -193,6 +197,7 @@ export default function SettingsScreen() {
               <Switch
                 value={notificationsEnabled}
                 onValueChange={(value) => handleToggle(value, setNotificationsEnabled)}
+                testID="settings-notifications-switch"
               />
             )}
           />
@@ -205,6 +210,7 @@ export default function SettingsScreen() {
               <Switch
                 value={soundEnabled}
                 onValueChange={(value) => handleToggle(value, setSoundEnabled)}
+                testID="settings-sound-switch"
               />
             )}
           />
@@ -217,6 +223,7 @@ export default function SettingsScreen() {
               <Switch
                 value={hapticsEnabled}
                 onValueChange={(value) => handleToggle(value, setHapticsEnabled)}
+                testID="settings-haptics-switch"
               />
             )}
           />
