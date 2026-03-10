@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { CommonActions } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 import HomeStackNavigator from './HomeStackNavigator';
@@ -36,6 +37,16 @@ export default function MainTabNavigator() {
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'HomeScreen' }],
+              })
+            );
+          },
+        })}
       />
       <Tab.Screen
         name="Practice"
@@ -46,6 +57,16 @@ export default function MainTabNavigator() {
             <MaterialCommunityIcons name="school" color={color} size={size} />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'PracticeModeScreen' }],
+              })
+            );
+          },
+        })}
       />
       <Tab.Screen
         name="Progress"
@@ -65,6 +86,16 @@ export default function MainTabNavigator() {
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: () => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: 'SettingsScreen' }],
+              })
+            );
+          },
+        })}
       />
     </Tab.Navigator>
   );

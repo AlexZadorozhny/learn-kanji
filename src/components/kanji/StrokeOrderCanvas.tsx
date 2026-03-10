@@ -400,12 +400,13 @@ export default function StrokeOrderCanvas({
               {currentStrokeIndex < kanji.strokeOrder.length && (
                 <Path
                   d={kanji.strokeOrder[currentStrokeIndex].path}
-                  stroke={theme.colors.outline}
+                  stroke={theme.colors.onSurfaceVariant}
                   strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeDasharray="5,5"
+                  opacity={0.8}
                 />
               )}
             </G>
