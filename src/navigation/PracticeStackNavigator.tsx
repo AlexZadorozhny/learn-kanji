@@ -28,6 +28,8 @@ export default function PracticeStackNavigator() {
         component={PracticeModeScreen}
         options={{
           title: 'Practice',
+          headerBackVisible: false, // Hide back button on root screen
+          headerLeft: () => null, // Explicitly remove left header element
         }}
       />
       <Stack.Screen

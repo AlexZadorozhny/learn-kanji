@@ -774,7 +774,7 @@ exports[`PracticeModeScreen renders correctly with available cards 1`] = `
                           }
                           testID="button-text"
                         >
-                          Start Practice (2 kanji)
+                          Start Practice (3 kanji)
                         </Text>
                       </View>
                     </View>
@@ -2002,7 +2002,7 @@ exports[`PracticeModeScreen renders correctly with no available cards 1`] = `
                           }
                           testID="button-text"
                         >
-                          Start Practice (2 kanji)
+                          Start Practice (3 kanji)
                         </Text>
                       </View>
                     </View>
@@ -3353,7 +3353,7 @@ exports[`PracticeModeScreen renders with dark theme 1`] = `
                           }
                           testID="button-text"
                         >
-                          Start Practice (2 kanji)
+                          Start Practice (3 kanji)
                         </Text>
                       </View>
                     </View>

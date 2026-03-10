@@ -22,7 +22,11 @@ export default function HomeStackNavigator() {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ title: 'Learn Kanji' }}
+        options={{
+          title: 'Learn Kanji',
+          headerBackVisible: false, // Hide back button on root screen
+          headerLeft: () => null, // Explicitly remove left header element
+        }}
       />
       <Stack.Screen
         name="KanjiDetail"

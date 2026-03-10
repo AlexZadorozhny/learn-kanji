@@ -64,6 +64,14 @@ export default function ResultsScreen() {
 
   const handleBackButton = () => {
     if (isFromKanjiDetail) {
+      // Reset Practice stack to initial state before navigating to Home
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'PracticeModeScreen' }]
+        })
+      );
+
       // Navigate back to Home tab -> KanjiDetail screen
       tabNavigation.navigate('Home', {
         screen: 'KanjiDetail',

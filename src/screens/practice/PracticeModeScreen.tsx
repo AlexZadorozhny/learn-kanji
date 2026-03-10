@@ -7,6 +7,7 @@ import { PracticeStackParamList } from '../../navigation/types';
 import { useProgressStore } from '../../store/progressStore';
 import { SRSService } from '../../services/practice/SRSService';
 import { useKanjiStore } from '../../store/kanjiStore';
+import { BUNDLED_KANJI_IDS } from '../../data/kanjivg-bundled';
 
 type PracticeModeScreenNavigationProp = NativeStackNavigationProp<
   PracticeStackParamList,
@@ -25,9 +26,9 @@ export default function PracticeModeScreen() {
   const newKanji = SRSService.getNewKanji(allKanjiIds, kanjiProgress, 5);
   const availableCards = dueKanji.length + newKanji.length;
 
-  // Count kanji with stroke order data
+  // Count kanji with stroke order data (all bundled kanji have stroke data available)
   const kanjiWithStrokeData = kanjiData.filter(
-    (k) => k.strokeOrder && k.strokeOrder.length > 0
+    (k) => BUNDLED_KANJI_IDS.includes(k.id)
   ).length;
 
   return (

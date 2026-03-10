@@ -123,10 +123,12 @@ describe('PracticeModeScreen', () => {
     SRSService.getDueKanji.mockReturnValue([]);
     SRSService.getNewKanji.mockReturnValue([]);
 
-    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
 
-    // 2 kanji have strokeOrder data in mockKanjiData
-    expect(getByText(/Start Practice \(2 kanji\)/)).toBeTruthy();
+    // All 3 kanji are in BUNDLED_KANJI_IDS and have stroke data available
+    // Both Stroke Order and Context Practice will have this text
+    const buttons = getAllByText(/Start Practice \(3 kanji\)/);
+    expect(buttons.length).toBeGreaterThan(0);
   });
 
   it('disables flashcards when no cards available', () => {
@@ -160,10 +162,12 @@ describe('PracticeModeScreen', () => {
     SRSService.getDueKanji.mockReturnValue([]);
     SRSService.getNewKanji.mockReturnValue([]);
 
-    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
 
-    // 2 kanji have strokeOrder data in mockKanjiData
-    expect(getByText(/Start Practice \(2 kanji\)/)).toBeTruthy();
+    // All 3 kanji are in BUNDLED_KANJI_IDS and have stroke data available
+    // Both Stroke Order and Context Practice will have this text
+    const buttons = getAllByText(/Start Practice \(3 kanji\)/);
+    expect(buttons.length).toBeGreaterThan(0);
   });
 
   it('shows multiple choice button with available kanji', () => {
@@ -185,20 +189,22 @@ describe('PracticeModeScreen', () => {
     SRSService.getDueKanji.mockReturnValue([]);
     SRSService.getNewKanji.mockReturnValue([]);
 
-    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
 
-    expect(getByText(/Start Practice \(3 kanji\)/)).toBeTruthy();
+    // Both Stroke Order and Context Practice will have this text
+    const buttons = getAllByText(/Start Practice \(3 kanji\)/);
+    expect(buttons.length).toBeGreaterThan(0);
   });
 
   it('disables stroke order when no kanji with stroke data', () => {
     useKanjiStore.mockReturnValue({
       kanjiData: [
         {
-          id: 'U+4E00',
-          character: '一',
-          meanings: ['one'],
-          strokes: 1,
-          // No strokeOrder data
+          id: 'U+9999',
+          character: '香',
+          meanings: ['fragrance'],
+          strokes: 9,
+          // ID not in BUNDLED_KANJI_IDS, so no stroke data available
         },
       ],
     });
@@ -275,11 +281,12 @@ describe('PracticeModeScreen', () => {
     SRSService.getDueKanji.mockReturnValue([]);
     SRSService.getNewKanji.mockReturnValue([]);
 
-    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
 
-    // 2 kanji have strokeOrder data in mockKanjiData
-    const button = getByText(/Start Practice \(2 kanji\)/);
-    fireEvent.press(button);
+    // All 3 kanji are in BUNDLED_KANJI_IDS and have stroke data available
+    // Both Stroke Order and Context Practice have same text, get the first one (Stroke Order)
+    const buttons = getAllByText(/Start Practice \(3 kanji\)/);
+    fireEvent.press(buttons[0]);
 
     expect(mockNavigate).toHaveBeenCalledWith('StrokeOrderScreen', expect.objectContaining({
       sessionKey: expect.any(Number)
@@ -308,10 +315,11 @@ describe('PracticeModeScreen', () => {
     SRSService.getDueKanji.mockReturnValue([]);
     SRSService.getNewKanji.mockReturnValue([]);
 
-    const { getByText } = renderWithProviders(<PracticeModeScreen />);
+    const { getAllByText } = renderWithProviders(<PracticeModeScreen />);
 
-    const button = getByText(/Start Practice \(3 kanji\)/);
-    fireEvent.press(button);
+    // Both Stroke Order and Context Practice have same text, get the second one (Context Practice)
+    const buttons = getAllByText(/Start Practice \(3 kanji\)/);
+    fireEvent.press(buttons[1]);
 
     expect(mockNavigate).toHaveBeenCalledWith('ContextPracticeScreen', {});
   });

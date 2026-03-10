@@ -22,7 +22,11 @@ export default function SettingsStackNavigator() {
       <Stack.Screen
         name="SettingsScreen"
         component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        options={{
+          title: 'Settings',
+          headerBackVisible: false, // Hide back button on root screen
+          headerLeft: () => null, // Explicitly remove left header element
+        }}
       />
       <Stack.Screen
         name="LicenseScreen"

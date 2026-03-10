@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Phase 1, 2 & 3 Complete + Validation Bug Fixed - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths
+**Current Status:** Phase 1, 2 & 3 Complete + Navigation Fixes - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths, Navigation stack management fixed
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -63,6 +63,9 @@ pkill -f "expo start"
 
 **Application Structure:**
 - **Navigation**: Bottom tabs (Home, Practice, Progress, Settings) + stack navigators
+  - Each tab uses a stack navigator for nested navigation
+  - Root screens (HomeScreen, PracticeModeScreen, SettingsScreen) have `headerBackVisible: false` and `headerLeft: () => null` to remove back buttons
+  - Stack navigators: HomeStackNavigator, PracticeStackNavigator, SettingsStackNavigator
 - **State Management**: Zustand stores (kanjiStore, progressStore, practiceStore)
 - **Data Layer**: AsyncStorage for persistence, embedded kanji dataset (25 characters, all with complete stroke data)
 - **Key Features**:
@@ -186,8 +189,9 @@ rm -rf node_modules && npm install
 - 25 most common kanji by frequency rank
 - **All 25 kanji use professional KanjiVG stroke order data** (bundled as embedded SVG strings)
 - Metadata in `src/data/sample-data.ts`: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
-- Stroke data in `src/data/kanjivg-bundled/index.ts`: Professional SVG paths from KanjiVG project
+- Stroke data in `src/data/kanjivg-bundled/index.ts`: Professional SVG paths from KanjiVG project, exported as `BUNDLED_KANJI_IDS`
 - **Manual stroke paths removed** (595 lines deleted) - replaced with industry-standard data
+- **Checking for stroke data availability**: Use `BUNDLED_KANJI_IDS.includes(kanji.id)` instead of checking `kanji.strokeOrder` (property no longer exists after KanjiVG integration)
 
 **Stroke Order Practice:**
 - Uses React Native SVG + PanResponder (simplified approach, no Skia dependency)
@@ -255,7 +259,11 @@ rm -rf node_modules && npm install
 - Context preservation through explicit `fromKanjiDetail` and `detailKanjiId` params
 - Customized ResultsScreen buttons when accessed from kanji detail:
   - "Practice Again" restarts practice with same kanji (uses `navigation.reset` for clean state)
-  - "Back to Kanji Details" returns to original kanji detail screen
+  - "Back to Kanji Details" returns to original kanji detail screen and resets Practice stack
+- **Navigation Stack Management (CRITICAL):**
+  - Before cross-tab navigation, always reset the source stack to prevent stuck screens
+  - Pattern: `navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'RootScreen' }] }))` then navigate to other tab
+  - Prevents Practice tab from showing ResultsScreen when user switches back
 - Navigation uses `CommonActions.reset` to maintain clean stack and prevent accumulation
 - StrokeOrderScreen uses `sessionKey` param for reliable session initialization
 - Implemented in `src/screens/progress/KanjiDetailScreen.tsx`, `src/screens/practice/ResultsScreen.tsx`, and updated navigation types
