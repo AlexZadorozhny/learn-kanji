@@ -130,21 +130,33 @@ export class AdvancedStrokeValidator {
         directionResult.accuracy * 0.2 +
         bboxResult.accuracy * 0.2;
 
-      // Combine geometric and Fréchet scores
-      accuracy = Math.round(geometricAccuracy * 0.4 + frechetScore * 0.6);
-
-      // Pass if: (start AND end AND direction) OR Fréchet OR bbox
+      // Determine which accuracy to use based on which validation passed
       const geometricPass =
         startPointResult.valid &&
         endPointResult.valid &&
         directionResult.valid;
 
-      valid =
-        (geometricPass || frechetValid || bboxResult.valid) &&
-        accuracy >= accuracyThreshold;
+      // FIX: If geometric validation passes, use geometric accuracy alone
+      // Don't let poor Fréchet score drag down a geometrically correct stroke
+      if (geometricPass) {
+        accuracy = Math.round(geometricAccuracy);
+        valid = true; // Geometric validation is sufficient
+      } else if (frechetValid) {
+        // If Fréchet passes but geometry doesn't, use Fréchet score
+        accuracy = frechetScore;
+        valid = true;
+      } else if (bboxResult.valid) {
+        // Bounding box fallback - combine scores and check threshold
+        accuracy = Math.round(geometricAccuracy * 0.4 + frechetScore * 0.6);
+        valid = accuracy >= accuracyThreshold;
+      } else {
+        // Nothing passed - combine scores for reporting
+        accuracy = Math.round(geometricAccuracy * 0.4 + frechetScore * 0.6);
+        valid = false;
+      }
     } else {
       // Pure geometric approach for straight strokes
-      accuracy = Math.round(
+      const geometricAccuracy = Math.round(
         startPointResult.accuracy * 0.4 +
           endPointResult.accuracy * 0.4 +
           directionResult.accuracy * 0.2
@@ -156,8 +168,17 @@ export class AdvancedStrokeValidator {
         endPointResult.valid &&
         directionResult.valid;
 
-      valid =
-        (geometricPass || bboxResult.valid) && accuracy >= accuracyThreshold;
+      if (geometricPass) {
+        accuracy = geometricAccuracy;
+        valid = true;
+      } else if (bboxResult.valid) {
+        // Bounding box fallback - check accuracy threshold
+        accuracy = geometricAccuracy;
+        valid = accuracy >= accuracyThreshold;
+      } else {
+        accuracy = geometricAccuracy;
+        valid = false;
+      }
     }
 
     // Generate helpful feedback if validation failed

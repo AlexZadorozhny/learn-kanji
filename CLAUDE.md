@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Phase 1, 2 & 3 Complete - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with complete stroke order data, All 4 practice modes complete, Dark Theme implemented
+**Current Status:** Phase 1, 2 & 3 Complete + Validation Bug Fixed - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -184,9 +184,10 @@ rm -rf node_modules && npm install
 
 **Kanji Data:**
 - 25 most common kanji by frequency rank
-- **All 25 kanji now include complete stroke order data** (SVG paths)
-- Each includes: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
-- Located in `src/data/sample-data.ts`
+- **All 25 kanji use professional KanjiVG stroke order data** (bundled as embedded SVG strings)
+- Metadata in `src/data/sample-data.ts`: meanings, on-yomi/kun-yomi readings, romaji, example words, JLPT level
+- Stroke data in `src/data/kanjivg-bundled/index.ts`: Professional SVG paths from KanjiVG project
+- **Manual stroke paths removed** (595 lines deleted) - replaced with industry-standard data
 
 **Stroke Order Practice:**
 - Uses React Native SVG + PanResponder (simplified approach, no Skia dependency)
@@ -212,9 +213,9 @@ rm -rf node_modules && npm install
 
 **KanjiVG Integration (Complete):**
 - **Three-tier architecture** for stroke order data (6,355+ kanji coverage):
-  - **Tier 1 - Bundled**: 4 sample kanji pre-bundled in app for instant offline access (<50ms load time)
-  - **Tier 2 - On-Demand**: 6,351+ kanji fetched from GitHub on first access, cached in AsyncStorage permanently
-  - **Tier 3 - Legacy Fallback**: Original 25 manually-defined kanji ensure zero regression
+  - **Tier 1 - Bundled**: 25 kanji pre-bundled in app as embedded SVG strings for instant offline access (<50ms load time)
+  - **Tier 2 - On-Demand**: 6,330+ kanji fetched from GitHub on first access, cached in AsyncStorage permanently
+  - **Tier 3 - Legacy Fallback**: Deprecated - bundled kanji now provide all primary stroke data (fallback code kept for safety)
 - **Services** (`src/services/kanjivg/`):
   - `KanjiVGParserService`: Parses SVG paths, normalizes coordinates (109×109 → 100×100 viewBox)
   - `KanjiVGFetcherService`: Downloads from GitHub with retry logic, AsyncStorage caching, LRU eviction
@@ -231,7 +232,8 @@ rm -rf node_modules && npm install
 - **Performance**: <50ms bundled load, <100ms cached load, <2s fresh fetch
 - **License**: CC BY-SA 3.0 (© Ulrich Apel) - Attribution in Settings → Licenses & Attribution
 - **Coverage**: 6,355+ kanji (254x improvement from original 25)
-- **Test Coverage**: 105 new tests (89 services + 16 store integration + 8 UI) - 670/670 passing
+- **Bundle Implementation**: Embedded SVG strings (1,561 lines) in `index.ts` instead of separate files (Metro bundler compatibility)
+- **Test Coverage**: 135 new tests (89 services + 16 store integration + 8 UI + 16 bundle loading + 6 parser fixes) - 700/700 passing
 
 **Dark Theme:**
 - Three modes: Light, Dark, and Auto (follows system preference)
@@ -279,13 +281,13 @@ npm test -- --no-coverage
 1. Make code changes
 2. Run `npm test` to verify all tests pass
 3. If tests fail, fix issues before proceeding
-4. Only commit and push after all tests pass (557/557 passing)
+4. Only commit and push after all tests pass (700/700 passing)
 5. Update documentation if adding new features
 6. Create descriptive commit messages
 
 **Test Coverage:**
 - Target: Maintain high test coverage (currently 84%+)
-- Current: 557 tests passing across 31 test suites
+- Current: 700 tests passing across 37 test suites
 - All new features should include unit tests
 - Update existing tests when modifying functionality
 - Test files located in `__tests__` directories alongside source files
@@ -293,7 +295,7 @@ npm test -- --no-coverage
 ### Git Commit Guidelines
 
 When creating commits:
-- Ensure all 557 tests pass before committing
+- Ensure all 700 tests pass before committing
 - Write clear, descriptive commit messages
 - Document breaking changes or new features
 - Update CLAUDE.md and MEMORY.md for significant changes
