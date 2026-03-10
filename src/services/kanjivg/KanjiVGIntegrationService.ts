@@ -5,9 +5,9 @@
  * to provide a simple API for getting stroke order data.
  *
  * Three-Tier Strategy:
- * 1. Tier 1 (Bundled): Pre-bundled 500 JLPT kanji in app bundle (~25-50MB)
- * 2. Tier 2 (Cached): Downloaded and cached in AsyncStorage
- * 3. Tier 3 (Legacy): Original 25 kanji as fallback
+ * 1. Tier 1 (Bundled): Pre-bundled 25 kanji from sampleKanjiData in app bundle (~100KB)
+ * 2. Tier 2 (On-Demand): Downloaded from GitHub and cached in AsyncStorage (6,330+ kanji)
+ * 3. Tier 3 (Legacy): Original manual strokeOrder as fallback (deprecated after migration)
  *
  * Data Flow:
  * 1. Check in-memory cache
@@ -26,7 +26,7 @@ import { StrokePath } from '../../types/kanji';
 import { KanjiVGParserService } from './KanjiVGParserService';
 import { KanjiVGFetcherService } from './KanjiVGFetcherService';
 import { sampleKanjiData } from '../../data/sample-data';
-import { BUNDLED_KANJI_IDS } from '../../data/kanjivg-bundled';
+import { BUNDLED_KANJI_IDS, isBundled, getBundledSVG } from '../../data/kanjivg-bundled';
 
 export type KanjiTier = 'bundled' | 'cached' | 'available' | 'unavailable';
 
@@ -204,9 +204,28 @@ export class KanjiVGIntegrationService {
    */
   private static async loadFromBundle(kanjiId: string): Promise<StrokePath[] | null> {
     try {
-      // TODO: Implement bundle loading in Phase 1.4
-      // For now, return null (no bundled data yet)
-      return null;
+      // 1. Check if kanji is in bundled registry
+      if (!isBundled(kanjiId)) {
+        return null;
+      }
+
+      // 2. Load SVG content from bundled map
+      const svgContent = getBundledSVG(kanjiId);
+
+      if (!svgContent) {
+        console.warn(`KanjiVGIntegration: No bundled SVG found for ${kanjiId}`);
+        return null;
+      }
+
+      // 3. Parse SVG using KanjiVGParserService
+      const strokePaths = KanjiVGParserService.parseKanjiVGSVG(svgContent, kanjiId);
+
+      if (!strokePaths || strokePaths.length === 0) {
+        console.warn(`KanjiVGIntegration: Bundled SVG for ${kanjiId} parsed to empty paths`);
+        return null;
+      }
+
+      return strokePaths;
     } catch (error) {
       console.error(`KanjiVGIntegration: Failed to load bundled data for ${kanjiId}:`, error);
       return null;
@@ -265,7 +284,13 @@ export class KanjiVGIntegrationService {
     try {
       const kanji = sampleKanjiData.find(k => k.id === kanjiId);
 
+      // After Phase 3, strokeOrder will not exist in sampleKanjiData
+      // Keep this check for backward compatibility during migration
       if (kanji && kanji.strokeOrder && kanji.strokeOrder.length > 0) {
+        // If we're using legacy fallback, it means bundled load failed
+        console.warn(
+          `KanjiVGIntegration: Using legacy fallback for ${kanjiId} - bundled load may have failed`
+        );
         return kanji.strokeOrder;
       }
 

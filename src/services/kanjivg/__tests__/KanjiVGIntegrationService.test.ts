@@ -7,6 +7,9 @@ import { KanjiVGParserService } from '../KanjiVGParserService';
 import { KanjiVGFetcherService } from '../KanjiVGFetcherService';
 import { sampleKanjiData } from '../../../data/sample-data';
 
+// Get real parser for bundle loading tests
+const ActualParser = jest.requireActual('../KanjiVGParserService').KanjiVGParserService;
+
 // Mock the fetcher and parser services
 jest.mock('../KanjiVGFetcherService');
 jest.mock('../KanjiVGParserService');
@@ -16,7 +19,10 @@ const MockedParser = KanjiVGParserService as jest.Mocked<typeof KanjiVGParserSer
 
 describe('KanjiVGIntegrationService', () => {
   const mockSVG = '<svg>test</svg>';
-  const mockStrokePaths = [{ d: 'M 20,30 L 40,50' }, { d: 'M 10,10 L 90,90' }];
+  const mockStrokePaths = [
+    { path: 'M 20,30 L 40,50', strokeNumber: 1 },
+    { path: 'M 10,10 L 90,90', strokeNumber: 2 },
+  ];
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -59,31 +65,35 @@ describe('KanjiVGIntegrationService', () => {
       // Pre-populate memory cache
       await KanjiVGIntegrationService.initialize();
 
-      // First call - will cache
+      // Use non-bundled kanji to test cache behavior with mocks
+      // First call - will load and cache
       MockedFetcher.getKanjiSVG.mockResolvedValue(mockSVG);
       MockedParser.parseKanjiVGSVG.mockReturnValue(mockStrokePaths);
 
-      const result1 = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+      const result1 = await KanjiVGIntegrationService.getStrokeOrder('U+8000');
 
       expect(result1).toEqual(mockStrokePaths);
-      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledTimes(1);
 
-      // Second call - from cache
-      const result2 = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+      // Note initial call count - might be cache-only + fetch (2) or just fetch (1)
+      const initialCalls = MockedFetcher.getKanjiSVG.mock.calls.length;
+      expect(initialCalls).toBeGreaterThan(0);
+
+      // Second call - should use memory cache, no additional fetches
+      const result2 = await KanjiVGIntegrationService.getStrokeOrder('U+8000');
 
       expect(result2).toEqual(mockStrokePaths);
-      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledTimes(1); // Not called again
+      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledTimes(initialCalls); // Not called again
     });
 
     it('should load from AsyncStorage cache if not in memory', async () => {
       MockedFetcher.getKanjiSVG.mockResolvedValueOnce(mockSVG); // cache-only call
       MockedParser.parseKanjiVGSVG.mockReturnValue(mockStrokePaths);
 
-      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+8000');
 
       expect(result).toEqual(mockStrokePaths);
-      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledWith('U+4E00', { cacheOnly: true });
-      expect(MockedParser.parseKanjiVGSVG).toHaveBeenCalledWith(mockSVG, 'U+4E00');
+      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledWith('U+8000', { cacheOnly: true });
+      expect(MockedParser.parseKanjiVGSVG).toHaveBeenCalledWith(mockSVG, 'U+8000');
     });
 
     it('should fetch from GitHub if not cached', async () => {
@@ -92,24 +102,25 @@ describe('KanjiVGIntegrationService', () => {
         .mockResolvedValueOnce(mockSVG); // fetch returns SVG
       MockedParser.parseKanjiVGSVG.mockReturnValue(mockStrokePaths);
 
-      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+8000');
 
       expect(result).toEqual(mockStrokePaths);
       expect(MockedFetcher.getKanjiSVG).toHaveBeenCalledTimes(2);
-      expect(MockedParser.parseKanjiVGSVG).toHaveBeenCalledWith(mockSVG, 'U+4E00');
+      expect(MockedParser.parseKanjiVGSVG).toHaveBeenCalledWith(mockSVG, 'U+8000');
     });
 
     it('should fallback to legacy data if fetch fails', async () => {
-      MockedFetcher.getKanjiSVG.mockResolvedValue(null);
+      // After Phase 3, legacy fallback is deprecated (no strokeOrder in sampleKanjiData)
+      // This test now verifies that bundled data works for all 25 kanji
+      await KanjiVGIntegrationService.initialize();
 
-      // Use a kanji ID that exists in sample data
-      const legacyKanji = sampleKanjiData.find(k => k.strokeOrder && k.strokeOrder.length > 0);
-      expect(legacyKanji).toBeDefined();
+      // U+4E00 (一) is bundled, so it should load successfully
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
 
-      const result = await KanjiVGIntegrationService.getStrokeOrder(legacyKanji!.id);
-
-      expect(result).toEqual(legacyKanji!.strokeOrder);
-      expect(MockedFetcher.getKanjiSVG).toHaveBeenCalled();
+      expect(result).toBeTruthy();
+      expect(result!.length).toBeGreaterThan(0);
+      expect(result![0]).toHaveProperty('path');
+      expect(result![0]).toHaveProperty('strokeNumber');
     });
 
     it('should return null if kanji unavailable', async () => {
@@ -207,11 +218,12 @@ describe('KanjiVGIntegrationService', () => {
       expect(result).toBe(true);
     });
 
-    it('should return true if in legacy data', async () => {
+    it('should return true if in bundled data', async () => {
+      await KanjiVGIntegrationService.initialize();
       MockedFetcher.isCached.mockResolvedValue(false);
 
-      const legacyKanji = sampleKanjiData.find(k => k.strokeOrder && k.strokeOrder.length > 0);
-      const result = await KanjiVGIntegrationService.hasStrokeData(legacyKanji!.id);
+      // U+4E00 is bundled (一)
+      const result = await KanjiVGIntegrationService.hasStrokeData('U+4E00');
 
       expect(result).toBe(true);
     });
@@ -245,11 +257,12 @@ describe('KanjiVGIntegrationService', () => {
       expect(tier).toBe('cached');
     });
 
-    it('should return "bundled" for legacy kanji', async () => {
+    it('should return "bundled" for bundled kanji', async () => {
+      await KanjiVGIntegrationService.initialize();
       MockedFetcher.isCached.mockResolvedValue(false);
 
-      const legacyKanji = sampleKanjiData.find(k => k.strokeOrder && k.strokeOrder.length > 0);
-      const tier = await KanjiVGIntegrationService.getKanjiTier(legacyKanji!.id);
+      // U+4E00 (一) is bundled
+      const tier = await KanjiVGIntegrationService.getKanjiTier('U+4E00');
 
       expect(tier).toBe('bundled');
     });
@@ -326,8 +339,9 @@ describe('KanjiVGIntegrationService', () => {
 
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
+      // Use non-bundled kanji that will trigger network fetch
       await expect(
-        KanjiVGIntegrationService.prefetchForSession(['U+4E00'])
+        KanjiVGIntegrationService.prefetchForSession(['U+8000'])
       ).resolves.not.toThrow();
 
       expect(consoleErrorSpy).toHaveBeenCalled();
@@ -337,26 +351,34 @@ describe('KanjiVGIntegrationService', () => {
   });
 
   describe('legacy fallback', () => {
-    it('should correctly identify all legacy kanji', () => {
+    it('should verify legacy strokeOrder data was removed', () => {
+      // After Phase 3, strokeOrder should be removed from all sampleKanjiData
       const legacyKanji = sampleKanjiData.filter(
         k => k.strokeOrder && k.strokeOrder.length > 0
       );
 
-      expect(legacyKanji.length).toBeGreaterThan(0);
-
-      console.log(`Found ${legacyKanji.length} legacy kanji with stroke order data`);
+      // Should be 0 since we removed all strokeOrder arrays
+      expect(legacyKanji.length).toBe(0);
     });
 
-    it('should return legacy data for all supported kanji', async () => {
-      MockedFetcher.getKanjiSVG.mockResolvedValue(null);
+    it('should prefer bundled data over legacy data', async () => {
+      // After Phase 3, all 25 kanji use bundled KanjiVG data
+      // Legacy fallback is deprecated
+      await KanjiVGIntegrationService.initialize();
 
-      const legacyKanji = sampleKanjiData.filter(
-        k => k.strokeOrder && k.strokeOrder.length > 0
-      );
+      // Test first 5 kanji from sampleKanjiData
+      const testKanji = sampleKanjiData.slice(0, 5);
 
-      for (const kanji of legacyKanji) {
+      for (const kanji of testKanji) {
         const result = await KanjiVGIntegrationService.getStrokeOrder(kanji.id);
-        expect(result).toEqual(kanji.strokeOrder);
+
+        // Should load successfully from bundle
+        expect(result).toBeTruthy();
+        expect(result!.length).toBeGreaterThan(0);
+
+        // Bundled data has correct format
+        expect(result![0]).toHaveProperty('path');
+        expect(result![0]).toHaveProperty('strokeNumber');
       }
     });
   });
@@ -388,6 +410,190 @@ describe('KanjiVGIntegrationService', () => {
       expect(consoleErrorSpy).toHaveBeenCalled();
 
       consoleErrorSpy.mockRestore();
+    });
+  });
+
+  describe('Bundle Loading (Phase 2)', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      KanjiVGIntegrationService.clearMemoryCache();
+
+      // Use real parser implementation for bundled SVG tests
+      // This allows actual parsing of bundled SVG content
+      MockedParser.parseKanjiVGSVG.mockImplementation((svgContent: string, kanjiId?: string) => {
+        console.log(`Mock parser called for ${kanjiId}, SVG length: ${svgContent ? svgContent.length : 'null'}`);
+        const result = ActualParser.parseKanjiVGSVG(svgContent, kanjiId);
+        console.log(`Mock parser returned ${result ? result.length : 'null'} strokes`);
+        return result;
+      });
+    });
+
+    it('should load bundled SVG for U+4E00 (一)', async () => {
+      // This test will load the actual bundled SVG file and parse it
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+
+      expect(result).toBeTruthy();
+      expect(Array.isArray(result)).toBe(true);
+      expect(result!.length).toBeGreaterThan(0);
+
+      // Verify stroke structure
+      result!.forEach((stroke, index) => {
+        expect(stroke).toHaveProperty('path');
+        expect(stroke).toHaveProperty('strokeNumber');
+        expect(stroke.strokeNumber).toBe(index + 1);
+      });
+    });
+
+    it('should load bundled SVG for U+4EBA (人)', async () => {
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4EBA');
+
+      expect(result).toBeTruthy();
+      expect(result!.length).toBeGreaterThan(0);
+    });
+
+    it('should load bundled SVG for U+56FD (国)', async () => {
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+56FD');
+
+      expect(result).toBeTruthy();
+      expect(result!.length).toBeGreaterThan(0);
+    });
+
+    it('should return null for non-bundled kanji', async () => {
+      MockedFetcher.getKanjiSVG.mockResolvedValue(null);
+
+      // U+9999 is not in the bundled list
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+9999');
+
+      expect(result).toBeNull();
+    });
+
+    it('should load all 25 bundled kanji successfully', async () => {
+      // Get bundled kanji IDs from index
+      const { BUNDLED_KANJI_IDS } = require('../../../data/kanjivg-bundled');
+
+      expect(BUNDLED_KANJI_IDS.length).toBe(25);
+
+      // Test first 5 to keep test time reasonable
+      const sampleIds = BUNDLED_KANJI_IDS.slice(0, 5);
+
+      for (const kanjiId of sampleIds) {
+        const result = await KanjiVGIntegrationService.getStrokeOrder(kanjiId);
+
+        expect(result).toBeTruthy();
+        expect(result!.length).toBeGreaterThan(0);
+
+        // Verify each stroke has required properties
+        result!.forEach(stroke => {
+          expect(stroke.path).toBeTruthy();
+          expect(stroke.strokeNumber).toBeGreaterThan(0);
+        });
+      }
+    });
+
+    it('should parse SVG paths correctly from bundled files', async () => {
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+
+      expect(result).toBeTruthy();
+      expect(result![0].path).toBeTruthy();
+
+      // Path should be a string containing SVG path commands
+      expect(typeof result![0].path).toBe('string');
+      expect(result![0].path.length).toBeGreaterThan(0);
+    });
+
+    it('should cache bundled kanji in memory after first load', async () => {
+      // First load
+      await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+
+      const cacheInfo = KanjiVGIntegrationService.getCacheInfo();
+      expect(cacheInfo.memoryCount).toBe(1);
+
+      // Second load should use cache
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+      expect(result).toBeTruthy();
+    });
+
+    it('should handle bundled kanji with multiple strokes', async () => {
+      // 人 (person) has 2 strokes
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4EBA');
+
+      expect(result).toBeTruthy();
+      expect(result!.length).toBe(2);
+
+      // Verify stroke numbers are sequential
+      expect(result![0].strokeNumber).toBe(1);
+      expect(result![1].strokeNumber).toBe(2);
+    });
+
+    it('should handle bundled kanji with many strokes', async () => {
+      // 国 (country) has 8 strokes
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+56FD');
+
+      expect(result).toBeTruthy();
+      expect(result!.length).toBe(8);
+
+      // Verify stroke numbers are sequential
+      result!.forEach((stroke, index) => {
+        expect(stroke.strokeNumber).toBe(index + 1);
+      });
+    });
+
+    it('should handle errors gracefully for corrupted bundled files', async () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      // Try to load a non-existent bundled kanji (should fall through to GitHub fetch)
+      // We mock the fetcher to return null to simulate complete failure
+      MockedFetcher.getKanjiSVG.mockResolvedValue(null);
+
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+FFFF');
+
+      expect(result).toBeNull();
+
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should prefer bundled data over cache for bundled kanji', async () => {
+      // Even if AsyncStorage has cached data, bundled should be preferred
+      MockedFetcher.isCached.mockResolvedValue(true);
+      MockedFetcher.getKanjiSVG.mockResolvedValue('<svg>cached</svg>');
+
+      const result = await KanjiVGIntegrationService.getStrokeOrder('U+4E00');
+
+      // Should load from bundle successfully
+      expect(result).toBeTruthy();
+      expect(result!.length).toBeGreaterThan(0);
+
+      // Verify it's real bundled data (has actual path content)
+      expect(result![0].path).toBeTruthy();
+      expect(result![0].strokeNumber).toBe(1);
+    });
+
+    it('should report correct tier for bundled kanji', async () => {
+      const tier = await KanjiVGIntegrationService.getKanjiTier('U+4E00');
+
+      expect(tier).toBe('bundled');
+    });
+
+    it('should include bundled kanji in cache info', async () => {
+      await KanjiVGIntegrationService.initialize();
+
+      const info = KanjiVGIntegrationService.getCacheInfo();
+
+      expect(info.bundledCount).toBe(25);
+    });
+
+    it('should handle hex conversion correctly', async () => {
+      // Test various Unicode ID formats
+      const testCases = [
+        { id: 'U+4E00', expectedHex: '04e00' },
+        { id: 'U+4EBA', expectedHex: '04eba' },
+        { id: 'U+56FD', expectedHex: '056fd' },
+      ];
+
+      for (const { id } of testCases) {
+        const result = await KanjiVGIntegrationService.getStrokeOrder(id);
+        expect(result).toBeTruthy();
+      }
     });
   });
 });

@@ -52,7 +52,8 @@ export class KanjiVGParserService {
 
       // Convert to StrokePath format with normalized coordinates
       const strokePaths: StrokePath[] = rawStrokes.map(raw => ({
-        d: this.normalizePathCoordinates(raw.pathData),
+        path: this.normalizePathCoordinates(raw.pathData),
+        strokeNumber: raw.strokeNumber,
       }));
 
       // Validate parsed data
@@ -72,14 +73,14 @@ export class KanjiVGParserService {
    * Extract stroke paths from SVG content
    *
    * KanjiVG format:
-   * <g id="kvg:StrokeNumbers_...">
-   *   <g id="kvg:..." kvg:number="1">
-   *     <path d="M 20,30 L 40,50" .../>
-   *   </g>
-   *   <g id="kvg:..." kvg:number="2">
-   *     <path d="M 10,10 C 20,20 30,30 40,40" .../>
+   * <g id="kvg:StrokePaths_04e00">
+   *   <g id="kvg:04e00" kvg:element="一">
+   *     <path id="kvg:04e00-s1" d="M 11,54.25 c 3.19,0.62 ..." />
+   *     <path id="kvg:04e00-s2" d="M 20,30 L 40,50" />
    *   </g>
    * </g>
+   *
+   * Stroke number is extracted from path id (e.g., "kvg:04e00-s1" -> stroke 1)
    *
    * @param svgContent - Raw SVG string
    * @returns Array of raw strokes with stroke numbers
@@ -87,22 +88,19 @@ export class KanjiVGParserService {
   private static extractStrokePaths(svgContent: string): RawStroke[] {
     const rawStrokes: RawStroke[] = [];
 
-    // Pattern to match <g> elements with kvg:number and their <path> elements
-    // Matches across multiple lines, non-greedy to avoid capturing multiple groups
-    const groupPattern = /<g[^>]*kvg:number="(\d+)"[^>]*>([\s\S]*?)<\/g>/g;
-    const pathPattern = /<path[^>]*\sd="([^"]*)"/;
+    // Pattern to match <path> elements with id containing stroke number (e.g., kvg:04e00-s1)
+    // Format: id="kvg:{hex}-s{number}" d="path data"
+    const pathPattern = /<path[^>]*\sid="kvg:[0-9a-f]+-s(\d+)"[^>]*\sd="([^"]*)"/gi;
 
-    let groupMatch;
-    while ((groupMatch = groupPattern.exec(svgContent)) !== null) {
-      const strokeNumber = parseInt(groupMatch[1], 10);
-      const groupContent = groupMatch[2];
+    let pathMatch;
+    while ((pathMatch = pathPattern.exec(svgContent)) !== null) {
+      const strokeNumber = parseInt(pathMatch[1], 10);
+      const pathData = pathMatch[2].trim();
 
-      // Extract path data from within this group
-      const pathMatch = pathPattern.exec(groupContent);
-      if (pathMatch && pathMatch[1]) {
+      if (pathData) {
         rawStrokes.push({
           strokeNumber,
-          pathData: pathMatch[1].trim(),
+          pathData,
         });
       }
     }
@@ -185,12 +183,17 @@ export class KanjiVGParserService {
 
     for (const path of paths) {
       // Check path has data
-      if (!path.d || path.d.length === 0) {
+      if (!path.path || path.path.length === 0) {
+        return false;
+      }
+
+      // Check stroke number is valid
+      if (!path.strokeNumber || path.strokeNumber < 1) {
         return false;
       }
 
       // Check path starts with Move command
-      const trimmed = path.d.trim();
+      const trimmed = path.path.trim();
       if (!trimmed.startsWith('M') && !trimmed.startsWith('m')) {
         return false;
       }
