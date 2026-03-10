@@ -31,7 +31,7 @@ export default function StrokeDirectionIndicator({
   const { startPoint, endPoint, angle } = pathInfo;
 
   // Calculate arrow points (triangle pointing in direction of stroke)
-  const arrowSize = 4; // Size of arrow in viewBox units
+  const arrowSize = 8; // Size of arrow in viewBox units (2x larger for visibility)
   const arrowPoints = calculateArrowPoints(endPoint.x, endPoint.y, angle, arrowSize);
 
   return (
@@ -84,9 +84,11 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
   let startPoint: Point | null = null;
   let endPoint: Point | null = null;
   let currentPoint: Point = { x: 0, y: 0 };
+  let previousPoint: Point = { x: 0, y: 0 }; // Track previous point for angle calculation
 
   for (const command of commands) {
     const type = command[0].toUpperCase();
+    const isRelative = command[0] === command[0].toLowerCase() && command[0] !== 'Z';
     const coords = command
       .slice(1)
       .trim()
@@ -97,7 +99,12 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
     switch (type) {
       case 'M': // Move to
         if (coords.length >= 2) {
-          currentPoint = { x: coords[0], y: coords[1] };
+          previousPoint = { ...currentPoint };
+          if (isRelative) {
+            currentPoint = { x: currentPoint.x + coords[0], y: currentPoint.y + coords[1] };
+          } else {
+            currentPoint = { x: coords[0], y: coords[1] };
+          }
           if (!startPoint) {
             startPoint = { ...currentPoint };
           }
@@ -107,23 +114,40 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
 
       case 'L': // Line to
         if (coords.length >= 2) {
-          currentPoint = { x: coords[0], y: coords[1] };
+          previousPoint = { ...currentPoint };
+          if (isRelative) {
+            currentPoint = { x: currentPoint.x + coords[0], y: currentPoint.y + coords[1] };
+          } else {
+            currentPoint = { x: coords[0], y: coords[1] };
+          }
           endPoint = { ...currentPoint };
         }
         break;
 
       case 'C': // Cubic Bezier curve
         if (coords.length >= 6) {
-          // End point is the last pair
-          currentPoint = { x: coords[4], y: coords[5] };
+          // For direction at end, use second control point to end point
+          if (isRelative) {
+            previousPoint = { x: currentPoint.x + coords[2], y: currentPoint.y + coords[3] };
+            currentPoint = { x: currentPoint.x + coords[4], y: currentPoint.y + coords[5] };
+          } else {
+            previousPoint = { x: coords[2], y: coords[3] }; // Second control point
+            currentPoint = { x: coords[4], y: coords[5] }; // End point
+          }
           endPoint = { ...currentPoint };
         }
         break;
 
       case 'Q': // Quadratic Bezier curve
         if (coords.length >= 4) {
-          // End point is the last pair
-          currentPoint = { x: coords[2], y: coords[3] };
+          // For direction at end, use control point to end point
+          if (isRelative) {
+            previousPoint = { x: currentPoint.x + coords[0], y: currentPoint.y + coords[1] };
+            currentPoint = { x: currentPoint.x + coords[2], y: currentPoint.y + coords[3] };
+          } else {
+            previousPoint = { x: coords[0], y: coords[1] }; // Control point
+            currentPoint = { x: coords[2], y: coords[3] }; // End point
+          }
           endPoint = { ...currentPoint };
         }
         break;
@@ -131,6 +155,7 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
       case 'Z': // Close path
         // Returns to start point
         if (startPoint) {
+          previousPoint = { ...currentPoint };
           currentPoint = { ...startPoint };
           endPoint = { ...currentPoint };
         }
@@ -140,9 +165,9 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
 
   if (!startPoint || !endPoint) return null;
 
-  // Calculate direction angle from start to end
-  const dx = endPoint.x - startPoint.x;
-  const dy = endPoint.y - startPoint.y;
+  // Calculate direction angle from previous point to end point (direction at end of stroke)
+  const dx = endPoint.x - previousPoint.x;
+  const dy = endPoint.y - previousPoint.y;
   const angle = Math.atan2(dy, dx);
 
   return {
