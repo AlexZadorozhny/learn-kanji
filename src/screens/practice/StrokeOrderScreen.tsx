@@ -38,6 +38,10 @@ export default function StrokeOrderScreen() {
   const [fromKanjiDetail, setFromKanjiDetail] = useState(false);
   const [detailKanjiId, setDetailKanjiId] = useState<string | undefined>();
 
+  // Use refs to track stroke counts to avoid state timing issues
+  const correctStrokesRef = React.useRef(0);
+  const totalStrokesRef = React.useRef(0);
+
   // KanjiVG integration state
   const [loadingSession, setLoadingSession] = useState(true);
   const [sessionKanji, setSessionKanji] = useState<KanjiCharacter[]>([]);
@@ -57,6 +61,8 @@ export default function StrokeOrderScreen() {
     setSessionStartTime(Date.now());
     setCorrectStrokes(0);
     setTotalStrokes(0);
+    correctStrokesRef.current = 0;
+    totalStrokesRef.current = 0;
 
     try {
       // Get kanji IDs from route params or use all available kanji
@@ -102,12 +108,17 @@ export default function StrokeOrderScreen() {
         const kanji = kanjiData.find((k) => k.id === id);
         if (kanji) {
           const strokeData = await loadStrokeOrder(id);
+          console.log(`Loaded stroke data for ${kanji.character} (${id}):`, strokeData?.length, 'strokes');
           if (strokeData && strokeData.length > 0) {
             // Create enhanced kanji with KanjiVG stroke data
-            kanjiWithData.push({
+            const enhancedKanji = {
               ...kanji,
               strokeOrder: strokeData,
-            });
+            };
+            console.log(`✓ Added ${kanji.character} to session | metadata strokes: ${kanji.strokes} | loaded strokes: ${strokeData.length}`);
+            kanjiWithData.push(enhancedKanji);
+          } else {
+            console.warn(`✗ Skipped ${kanji.character} (${id}) - no stroke data loaded`);
           }
         }
       }
@@ -134,21 +145,49 @@ export default function StrokeOrderScreen() {
   };
 
   const handleStrokeComplete = (correct: boolean) => {
-    setTotalStrokes((prev) => prev + 1);
+    console.log(`📝 handleStrokeComplete called: correct=${correct}`);
+
+    // Update refs immediately (synchronous)
+    totalStrokesRef.current += 1;
     if (correct) {
-      setCorrectStrokes((prev) => prev + 1);
+      correctStrokesRef.current += 1;
+    }
+    console.log(`  Refs updated: correctStrokes=${correctStrokesRef.current}, totalStrokes=${totalStrokesRef.current}`);
+
+    // Also update state for UI display (asynchronous)
+    setTotalStrokes((prev) => {
+      const newTotal = prev + 1;
+      console.log(`  State totalStrokes: ${prev} → ${newTotal}`);
+      return newTotal;
+    });
+    if (correct) {
+      setCorrectStrokes((prev) => {
+        const newCorrect = prev + 1;
+        console.log(`  State correctStrokes: ${prev} → ${newCorrect}`);
+        return newCorrect;
+      });
     }
   };
 
   const handleAllStrokesComplete = () => {
-    if (!currentSession) return;
+    console.log('🏁 handleAllStrokesComplete called');
+    if (!currentSession) {
+      console.error('❌ No current session!');
+      return;
+    }
 
     const currentKanjiId = currentSession.kanjiIds[currentSession.currentIndex];
     const timeSpent = Math.floor((Date.now() - sessionStartTime) / 1000);
 
-    // Calculate accuracy for this kanji
-    const accuracy = totalStrokes > 0 ? (correctStrokes / totalStrokes) * 100 : 0;
+    // Calculate accuracy for this kanji using refs (synchronous, not affected by state batching)
+    const finalCorrectStrokes = correctStrokesRef.current;
+    const finalTotalStrokes = totalStrokesRef.current;
+    console.log(`📊 Calculating accuracy from REFS: correctStrokes=${finalCorrectStrokes}, totalStrokes=${finalTotalStrokes}`);
+    console.log(`📊 State values for comparison: correctStrokes=${correctStrokes}, totalStrokes=${totalStrokes}`);
+    const accuracy = finalTotalStrokes > 0 ? (finalCorrectStrokes / finalTotalStrokes) * 100 : 0;
     const wasCorrect = accuracy >= 70; // 70% accuracy threshold
+    console.log(`  Accuracy: ${accuracy.toFixed(1)}% | Pass threshold: 70% | Result: ${wasCorrect ? 'PASS ✓' : 'FAIL ✗'}`);
+
 
     // Add result
     const result: PracticeResult = {
@@ -192,9 +231,12 @@ export default function StrokeOrderScreen() {
 
     // Move to next kanji or show results
     if (currentSession.currentIndex + 1 < currentSession.kanjiIds.length) {
-      // Reset stroke counters
+      // Reset stroke counters (both state and refs)
       setCorrectStrokes(0);
       setTotalStrokes(0);
+      correctStrokesRef.current = 0;
+      totalStrokesRef.current = 0;
+      console.log('🔄 Reset stroke counters for next kanji');
       nextCard();
     } else {
       // Session complete

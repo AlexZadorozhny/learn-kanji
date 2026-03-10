@@ -140,7 +140,10 @@ export default function StrokeOrderCanvas({
 
           // Move to next stroke or complete
           const nextIndex = strokeIndex + 1;
-          if (nextIndex < kanji.strokes) {
+          console.log(`nextIndex: ${nextIndex}, strokeOrder.length: ${kanji.strokeOrder?.length}, kanji.strokes: ${kanji.strokes}`);
+
+          // Use strokeOrder.length (actual data) instead of kanji.strokes (metadata)
+          if (nextIndex < (kanji.strokeOrder?.length || 0)) {
             currentStrokeIndexRef.current = nextIndex;
             setCurrentStrokeIndex(nextIndex);
             console.log('Moving to stroke index:', nextIndex);
@@ -188,9 +191,14 @@ export default function StrokeOrderCanvas({
     console.log('=== Validating stroke (Advanced) ===');
     console.log('Stroke index:', strokeIndex);
     console.log('Total points drawn:', points.length);
+    console.log('Kanji:', kanji.character, '| strokeOrder.length:', kanji.strokeOrder?.length, '| kanji.strokes metadata:', kanji.strokes);
 
     if (!kanji.strokeOrder || strokeIndex >= kanji.strokeOrder.length) {
-      console.log('No stroke order data or invalid index');
+      console.error('❌ VALIDATION ERROR: No stroke order data or invalid index!');
+      console.error('  strokeOrder exists:', !!kanji.strokeOrder);
+      console.error('  strokeOrder.length:', kanji.strokeOrder?.length);
+      console.error('  strokeIndex:', strokeIndex);
+      console.error('  kanji.strokes:', kanji.strokes);
       return false;
     }
 
