@@ -33,6 +33,7 @@ export default function MainTabNavigator() {
         component={HomeStackNavigator}
         options={{
           headerShown: false,
+          tabBarTestID: 'tab-home',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
@@ -42,7 +43,18 @@ export default function MainTabNavigator() {
             navigation.dispatch(
               CommonActions.reset({
                 index: 0,
-                routes: [{ name: 'HomeScreen' }],
+                routes: [
+                  {
+                    name: 'Home',
+                    state: {
+                      index: 0,
+                      routes: [{ name: 'HomeScreen' }],
+                    },
+                  },
+                  { name: 'Practice' },
+                  { name: 'Progress' },
+                  { name: 'Settings' },
+                ],
               })
             );
           },
@@ -53,6 +65,7 @@ export default function MainTabNavigator() {
         component={PracticeStackNavigator}
         options={{
           headerShown: false,
+          tabBarTestID: 'tab-practice',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="school" color={color} size={size} />
           ),
@@ -61,8 +74,19 @@ export default function MainTabNavigator() {
           tabPress: () => {
             navigation.dispatch(
               CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'PracticeModeScreen' }],
+                index: 1,
+                routes: [
+                  { name: 'Home' },
+                  {
+                    name: 'Practice',
+                    state: {
+                      index: 0,
+                      routes: [{ name: 'PracticeModeScreen' }],
+                    },
+                  },
+                  { name: 'Progress' },
+                  { name: 'Settings' },
+                ],
               })
             );
           },
@@ -72,6 +96,7 @@ export default function MainTabNavigator() {
         name="Progress"
         component={ProgressScreen}
         options={{
+          tabBarTestID: 'tab-progress',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="chart-line" color={color} size={size} />
           ),
@@ -82,6 +107,7 @@ export default function MainTabNavigator() {
         component={SettingsStackNavigator}
         options={{
           headerShown: false,
+          tabBarTestID: 'tab-settings',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),
@@ -90,8 +116,19 @@ export default function MainTabNavigator() {
           tabPress: () => {
             navigation.dispatch(
               CommonActions.reset({
-                index: 0,
-                routes: [{ name: 'SettingsScreen' }],
+                index: 3,
+                routes: [
+                  { name: 'Home' },
+                  { name: 'Practice' },
+                  { name: 'Progress' },
+                  {
+                    name: 'Settings',
+                    state: {
+                      index: 0,
+                      routes: [{ name: 'SettingsScreen' }],
+                    },
+                  },
+                ],
               })
             );
           },
