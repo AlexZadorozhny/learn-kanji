@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, IconButton, ProgressBar, useTheme } from 'react-native-paper';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, IconButton, ProgressBar, useTheme, Button } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PracticeStackParamList } from '../../navigation/types';
@@ -9,6 +9,7 @@ import { useProgressStore } from '../../store/progressStore';
 import { usePracticeStore } from '../../store/practiceStore';
 import StrokeOrderCanvas from '../../components/kanji/StrokeOrderCanvas';
 import { PracticeResult } from '../../types/practice';
+import { KanjiCharacter, StrokePath } from '../../types/kanji';
 
 type StrokeOrderScreenNavigationProp = NativeStackNavigationProp<
   PracticeStackParamList,
@@ -37,51 +38,100 @@ export default function StrokeOrderScreen() {
   const [fromKanjiDetail, setFromKanjiDetail] = useState(false);
   const [detailKanjiId, setDetailKanjiId] = useState<string | undefined>();
 
+  // KanjiVG integration state
+  const [loadingSession, setLoadingSession] = useState(true);
+  const [sessionKanji, setSessionKanji] = useState<KanjiCharacter[]>([]);
+  const [strokeDataError, setStrokeDataError] = useState<string | null>(null);
+  const loadStrokeOrderBatch = useKanjiStore((state) => state.loadStrokeOrderBatch);
+  const loadStrokeOrder = useKanjiStore((state) => state.loadStrokeOrder);
+
   useEffect(() => {
+    initializeSession();
+  }, [route.params?.sessionKey]);
+
+  const initializeSession = async () => {
+    setLoadingSession(true);
+    setStrokeDataError(null);
+
     // Reset session state for new practice session
     setSessionStartTime(Date.now());
     setCorrectStrokes(0);
     setTotalStrokes(0);
 
-    // Get kanji IDs from route params or use kanji with stroke data
-    let kanjiIds = route.params?.kanjiIds;
+    try {
+      // Get kanji IDs from route params or use all available kanji
+      let kanjiIds = route.params?.kanjiIds;
 
-    // Check if this is from KanjiDetailScreen - use explicit params if provided
-    const explicitFromKanjiDetail = route.params?.fromKanjiDetail;
-    const explicitDetailKanjiId = route.params?.detailKanjiId;
+      // Check if this is from KanjiDetailScreen - use explicit params if provided
+      const explicitFromKanjiDetail = route.params?.fromKanjiDetail;
+      const explicitDetailKanjiId = route.params?.detailKanjiId;
 
-    if (explicitFromKanjiDetail !== undefined) {
-      // Use explicitly passed params
-      setFromKanjiDetail(explicitFromKanjiDetail);
-      setDetailKanjiId(explicitDetailKanjiId);
-    } else if (kanjiIds && kanjiIds.length === 1) {
-      // Infer from single kanji in array (backward compatibility)
-      setFromKanjiDetail(true);
-      setDetailKanjiId(kanjiIds[0]);
-    } else {
-      setFromKanjiDetail(false);
-      setDetailKanjiId(undefined);
+      if (explicitFromKanjiDetail !== undefined) {
+        // Use explicitly passed params
+        setFromKanjiDetail(explicitFromKanjiDetail);
+        setDetailKanjiId(explicitDetailKanjiId);
+      } else if (kanjiIds && kanjiIds.length === 1) {
+        // Infer from single kanji in array (backward compatibility)
+        setFromKanjiDetail(true);
+        setDetailKanjiId(kanjiIds[0]);
+      } else {
+        setFromKanjiDetail(false);
+        setDetailKanjiId(undefined);
+      }
+
+      if (!kanjiIds || kanjiIds.length === 0) {
+        // Use all available kanji (KanjiVG provides much more coverage)
+        // Shuffle and take up to 5 kanji per session
+        const allKanjiIds = kanjiData.map((k) => k.id);
+        const shuffled = [...allKanjiIds].sort(() => Math.random() - 0.5);
+        kanjiIds = shuffled.slice(0, Math.min(5, shuffled.length));
+      }
+
+      if (kanjiIds.length === 0) {
+        setStrokeDataError('No kanji available for practice');
+        setLoadingSession(false);
+        return;
+      }
+
+      // Load stroke data for all selected kanji using KanjiVG
+      await loadStrokeOrderBatch(kanjiIds);
+
+      // Filter kanji that successfully loaded stroke data
+      const kanjiWithData: KanjiCharacter[] = [];
+      for (const id of kanjiIds) {
+        const kanji = kanjiData.find((k) => k.id === id);
+        if (kanji) {
+          const strokeData = await loadStrokeOrder(id);
+          if (strokeData && strokeData.length > 0) {
+            // Create enhanced kanji with KanjiVG stroke data
+            kanjiWithData.push({
+              ...kanji,
+              strokeOrder: strokeData,
+            });
+          }
+        }
+      }
+
+      if (kanjiWithData.length === 0) {
+        setStrokeDataError('Could not load stroke order data. Check your internet connection.');
+        setLoadingSession(false);
+        return;
+      }
+
+      // Set session kanji
+      setSessionKanji(kanjiWithData);
+
+      // Start practice session
+      const sessionKanjiIds = kanjiWithData.map((k) => k.id);
+      startSession('writing', sessionKanjiIds);
+
+      setLoadingSession(false);
+    } catch (error) {
+      console.error('Failed to initialize session:', error);
+      setStrokeDataError('Failed to load stroke data. Please try again.');
+      setLoadingSession(false);
     }
-
-    if (!kanjiIds || kanjiIds.length === 0) {
-      // Only use kanji that have stroke order data
-      const kanjiWithStrokeData = kanjiData
-        .filter((k) => k.strokeOrder && k.strokeOrder.length > 0)
-        .map((k) => k.id);
-
-      // Shuffle and take up to 5 kanji per session
-      const shuffled = [...kanjiWithStrokeData].sort(() => Math.random() - 0.5);
-      kanjiIds = shuffled.slice(0, Math.min(5, shuffled.length));
-    }
-
-    if (kanjiIds.length === 0) {
-      // No kanji with stroke data available
-      navigation.goBack();
-      return;
-    }
-
-    startSession('writing', kanjiIds);
-  }, [route.params?.sessionKey]);
+  };
 
   const handleStrokeComplete = (correct: boolean) => {
     setTotalStrokes((prev) => prev + 1);
@@ -165,13 +215,42 @@ export default function StrokeOrderScreen() {
     }
   };
 
-  if (!currentSession) {
+  // Loading state
+  if (loadingSession) {
+    return (
+      <View style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}>
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <Text variant="bodyLarge" style={styles.loadingText}>
+          Preparing stroke order practice...
+        </Text>
+      </View>
+    );
+  }
+
+  // Error state
+  if (strokeDataError) {
+    return (
+      <View style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}>
+        <Text variant="bodyLarge" style={styles.errorText}>
+          {strokeDataError}
+        </Text>
+        <Button mode="contained" onPress={initializeSession} style={styles.retryButton}>
+          Retry
+        </Button>
+        <Button mode="outlined" onPress={() => navigation.goBack()} style={styles.retryButton}>
+          Go Back
+        </Button>
+      </View>
+    );
+  }
+
+  if (!currentSession || sessionKanji.length === 0) {
     return null;
   }
 
   const progress = getSessionProgress();
   const currentKanjiId = currentSession.kanjiIds[currentSession.currentIndex];
-  const currentKanji = kanjiData.find((k) => k.id === currentKanjiId);
+  const currentKanji = sessionKanji.find((k) => k.id === currentKanjiId);
 
   if (!currentKanji || !currentKanji.strokeOrder) {
     return null;
@@ -227,5 +306,23 @@ const styles = StyleSheet.create({
   progressBar: {
     marginTop: 4,
     height: 6,
+  },
+  centered: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  loadingText: {
+    marginTop: 16,
+    textAlign: 'center',
+  },
+  errorText: {
+    marginBottom: 16,
+    textAlign: 'center',
+    color: '#f44336',
+  },
+  retryButton: {
+    marginTop: 8,
+    minWidth: 200,
   },
 });

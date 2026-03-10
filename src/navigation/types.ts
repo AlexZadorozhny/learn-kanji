@@ -5,7 +5,7 @@ export type MainTabParamList = {
   Home: NavigatorScreenParams<HomeStackParamList> | undefined;
   Practice: NavigatorScreenParams<PracticeStackParamList> | undefined;
   Progress: undefined;
-  Settings: undefined;
+  Settings: NavigatorScreenParams<SettingsStackParamList> | undefined;
 };
 
 // Home Stack Params
@@ -55,6 +55,7 @@ export type ProgressStackParamList = {
 export type SettingsStackParamList = {
   SettingsScreen: undefined;
   AboutScreen: undefined;
+  LicenseScreen: undefined;
 };
 
 // Root Stack Params (if needed for modals, etc.)

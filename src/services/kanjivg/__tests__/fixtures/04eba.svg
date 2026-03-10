@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Kanji: 人 (person)
+Two strokes forming inverted V
+Copyright Ulrich Apel, CC BY-SA 3.0
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="kvg:StrokeNumbers_04eba" style="font-size:8;fill:#808080">
+	<text transform="matrix(1 0 0 1 38.50 18.50)">1</text>
+	<text transform="matrix(1 0 0 1 58.50 18.50)">2</text>
+</g>
+<g id="kvg:04eba" kvg:element="人">
+	<g id="kvg:04eba-g1" kvg:element="人" kvg:number="1">
+		<path id="kvg:04eba-s1" kvg:type="㇒" d="M 45,20 L 30,85"/>
+	</g>
+	<g id="kvg:04eba-g2" kvg:element="人" kvg:number="2">
+		<path id="kvg:04eba-s2" kvg:type="㇏" d="M 64,20 L 79,85"/>
+	</g>
+</g>
+</svg>

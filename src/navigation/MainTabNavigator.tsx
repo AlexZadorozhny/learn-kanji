@@ -4,8 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 import HomeStackNavigator from './HomeStackNavigator';
 import PracticeStackNavigator from './PracticeStackNavigator';
+import SettingsStackNavigator from './SettingsStackNavigator';
 import ProgressScreen from '../screens/progress/ProgressScreen';
-import SettingsScreen from '../screens/settings/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,8 +58,9 @@ export default function MainTabNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStackNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cog" color={color} size={size} />
           ),

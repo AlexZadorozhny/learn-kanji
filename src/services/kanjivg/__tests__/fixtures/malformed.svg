@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Malformed SVG for error testing
+Missing kvg:number attributes and proper structure
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="kvg:malformed">
+	<g id="kvg:malformed-g1">
+		<path id="kvg:malformed-s1" d="M 20,50 L 89,50"/>
+	</g>
+	<g id="kvg:malformed-g2">
+		<!-- Missing path element -->
+	</g>
+</g>
+</svg>

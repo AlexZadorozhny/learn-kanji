@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Chip, Divider, IconButton, Button, useTheme } from 'react-native-paper';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
@@ -7,6 +7,7 @@ import { useKanjiStore } from '../../store/kanjiStore';
 import { HomeStackParamList, MainTabParamList } from '../../navigation/types';
 import { typography } from '../../theme/theme';
 import { TTSService } from '../../services/audio/TTSService';
+import { KanjiTier } from '../../services/kanjivg/KanjiVGIntegrationService';
 
 type KanjiDetailRouteProp = RouteProp<HomeStackParamList, 'KanjiDetail'>;
 
@@ -14,12 +15,36 @@ export default function KanjiDetailScreen() {
   const theme = useTheme();
   const route = useRoute<KanjiDetailRouteProp>();
   const { kanjiId } = route.params;
-  const { getKanjiById } = useKanjiStore();
+  const { getKanjiById, hasStrokeData: checkStrokeData, getStrokeDataTier, loadStrokeOrder } = useKanjiStore();
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [strokeDataAvailable, setStrokeDataAvailable] = useState(false);
+  const [strokeDataTier, setStrokeDataTier] = useState<KanjiTier>('unavailable');
   const tabNavigation = useNavigation<BottomTabNavigationProp<MainTabParamList>>();
 
   const kanji = getKanjiById(kanjiId);
-  const hasStrokeData = kanji?.strokeOrder && kanji.strokeOrder.length > 0;
+
+  useEffect(() => {
+    checkStrokeDataAvailability();
+  }, [kanji?.id]);
+
+  const checkStrokeDataAvailability = async () => {
+    if (!kanji) return;
+
+    try {
+      const available = await checkStrokeData(kanji.id);
+      const tier = await getStrokeDataTier(kanji.id);
+
+      setStrokeDataAvailable(available);
+      setStrokeDataTier(tier);
+
+      // Prefetch in background if not bundled (non-blocking)
+      if (tier !== 'bundled' && available) {
+        loadStrokeOrder(kanji.id).catch(console.error);
+      }
+    } catch (error) {
+      console.error('Failed to check stroke data availability:', error);
+    }
+  };
 
   const handleSpeak = async (text: string, id: string) => {
     try {
@@ -67,12 +92,28 @@ export default function KanjiDetailScreen() {
                 JLPT N{kanji.jlptLevel}
               </Chip>
             )}
+            {/* Stroke data availability indicator */}
+            {strokeDataTier === 'bundled' && (
+              <Chip icon="lightning-bolt" mode="flat" style={styles.chip}>
+                Instant Access
+              </Chip>
+            )}
+            {strokeDataTier === 'cached' && (
+              <Chip icon="check-circle" mode="flat" style={styles.chip}>
+                Downloaded
+              </Chip>
+            )}
+            {strokeDataTier === 'available' && (
+              <Chip icon="cloud-download" mode="outlined" style={styles.chip}>
+                Available Online
+              </Chip>
+            )}
           </View>
         </Card.Content>
       </Card>
 
       {/* Practice Modes */}
-      {hasStrokeData && (
+      {strokeDataAvailable && (
         <Card style={styles.card}>
           <Card.Content>
             <Text variant="titleMedium" style={styles.sectionTitle}>

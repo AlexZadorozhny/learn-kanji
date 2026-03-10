@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Kanji: 国 (country)
+Complex kanji with 8 strokes including curves
+Copyright Ulrich Apel, CC BY-SA 3.0
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="109" height="109" viewBox="0 0 109 109">
+<g id="kvg:StrokeNumbers_056fd" style="font-size:8;fill:#808080">
+	<text transform="matrix(1 0 0 1 16.50 20.88)">1</text>
+	<text transform="matrix(1 0 0 1 37.50 15.50)">2</text>
+	<text transform="matrix(1 0 0 1 29.25 49.63)">3</text>
+	<text transform="matrix(1 0 0 1 49.50 49.50)">4</text>
+	<text transform="matrix(1 0 0 1 20.25 74.98)">5</text>
+	<text transform="matrix(1 0 0 1 70.50 25.50)">6</text>
+	<text transform="matrix(1 0 0 1 70.50 58.50)">7</text>
+	<text transform="matrix(1 0 0 1 14.25 96.13)">8</text>
+</g>
+<g id="kvg:056fd" kvg:element="国">
+	<g id="kvg:056fd-g1" kvg:number="1">
+		<path id="kvg:056fd-s1" kvg:type="㇑" d="M 18,22 L 18,89"/>
+	</g>
+	<g id="kvg:056fd-g2" kvg:number="2">
+		<path id="kvg:056fd-s2" kvg:type="㇐" d="M 18,22 L 90,22"/>
+	</g>
+	<g id="kvg:056fd-g3" kvg:number="3">
+		<path id="kvg:056fd-s3" kvg:type="㇐" d="M 32,40 L 49,40"/>
+	</g>
+	<g id="kvg:056fd-g4" kvg:number="4">
+		<path id="kvg:056fd-s4" kvg:type="㇐" d="M 32,60 L 75,60"/>
+	</g>
+	<g id="kvg:056fd-g5" kvg:number="5">
+		<path id="kvg:056fd-s5" kvg:type="㇑" d="M 32,40 L 32,75"/>
+	</g>
+	<g id="kvg:056fd-g6" kvg:number="6">
+		<path id="kvg:056fd-s6" kvg:type="㇑" d="M 75,25 L 75,58"/>
+	</g>
+	<g id="kvg:056fd-g7" kvg:number="7">
+		<path id="kvg:056fd-s7" kvg:type="㇏" d="M 75,60 L 85,75"/>
+	</g>
+	<g id="kvg:056fd-g8" kvg:number="8">
+		<path id="kvg:056fd-s8" kvg:type="㇐" d="M 18,89 L 90,89"/>
+	</g>
+</g>
+</svg>

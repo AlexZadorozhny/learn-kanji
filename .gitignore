@@ -45,3 +45,6 @@ coverage/
 
 # Claude Code
 .claude/
+
+#codemie
+.codemie/

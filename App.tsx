@@ -6,16 +6,31 @@ import { lightTheme, darkTheme } from './src/theme/theme';
 import RootNavigator from './src/navigation/RootNavigator';
 import { useProgressStore } from './src/store/progressStore';
 import { useSettingsStore } from './src/store/settingsStore';
+import { useKanjiStore } from './src/store/kanjiStore';
 
 export default function App() {
   const loadProgress = useProgressStore((state) => state.loadProgress);
   const { themeMode, loadSettings } = useSettingsStore();
+  const initializeKanjiVG = useKanjiStore((state) => state.initializeKanjiVG);
   const systemColorScheme = useColorScheme();
 
   useEffect(() => {
-    // Load saved progress and settings when app starts
-    loadProgress();
-    loadSettings();
+    const initializeApp = async () => {
+      // Load saved progress and settings
+      loadProgress();
+      loadSettings();
+
+      // Initialize KanjiVG integration
+      try {
+        await initializeKanjiVG();
+        console.log('KanjiVG initialized successfully');
+      } catch (error) {
+        console.error('Failed to initialize KanjiVG:', error);
+        // Non-blocking error - app continues with legacy data
+      }
+    };
+
+    initializeApp();
   }, []);
 
   // Determine which theme to use
