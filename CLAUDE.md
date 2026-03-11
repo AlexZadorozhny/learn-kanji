@@ -53,6 +53,10 @@ npm run lint:fix        # Auto-fix lint errors
 # Format (code style)
 npm run format          # Format all source files
 npm run format:check    # Check formatting without writing
+
+# Security (local, optional)
+npm run security:audit   # npm audit at high threshold
+npm run security:check   # alias for local security check
 ```
 
 **Interactive Development Mode:**
@@ -435,6 +439,15 @@ When creating commits:
 - Update CLAUDE.md and MEMORY.md for significant changes
 - Pre-commit hook automatically runs `eslint --fix` + `prettier --write` on staged files
 - Use Co-Authored-By tag: `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`
+
+## Security Scanning Workflow
+
+- Security automation files:
+  - `.github/dependabot.yml` (weekly npm updates)
+  - `.github/workflows/security.yml` (Dependency Audit + CodeQL)
+- Dependency audit is enforced at high/critical threshold in CI.
+- GitHub repository settings should have Dependency Graph, Dependabot alerts, and Secret Scanning enabled.
+- Branch protection should require `Dependency Audit (High/Critical Gate)` and `CodeQL` checks.
 
 ## Prerequisites
 

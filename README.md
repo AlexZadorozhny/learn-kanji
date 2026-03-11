@@ -313,6 +313,41 @@ learn-kanji/
 - **Prettier** - Code formatting (single quotes, trailing commas, 100-char width)
 - **Husky + lint-staged** - Pre-commit hooks enforce lint + format on staged files
 
+## Security Scanning
+
+This project uses a GitHub-native security baseline with enforced CI gating for high/critical dependency findings.
+
+### Automated Scans
+
+- **Dependabot**: Weekly npm dependency update PRs via `.github/dependabot.yml`
+- **GitHub Actions security workflow**: `.github/workflows/security.yml`
+  - Runs on pull requests, pushes to `main`/`master`, weekly schedule, and manual trigger
+  - Includes `npm audit` report generation artifact plus enforced failure on `high`/`critical`
+  - Includes CodeQL analysis for JavaScript/TypeScript
+
+### Local Security Commands
+
+```bash
+# Dependency vulnerability audit (high+)
+npm run security:audit
+
+# Alias for local security check workflow
+npm run security:check
+```
+
+### Rollout Mode
+
+- Current mode is **enforced** for dependency audit findings in CI (fails on `high`/`critical`).
+
+### Branch Protection Checklist
+
+Configure GitHub branch protection for your default branch and require status checks before merge:
+
+- Require successful check: `Dependency Audit (High/Critical Gate)`
+- Require successful check: `CodeQL`
+- Require pull request reviews before merge
+- Restrict direct pushes to protected branches
+
 ## Data Model
 
 ### Kanji Character Structure
