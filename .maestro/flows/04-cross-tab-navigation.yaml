@@ -47,7 +47,7 @@ tags:
 - waitForAnimationToEnd
 
 # Wait for stroke order screen to load
-- wait: 2000
+- waitForAnimationToEnd
 
 # Verify we're now in the Practice tab
 # The tab bar should show Practice as active

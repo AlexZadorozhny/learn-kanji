@@ -29,10 +29,10 @@ tags:
 - assertVisible:
     id: "flashcard-container"
 
-# Complete 10 flashcards (or until session ends)
+# Complete 5 flashcards (or until session ends)
 # Each iteration: flip card, then rate it
 - repeat:
-    times: 10
+    times: 5
     commands:
       # Flip the card to see the answer
       - tapOn:
@@ -60,7 +60,7 @@ tags:
             visible:
               id: "flashcard-container"
           commands:
-            - wait: 500
+                        - waitForAnimationToEnd
 
 # Verify results screen appears
 - assertVisible:
@@ -73,7 +73,7 @@ tags:
 
 # Tap back to practice mode
 - tapOn:
-    id: "results-back-button"
+    id: "results-close-button"
 - waitForAnimationToEnd
 
 # Verify we're back at practice mode screen

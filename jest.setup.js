@@ -24,20 +24,6 @@ jest.mock('expo-haptics', () => ({
   },
 }));
 
-// Mock expo-av (used by SoundService)
-jest.mock('expo-av', () => ({
-  Audio: {
-    Sound: {
-      createAsync: jest.fn(() => Promise.resolve({
-        sound: {
-          playAsync: jest.fn(),
-          unloadAsync: jest.fn(),
-        },
-      })),
-    },
-  },
-}));
-
 // Mock AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(() => Promise.resolve()),

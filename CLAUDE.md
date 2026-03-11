@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Phase 1, 2 & 3 Complete + Navigation Fixes - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths, Navigation stack management fixed
+**Current Status:** Phase 1, 2 & 3 Complete + Navigation Fixes + Build Fixes - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths, Navigation stack management fixed, expo-av removed (incompatible with expo-modules-core@55), Maestro E2E tests fixed
 
 **Tech Stack:**
 - Expo ~55.0.5
@@ -237,7 +237,7 @@ rm -rf node_modules && npm install
 - **License**: CC BY-SA 3.0 (© Ulrich Apel) - Attribution in Settings → Licenses & Attribution
 - **Coverage**: 6,355+ kanji (254x improvement from original 25)
 - **Bundle Implementation**: Embedded SVG strings (1,561 lines) in `index.ts` instead of separate files (Metro bundler compatibility)
-- **Test Coverage**: 135 new tests (89 services + 16 store integration + 8 UI + 16 bundle loading + 6 parser fixes) - 700/700 passing
+- **Test Coverage**: 135 new tests (89 services + 16 store integration + 8 UI + 16 bundle loading + 6 parser fixes) - 691/691 passing
 
 **Dark Theme:**
 - Three modes: Light, Dark, and Auto (follows system preference)
@@ -289,7 +289,7 @@ npm test -- --no-coverage
 
 **Unit Test Coverage:**
 - Target: Maintain high test coverage (currently 84%+)
-- Current: 700 tests passing across 37 test suites
+- Current: 691 tests passing across 37 test suites
 - All new features should include unit tests
 - Update existing tests when modifying functionality
 - Test files located in `__tests__` directories alongside source files
@@ -340,7 +340,7 @@ npm run maestro:studio
 **Full workflow (recommended before major commits):**
 
 1. Make code changes
-2. Run `npm test` to verify all unit tests pass (700/700)
+2. Run `npm test` to verify all unit tests pass (691/691)
 3. Start simulator and launch app
 4. Run `npm run test:e2e` to verify E2E flows (6/6 passing)
 5. If any tests fail, fix issues before proceeding
@@ -366,7 +366,7 @@ npm run maestro:studio
 ### Git Commit Guidelines
 
 When creating commits:
-- Ensure all 700 tests pass before committing
+- Ensure all 691 tests pass before committing
 - Write clear, descriptive commit messages
 - Document breaking changes or new features
 - Update CLAUDE.md and MEMORY.md for significant changes

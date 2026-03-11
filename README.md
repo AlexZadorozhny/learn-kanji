@@ -287,7 +287,6 @@ learn-kanji/
 ### Utilities
 - **expo-speech** - Text-to-speech for pronunciation
 - **expo-haptics** - Haptic feedback for tactile interactions
-- **expo-av** - Audio playback for sound effects
 - **react-native-svg** - SVG rendering
 - **date-fns** - Date utilities
 - **react-native-reanimated** - Smooth animations

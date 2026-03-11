@@ -41,7 +41,7 @@ tags:
           id: "multiple-choice-option-0"
 
       # Wait for feedback animation (1.5s auto-advance)
-      - wait: 2000
+      - waitForAnimationToEnd
 
       # If still in quiz, continue; otherwise, we've reached results
       - runFlow:
@@ -49,7 +49,7 @@ tags:
             visible:
               id: "multiple-choice-container"
           commands:
-            - wait: 500
+                        - waitForAnimationToEnd
 
 # Verify results screen appears
 - assertVisible:

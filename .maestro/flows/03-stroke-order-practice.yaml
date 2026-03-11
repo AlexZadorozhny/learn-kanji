@@ -26,7 +26,7 @@ tags:
 
 # Wait for stroke order screen to load
 # The screen loads kanji data asynchronously, so give it time
-- wait: 2000
+- waitForAnimationToEnd
 
 # Verify stroke order canvas UI elements are present
 # We look for common UI elements that should be visible
@@ -49,8 +49,8 @@ tags:
 
 # Alternative: tap back/close if available
 # Most screens have a back button or close icon in the header
-- scroll:
-    direction: UP
+- swipe:
+    direction: DOWN
 
 # Return to practice mode using device back button or close icon
 # This depends on screen implementation

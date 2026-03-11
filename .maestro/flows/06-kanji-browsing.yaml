@@ -26,17 +26,15 @@ tags:
 - assertVisible: "characters available"
 
 # Test scrolling through kanji list
-- scroll:
-    direction: DOWN
-- wait: 500
+- scroll
+- waitForAnimationToEnd
 
-- scroll:
-    direction: DOWN
-- wait: 500
+- scroll
+- waitForAnimationToEnd
 
-- scroll:
-    direction: UP
-- wait: 500
+- swipe:
+    direction: DOWN
+- waitForAnimationToEnd
 
 # Tap on first kanji card (日 - sun/day)
 - tapOn:
@@ -50,18 +48,16 @@ tags:
 - assertVisible: "strokes"
 
 # Scroll down to see more details
-- scroll:
-    direction: DOWN
-- wait: 500
+- scroll
+- waitForAnimationToEnd
 
 # Look for readings section
 - assertVisible: "On-yomi"
 - assertVisible: "Kun-yomi"
 
 # Scroll down more to see example words
-- scroll:
-    direction: DOWN
-- wait: 500
+- scroll
+- waitForAnimationToEnd
 
 # Go back to list
 - back
@@ -135,9 +131,9 @@ tags:
     id: "home-kanji-list"
 
 # Verify we can see the first kanji again (scroll to top)
-- scroll:
-    direction: UP
-- wait: 500
+- swipe:
+    direction: DOWN
+- waitForAnimationToEnd
 
 - assertVisible:
     id: "kanji-card-日"
