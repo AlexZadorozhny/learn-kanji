@@ -34,6 +34,13 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 npm install
 ```
 
+## Contribution Workflow
+
+- All repository changes must go through a pull request.
+- Do not push feature, fix, or documentation changes directly to `master`.
+- Create a branch from `master`, make the change there, push the branch, and open a PR back into `master`.
+- Before opening the PR, run the relevant checks for the scope of the change, at minimum `npm test`.
+
 **Required Configuration:**
 
 The project includes a `babel.config.js` with the reanimated plugin:
