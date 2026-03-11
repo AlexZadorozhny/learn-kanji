@@ -281,7 +281,7 @@ export class KanjiVGFetcherService {
       // Update metadata
       await AsyncStorage.setItem(this.CACHE_METADATA_KEY, JSON.stringify(metadata));
 
-      console.log(
+      console.warn(
         `KanjiVGFetcher: Evicted ${toDelete.length} items (${(freedSpace / 1024).toFixed(1)} KB)`
       );
     } catch (error) {
@@ -348,7 +348,7 @@ export class KanjiVGFetcherService {
       // Remove metadata
       await AsyncStorage.removeItem(this.CACHE_METADATA_KEY);
 
-      console.log(`KanjiVGFetcher: Cleared cache (${cacheKeys.length} items)`);
+      console.warn(`KanjiVGFetcher: Cleared cache (${cacheKeys.length} items)`);
     } catch (error) {
       console.error('KanjiVGFetcher: Failed to clear cache:', error);
     }
@@ -376,11 +376,11 @@ export class KanjiVGFetcherService {
       }
 
       if (uncached.length === 0) {
-        console.log('KanjiVGFetcher: All kanji already cached');
+        console.warn('KanjiVGFetcher: All kanji already cached');
         return;
       }
 
-      console.log(`KanjiVGFetcher: Prefetching ${uncached.length} kanji...`);
+      console.warn(`KanjiVGFetcher: Prefetching ${uncached.length} kanji...`);
 
       // Process in batches of maxConcurrent
       for (let i = 0; i < uncached.length; i += maxConcurrent) {
@@ -398,7 +398,7 @@ export class KanjiVGFetcherService {
         );
       }
 
-      console.log(`KanjiVGFetcher: Prefetch complete`);
+      console.warn(`KanjiVGFetcher: Prefetch complete`);
     } catch (error) {
       console.error('KanjiVGFetcher: Prefetch error:', error);
     }

@@ -50,7 +50,7 @@ export class KanjiVGIntegrationService {
       this.bundledKanjiIds = new Set(BUNDLED_KANJI_IDS);
 
       this.initialized = true;
-      console.log(
+      console.warn(
         `KanjiVGIntegration: Initialized with ${this.bundledKanjiIds.size} bundled kanji`
       );
     } catch (error) {
@@ -307,7 +307,7 @@ export class KanjiVGIntegrationService {
    */
   static clearMemoryCache(): void {
     this.strokeDataCache.clear();
-    console.log('KanjiVGIntegration: Memory cache cleared');
+    console.warn('KanjiVGIntegration: Memory cache cleared');
   }
 
   /**
@@ -331,12 +331,12 @@ export class KanjiVGIntegrationService {
    */
   static async prefetchForSession(kanjiIds: string[]): Promise<void> {
     try {
-      console.log(`KanjiVGIntegration: Prefetching ${kanjiIds.length} kanji for session...`);
+      console.warn(`KanjiVGIntegration: Prefetching ${kanjiIds.length} kanji for session...`);
 
       // Load all in parallel
       await this.loadStrokeOrderBatch(kanjiIds);
 
-      console.log('KanjiVGIntegration: Prefetch complete');
+      console.warn('KanjiVGIntegration: Prefetch complete');
     } catch (error) {
       console.error('KanjiVGIntegration: Prefetch error:', error);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Text, Card, IconButton, ProgressBar, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -30,8 +30,12 @@ export default function MultipleChoiceScreen() {
   const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const initialized = useRef(false);
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     // Get kanji IDs from route params or use all kanji
     let kanjiIds = route.params?.kanjiIds;
 
@@ -47,7 +51,7 @@ export default function MultipleChoiceScreen() {
     }
 
     startSession('quiz', kanjiIds);
-  }, []);
+  }, [kanjiData, navigation, route.params?.kanjiIds, startSession]);
 
   useEffect(() => {
     // Generate question when session starts or card changes
@@ -62,7 +66,7 @@ export default function MultipleChoiceScreen() {
         setShowFeedback(false);
       }
     }
-  }, [currentSession?.currentIndex]);
+  }, [currentSession?.currentIndex, currentSession, kanjiData]);
 
   const handleAnswerSelect = (answer: string) => {
     if (showFeedback || !currentQuestion) return;

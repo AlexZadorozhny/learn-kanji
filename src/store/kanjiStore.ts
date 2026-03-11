@@ -154,6 +154,6 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
       loadingStrokeData: new Set(),
     });
     KanjiVGIntegrationService.clearMemoryCache();
-    console.log('Stroke data cache cleared');
+    console.warn('Stroke data cache cleared');
   },
 }));

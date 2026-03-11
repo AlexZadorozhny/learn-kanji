@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Text, Card, IconButton, ProgressBar, Button, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -31,8 +31,12 @@ export default function ContextPracticeScreen() {
   const [, setSelectedAnswers] = useState<string[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [speaking, setSpeaking] = useState(false);
+  const initialized = useRef(false);
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     // Get kanji IDs from route params or use all kanji
     let kanjiIds = route.params?.kanjiIds;
 
@@ -51,7 +55,7 @@ export default function ContextPracticeScreen() {
     }
 
     startSession('context', kanjiIds);
-  }, []);
+  }, [kanjiData, navigation, route.params?.kanjiIds, startSession]);
 
   const handleSpeak = async (text: string) => {
     if (speaking) return;

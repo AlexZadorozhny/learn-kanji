@@ -16,7 +16,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     loadKanji();
-  }, []);
+  }, [loadKanji]);
 
   if (loading) {
     return (

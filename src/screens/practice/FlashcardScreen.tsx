@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, ProgressBar, IconButton, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -28,8 +28,12 @@ export default function FlashcardScreen() {
 
   const [sessionStartTime] = useState(Date.now());
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const initialized = useRef(false);
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     // Get kanji IDs from route params or use review queue
     let kanjiIds = route.params?.kanjiIds;
 
@@ -51,7 +55,7 @@ export default function FlashcardScreen() {
     }
 
     startSession('flashcard', kanjiIds);
-  }, []);
+  }, [kanjiData, kanjiProgress, navigation, route.params?.kanjiIds, startSession]);
 
   const handleRate = (rating: number) => {
     if (!currentSession) return;

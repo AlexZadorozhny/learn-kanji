@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Japanese Kanji learning mobile application built with Expo and React Native. Features include flashcard practice with spaced repetition, multiple choice quizzes, context word practice, stroke order writing, dark theme support, kanji browsing, progress tracking, and text-to-speech pronunciation. Targets iOS, Android, and Web platforms.
 
-**Current Status:** Phase 1, 2 & 3 Complete + Navigation Fixes + Build Fixes + Static Analysis - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths, Navigation stack management fixed, expo-av removed (incompatible with expo-modules-core@55), Maestro E2E tests fixed, ESLint 9 + Prettier + Husky pre-commit hooks
+**Current Status:** Phase 1, 2 & 3 Complete + Navigation Fixes + Build Fixes + Static Analysis (Clean) - Advanced stroke validation with adaptive thresholds, Fréchet distance algorithm, performance monitoring, All 25 kanji with professional KanjiVG stroke data (bundled), All 4 practice modes complete, Dark Theme implemented, KanjiVG Bundle Integration Complete, Stroke validation fixed for curved paths, Navigation stack management fixed, expo-av removed (incompatible with expo-modules-core@55), Maestro E2E tests fixed, ESLint 9 + Prettier + Husky pre-commit hooks, All lint warnings resolved (0 errors, 0 warnings)
 
 **Tech Stack:**
 
@@ -320,7 +320,7 @@ rm -rf node_modules && npm install
 - **Husky + lint-staged**: Pre-commit hook auto-runs `eslint --fix` + `prettier --write` on staged `.ts`/`.tsx`/`.js`/`.jsx` files, `prettier --write` on staged `.json`/`.md` files
 - **VS Code integration**: Format on save + ESLint auto-fix on save (configured in `.vscode/settings.json`)
 - **Recommended extensions**: `dbaeumer.vscode-eslint` + `esbenp.prettier-vscode` (in `.vscode/extensions.json`)
-- **Current state**: 0 errors, ~66 warnings (all `no-console` and `no-inline-styles` — acceptable)
+- **Current state**: 0 errors, 0 warnings (all `no-console` fixed by removing debug logs or using `console.warn`/`console.error`; `no-inline-styles` fixed by extracting to `StyleSheet`; `react-hooks/exhaustive-deps` fixed with proper dependency arrays and `useRef` guards; `no-unused-styles` fixed by removing dead styles)
 
 ## Development Workflow
 

@@ -31,7 +31,7 @@ describe('KanjiVGIntegrationService', () => {
 
   describe('initialize', () => {
     it('should initialize successfully', async () => {
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       await KanjiVGIntegrationService.initialize();
 
@@ -45,7 +45,7 @@ describe('KanjiVGIntegrationService', () => {
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
       // Force an error by mocking something that throws
-      jest.spyOn(console, 'log').mockImplementationOnce(() => {
+      jest.spyOn(console, 'warn').mockImplementationOnce(() => {
         throw new Error('Init error');
       });
 
@@ -284,7 +284,7 @@ describe('KanjiVGIntegrationService', () => {
       const infoBefore = KanjiVGIntegrationService.getCacheInfo();
       expect(infoBefore.memoryCount).toBeGreaterThan(0);
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       KanjiVGIntegrationService.clearMemoryCache();
 
@@ -319,7 +319,7 @@ describe('KanjiVGIntegrationService', () => {
       MockedFetcher.getKanjiSVG.mockResolvedValue(mockSVG);
       MockedParser.parseKanjiVGSVG.mockReturnValue(mockStrokePaths);
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       const kanjiIds = ['U+4E00', 'U+4E8C', 'U+4E09'];
       await KanjiVGIntegrationService.prefetchForSession(kanjiIds);

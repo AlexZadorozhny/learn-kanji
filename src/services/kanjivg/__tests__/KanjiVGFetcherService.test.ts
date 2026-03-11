@@ -275,7 +275,7 @@ describe('KanjiVGFetcherService', () => {
       (AsyncStorage.multiRemove as jest.Mock).mockResolvedValue(undefined);
       (AsyncStorage.removeItem as jest.Mock).mockResolvedValue(undefined);
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       await KanjiVGFetcherService.clearCache();
 
@@ -316,7 +316,7 @@ describe('KanjiVGFetcherService', () => {
         text: async () => mockSVG,
       });
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       await KanjiVGFetcherService.prefetchKanji(['U+4E00', 'U+4E8C']);
 
@@ -390,7 +390,7 @@ describe('KanjiVGFetcherService', () => {
     it('should log message if all kanji already cached', async () => {
       (AsyncStorage.getItem as jest.Mock).mockResolvedValue(mockSVG);
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
 
       await KanjiVGFetcherService.prefetchKanji(['U+4E00', 'U+4E8C']);
 

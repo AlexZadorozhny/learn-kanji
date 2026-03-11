@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Chip, Divider, IconButton, Button, useTheme } from 'react-native-paper';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
@@ -28,11 +28,7 @@ export default function KanjiDetailScreen() {
 
   const kanji = getKanjiById(kanjiId);
 
-  useEffect(() => {
-    checkStrokeDataAvailability();
-  }, [kanji?.id]);
-
-  const checkStrokeDataAvailability = async () => {
+  const checkStrokeDataAvailability = useCallback(async () => {
     if (!kanji) return;
 
     try {
@@ -49,7 +45,11 @@ export default function KanjiDetailScreen() {
     } catch (error) {
       console.error('Failed to check stroke data availability:', error);
     }
-  };
+  }, [kanji, checkStrokeData, getStrokeDataTier, loadStrokeOrder]);
+
+  useEffect(() => {
+    checkStrokeDataAvailability();
+  }, [checkStrokeDataAvailability]);
 
   const handleSpeak = async (text: string, id: string) => {
     try {

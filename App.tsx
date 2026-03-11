@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
@@ -14,24 +14,23 @@ export default function App() {
   const initializeKanjiVG = useKanjiStore((state) => state.initializeKanjiVG);
   const systemColorScheme = useColorScheme();
 
+  const initializeApp = useCallback(async () => {
+    // Load saved progress and settings
+    loadProgress();
+    loadSettings();
+
+    // Initialize KanjiVG integration
+    try {
+      await initializeKanjiVG();
+    } catch (error) {
+      console.error('Failed to initialize KanjiVG:', error);
+      // Non-blocking error - app continues with legacy data
+    }
+  }, [loadProgress, loadSettings, initializeKanjiVG]);
+
   useEffect(() => {
-    const initializeApp = async () => {
-      // Load saved progress and settings
-      loadProgress();
-      loadSettings();
-
-      // Initialize KanjiVG integration
-      try {
-        await initializeKanjiVG();
-        console.log('KanjiVG initialized successfully');
-      } catch (error) {
-        console.error('Failed to initialize KanjiVG:', error);
-        // Non-blocking error - app continues with legacy data
-      }
-    };
-
     initializeApp();
-  }, []);
+  }, [initializeApp]);
 
   // Determine which theme to use
   const getTheme = () => {

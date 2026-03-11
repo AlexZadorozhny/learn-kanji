@@ -213,7 +213,7 @@ describe('kanjiStore - KanjiVG Integration', () => {
 
       expect(useKanjiStore.getState().strokeDataCache.size).toBe(2);
 
-      const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+      const consoleLogSpy = jest.spyOn(console, 'warn').mockImplementation();
       MockedIntegration.clearMemoryCache.mockImplementation();
 
       useKanjiStore.getState().clearStrokeCache();

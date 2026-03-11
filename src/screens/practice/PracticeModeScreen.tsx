@@ -46,12 +46,7 @@ export default function PracticeModeScreen() {
       </View>
 
       {availableCards > 0 && (
-        <Card
-          style={[
-            styles.infoCard,
-            { backgroundColor: theme.dark ? theme.colors.primaryContainer : '#e3f2fd' },
-          ]}
-        >
+        <Card style={[styles.infoCard, { backgroundColor: theme.colors.primaryContainer }]}>
           <Card.Content>
             <Text variant="titleMedium" style={styles.infoTitle}>
               📚 Cards Ready
@@ -199,9 +194,6 @@ const styles = StyleSheet.create({
     margin: 16,
     marginBottom: 8,
     elevation: 2,
-  },
-  disabledCard: {
-    opacity: 0.6,
   },
   modeTitle: {
     fontWeight: 'bold',

@@ -85,7 +85,7 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         isLoaded: true,
       });
 
-      console.log('Progress loaded from storage');
+      console.warn('Progress loaded from storage');
     } catch (error) {
       console.error('Failed to load progress:', error);
       set({ isLoaded: true });
@@ -99,7 +99,7 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         StorageService.saveUserProgress(kanjiProgress),
         StorageService.saveStudyStats(studyStats),
       ]);
-      console.log('Progress saved to storage');
+      console.warn('Progress saved to storage');
     } catch (error) {
       console.error('Failed to save progress:', error);
     }
@@ -112,7 +112,7 @@ export const useProgressStore = create<ProgressStore>((set, get) => ({
         kanjiProgress: {},
         studyStats: initialStudyStats,
       });
-      console.log('Progress cleared');
+      console.warn('Progress cleared');
     } catch (error) {
       console.error('Failed to clear progress:', error);
     }

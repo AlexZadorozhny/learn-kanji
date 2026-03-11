@@ -63,7 +63,6 @@ export default function StrokeOrderCanvas({
       onPanResponderTerminationRequest: () => false, // Don't let other views take over
 
       onPanResponderGrant: (evt) => {
-        console.log('Touch started!', evt.nativeEvent);
         // Clear any incorrect stroke when starting a new one
         setIncorrectStroke(null);
         setFeedbackMessage('');
@@ -72,7 +71,6 @@ export default function StrokeOrderCanvas({
         // Scale to SVG viewBox coordinates (0-100)
         const scaledX = (locationX / canvasSize) * 100;
         const scaledY = (locationY / canvasSize) * 100;
-        console.log('Scaled coords:', scaledX, scaledY);
 
         // Update both state and ref
         const newPoint = { x: scaledX, y: scaledY };
@@ -81,7 +79,6 @@ export default function StrokeOrderCanvas({
       },
 
       onPanResponderMove: (evt) => {
-        console.log('Move detected!');
         const { locationX, locationY } = evt.nativeEvent;
         // Scale to SVG viewBox coordinates (0-100)
         const scaledX = (locationX / canvasSize) * 100;
@@ -90,7 +87,6 @@ export default function StrokeOrderCanvas({
         // Update ref immediately (synchronous)
         const newPoint = { x: scaledX, y: scaledY };
         currentDrawingRef.current = [...currentDrawingRef.current, newPoint];
-        console.log('Adding point, total points in ref:', currentDrawingRef.current.length);
 
         // Update state for rendering
         setCurrentDrawing((prev) => [...prev, newPoint]);
@@ -99,10 +95,8 @@ export default function StrokeOrderCanvas({
       onPanResponderRelease: () => {
         // Read from ref (synchronous) not state
         const drawnPoints = [...currentDrawingRef.current];
-        console.log('Touch ended, points from ref:', drawnPoints.length);
 
         if (drawnPoints.length < 2) {
-          console.log('Not enough points, clearing');
           currentDrawingRef.current = [];
           setCurrentDrawing([]);
           return;
@@ -115,12 +109,9 @@ export default function StrokeOrderCanvas({
 
         // Validate the stroke (use ref for current index)
         const strokeIndex = currentStrokeIndexRef.current;
-        console.log('Using stroke index from ref:', strokeIndex);
         const isCorrect = validateStroke(drawnPoints, strokeIndex);
-        console.log('Validation result:', isCorrect);
 
         if (isCorrect) {
-          console.log('✓ Correct stroke!');
           HapticService.success();
 
           // Add to completed strokes
@@ -140,33 +131,25 @@ export default function StrokeOrderCanvas({
 
           // Move to next stroke or complete
           const nextIndex = strokeIndex + 1;
-          console.log(
-            `nextIndex: ${nextIndex}, strokeOrder.length: ${kanji.strokeOrder?.length}, kanji.strokes: ${kanji.strokes}`
-          );
 
           // Use strokeOrder.length (actual data) instead of kanji.strokes (metadata)
           if (nextIndex < (kanji.strokeOrder?.length || 0)) {
             currentStrokeIndexRef.current = nextIndex;
             setCurrentStrokeIndex(nextIndex);
-            console.log('Moving to stroke index:', nextIndex);
             // Clear feedback after a moment
             setTimeout(() => {
               setFeedbackMessage('');
             }, 500);
           } else {
-            console.log('All strokes complete!');
             setTimeout(() => {
               onAllStrokesComplete();
             }, 500);
           }
         } else {
-          console.log('✗ Incorrect stroke - SHOWING IN RED for 2 seconds');
-          console.log('Incorrect stroke points:', drawnPoints.length);
           HapticService.warning();
 
           // Move drawn stroke to incorrectStroke state
           setIncorrectStroke(drawnPoints);
-          console.log('Set incorrectStroke state with', drawnPoints.length, 'points');
 
           // Clear current drawing (both state and ref)
           currentDrawingRef.current = [];
@@ -178,9 +161,7 @@ export default function StrokeOrderCanvas({
           onStrokeComplete(false);
 
           // Keep the incorrect stroke visible for 2 seconds
-          console.log('Setting timeout to clear incorrect stroke in 2 seconds');
           clearTimeoutRef.current = setTimeout(() => {
-            console.log('NOW clearing incorrect stroke after 2 seconds');
             setIncorrectStroke(null);
             setFeedbackMessage('');
           }, 2000);
@@ -190,33 +171,15 @@ export default function StrokeOrderCanvas({
   ).current;
 
   const validateStroke = (points: Point[], strokeIndex: number): boolean => {
-    console.log('=== Validating stroke (Advanced) ===');
-    console.log('Stroke index:', strokeIndex);
-    console.log('Total points drawn:', points.length);
-    console.log(
-      'Kanji:',
-      kanji.character,
-      '| strokeOrder.length:',
-      kanji.strokeOrder?.length,
-      '| kanji.strokes metadata:',
-      kanji.strokes
-    );
-
     if (!kanji.strokeOrder || strokeIndex >= kanji.strokeOrder.length) {
-      console.error('❌ VALIDATION ERROR: No stroke order data or invalid index!');
-      console.error('  strokeOrder exists:', !!kanji.strokeOrder);
-      console.error('  strokeOrder.length:', kanji.strokeOrder?.length);
-      console.error('  strokeIndex:', strokeIndex);
-      console.error('  kanji.strokes:', kanji.strokes);
+      console.error('Validation error: No stroke order data or invalid index');
       return false;
     }
 
     const targetStroke = kanji.strokeOrder[strokeIndex];
-    console.log('Target stroke path:', targetStroke.path);
 
     // Convert user points to SVG path
     const userPath = convertUserStrokeToPath(points);
-    console.log('User path:', userPath);
 
     // Get current attempt count for this stroke
     const attemptCount = (strokeAttempts[strokeIndex] || 0) + 1;
@@ -235,10 +198,6 @@ export default function StrokeOrderCanvas({
     // End performance monitoring
     const validationTime = Date.now() - startTime;
 
-    console.log('Validation result:', result);
-    console.log(`Validation time: ${validationTime}ms`);
-    console.log(`Accuracy: ${result.accuracy}%`);
-
     // Determine stroke type for performance tracking
     const strokeType = ValidationConfig.shouldUseFrechetDistance(
       kanji.strokeOrder.slice(strokeIndex, strokeIndex + 1).map((s) => s.path)
@@ -255,11 +214,6 @@ export default function StrokeOrderCanvas({
       kanji.strokes,
       strokeType === 'curved'
     );
-
-    // Log performance stats in dev mode (every 10 validations)
-    if (__DEV__ && PerformanceMonitor.getStats().totalValidations % 10 === 0) {
-      console.log(PerformanceMonitor.getPerformanceReport());
-    }
 
     // Update feedback message based on validation
     if (!result.valid && result.reason) {
@@ -374,7 +328,7 @@ export default function StrokeOrderCanvas({
           width={canvasSize}
           height={canvasSize}
           viewBox={`0 0 100 100`}
-          style={[StyleSheet.absoluteFill, { zIndex: 1 }]}
+          style={[StyleSheet.absoluteFill, styles.svgLayer]}
           pointerEvents="box-none"
         >
           {/* Background to show drawing area */}
@@ -472,16 +426,8 @@ export default function StrokeOrderCanvas({
 
         {/* Touch capture overlay - MUST be on top */}
         <View
-          style={[
-            StyleSheet.absoluteFill,
-            {
-              backgroundColor: 'transparent',
-              zIndex: 10,
-            },
-          ]}
+          style={[StyleSheet.absoluteFill, styles.touchOverlay]}
           {...panResponder.panHandlers}
-          onTouchStart={() => console.log('Native touch started!')}
-          onTouchMove={() => console.log('Native touch moved!')}
         />
       </View>
 
@@ -548,6 +494,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     // borderColor set dynamically
+  },
+  svgLayer: {
+    zIndex: 1,
+  },
+  touchOverlay: {
+    backgroundColor: 'transparent',
+    zIndex: 10,
   },
   hint: {
     // color set dynamically
