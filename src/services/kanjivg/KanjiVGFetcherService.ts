@@ -45,10 +45,7 @@ export class KanjiVGFetcherService {
    * @param options - Fetch options
    * @returns SVG content string, or null if not found
    */
-  static async getKanjiSVG(
-    kanjiId: string,
-    options: FetchOptions = {}
-  ): Promise<string | null> {
+  static async getKanjiSVG(kanjiId: string, options: FetchOptions = {}): Promise<string | null> {
     const { cacheOnly = false, forceRefresh = false, timeout = this.DEFAULT_TIMEOUT } = options;
 
     try {
@@ -113,10 +110,11 @@ export class KanjiVGFetcherService {
         }
 
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      } catch (error: any) {
+      } catch (error: unknown) {
         const isLastAttempt = attempt === this.MAX_RETRIES;
+        const err = error instanceof Error ? error : new Error(String(error));
 
-        if (error.name === 'AbortError') {
+        if (err.name === 'AbortError') {
           console.warn(
             `KanjiVGFetcher: Timeout fetching ${kanjiId} (attempt ${attempt + 1}/${
               this.MAX_RETRIES + 1
@@ -127,7 +125,7 @@ export class KanjiVGFetcherService {
             `KanjiVGFetcher: Network error fetching ${kanjiId} (attempt ${attempt + 1}/${
               this.MAX_RETRIES + 1
             }):`,
-            error.message
+            err.message
           );
         }
 
@@ -138,7 +136,7 @@ export class KanjiVGFetcherService {
 
         // Wait before retry (exponential backoff)
         const delay = this.RETRY_DELAY_BASE * Math.pow(2, attempt);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
     }
 
@@ -315,7 +313,7 @@ export class KanjiVGFetcherService {
   static async getCacheStats(): Promise<CacheStats> {
     try {
       const keys = await AsyncStorage.getAllKeys();
-      const cacheKeys = keys.filter(key => key.startsWith(this.CACHE_KEY_PREFIX));
+      const cacheKeys = keys.filter((key) => key.startsWith(this.CACHE_KEY_PREFIX));
 
       let totalSize = 0;
 
@@ -342,7 +340,7 @@ export class KanjiVGFetcherService {
   static async clearCache(): Promise<void> {
     try {
       const keys = await AsyncStorage.getAllKeys();
-      const cacheKeys = keys.filter(key => key.startsWith(this.CACHE_KEY_PREFIX));
+      const cacheKeys = keys.filter((key) => key.startsWith(this.CACHE_KEY_PREFIX));
 
       // Remove all cache entries
       await AsyncStorage.multiRemove(cacheKeys);
@@ -389,10 +387,10 @@ export class KanjiVGFetcherService {
         const batch = uncached.slice(i, i + maxConcurrent);
 
         await Promise.all(
-          batch.map(async kanjiId => {
+          batch.map(async (kanjiId) => {
             try {
               await this.getKanjiSVG(kanjiId);
-            } catch (error) {
+            } catch (_error) {
               // Silent failure - just log
               console.warn(`KanjiVGFetcher: Prefetch failed for ${kanjiId}`);
             }

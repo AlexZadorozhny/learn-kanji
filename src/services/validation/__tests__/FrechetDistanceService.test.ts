@@ -134,16 +134,8 @@ describe('FrechetDistanceService', () => {
         { x: 200, y: 200 },
         { x: 210, y: 200 },
       ];
-      const distanceWithTermination = FrechetDistanceService.calculate(
-        path1,
-        path2,
-        true
-      );
-      const distanceWithoutTermination = FrechetDistanceService.calculate(
-        path1,
-        path2,
-        false
-      );
+      const distanceWithTermination = FrechetDistanceService.calculate(path1, path2, true);
+      const distanceWithoutTermination = FrechetDistanceService.calculate(path1, path2, false);
 
       // Both should be very large
       expect(distanceWithTermination).toBeGreaterThan(100);
@@ -409,13 +401,10 @@ describe('FrechetDistanceService', () => {
 
       const startTimeWithoutTermination = Date.now();
       FrechetDistanceService.calculate(path1, path2, false);
-      const durationWithoutTermination =
-        Date.now() - startTimeWithoutTermination;
+      const durationWithoutTermination = Date.now() - startTimeWithoutTermination;
 
       // With early termination should be faster (or at least not slower)
-      expect(durationWithTermination).toBeLessThanOrEqual(
-        durationWithoutTermination + 5
-      );
+      expect(durationWithTermination).toBeLessThanOrEqual(durationWithoutTermination + 5);
     });
   });
 });

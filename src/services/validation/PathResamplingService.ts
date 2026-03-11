@@ -53,15 +53,11 @@ export class PathResamplingService {
       if (nextDistance >= targetDistance) {
         // Target distance is within this segment - interpolate
         const segmentProgress =
-          segmentLength > 0
-            ? (targetDistance - accumulatedDistance) / segmentLength
-            : 0;
+          segmentLength > 0 ? (targetDistance - accumulatedDistance) / segmentLength : 0;
 
         return {
-          x:
-            points[i - 1].x + (points[i].x - points[i - 1].x) * segmentProgress,
-          y:
-            points[i - 1].y + (points[i].y - points[i - 1].y) * segmentProgress,
+          x: points[i - 1].x + (points[i].x - points[i - 1].x) * segmentProgress,
+          y: points[i - 1].y + (points[i].y - points[i - 1].y) * segmentProgress,
         };
       }
 
@@ -100,7 +96,9 @@ export class PathResamplingService {
 
     if (pathLength === 0) {
       // All points are the same - return duplicates of first point
-      return Array(targetCount).fill(null).map(() => ({ ...points[0] }));
+      return Array(targetCount)
+        .fill(null)
+        .map(() => ({ ...points[0] }));
     }
 
     // Calculate spacing between resampled points
@@ -186,12 +184,7 @@ export class PathResamplingService {
 
     // If max distance exceeds tolerance, recursively simplify
     if (maxDistance > tolerance) {
-      const left = this.douglasPeucker(
-        points,
-        startIndex,
-        maxIndex,
-        tolerance
-      );
+      const left = this.douglasPeucker(points, startIndex, maxIndex, tolerance);
       const right = this.douglasPeucker(points, maxIndex, endIndex, tolerance);
 
       // Combine results (remove duplicate point at junction)
@@ -210,11 +203,7 @@ export class PathResamplingService {
    * @param lineEnd End of line segment
    * @returns Perpendicular distance
    */
-  private static perpendicularDistance(
-    point: Point,
-    lineStart: Point,
-    lineEnd: Point
-  ): number {
+  private static perpendicularDistance(point: Point, lineStart: Point, lineEnd: Point): number {
     const dx = lineEnd.x - lineStart.x;
     const dy = lineEnd.y - lineStart.y;
 
@@ -228,11 +217,7 @@ export class PathResamplingService {
     // Calculate projection of point onto line
     const t = Math.max(
       0,
-      Math.min(
-        1,
-        ((point.x - lineStart.x) * dx + (point.y - lineStart.y) * dy) /
-          lengthSquared
-      )
+      Math.min(1, ((point.x - lineStart.x) * dx + (point.y - lineStart.y) * dy) / lengthSquared)
     );
 
     const projection = {

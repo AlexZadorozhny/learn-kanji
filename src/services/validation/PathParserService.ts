@@ -55,17 +55,17 @@ export class PathParserService {
       .replace(/\s+/g, ' ') // Normalize whitespace
       .replace(/([MLCQZmlcqz])/g, '|$1 ') // Add delimiter before commands
       .split('|')
-      .filter(s => s.trim().length > 0);
+      .filter((s) => s.trim().length > 0);
 
     for (const commandStr of cleaned) {
-      const type = commandStr[0] as any;
+      const type = commandStr[0] as string;
       const isAbsolute = type === type.toUpperCase();
       const coords = commandStr
         .slice(1)
         .trim()
         .split(/\s+/)
         .map(Number)
-        .filter(n => !isNaN(n));
+        .filter((n) => !isNaN(n));
 
       const command: PathCommand = {
         type: type.toUpperCase() as PathCommand['type'],
@@ -146,9 +146,10 @@ export class PathParserService {
           // Return to start point
           currentX = startX;
           currentY = startY;
-          if (points.length > 0 &&
-              (points[points.length - 1].x !== startX ||
-               points[points.length - 1].y !== startY)) {
+          if (
+            points.length > 0 &&
+            (points[points.length - 1].x !== startX || points[points.length - 1].y !== startY)
+          ) {
             points.push({ x: currentX, y: currentY });
           }
           break;
@@ -176,8 +177,8 @@ export class PathParserService {
       return { minX: 0, minY: 0, maxX: 100, maxY: 100 };
     }
 
-    const xs = points.map(p => p.x);
-    const ys = points.map(p => p.y);
+    const xs = points.map((p) => p.x);
+    const ys = points.map((p) => p.y);
 
     return {
       minX: Math.min(...xs),

@@ -121,7 +121,7 @@ export class KanjiVGIntegrationService {
     const results = new Map<string, StrokePath[]>();
 
     // Load in parallel
-    const promises = kanjiIds.map(async id => {
+    const promises = kanjiIds.map(async (id) => {
       const strokeOrder = await this.getStrokeOrder(id);
       if (strokeOrder) {
         results.set(id, strokeOrder);
@@ -282,7 +282,7 @@ export class KanjiVGIntegrationService {
    */
   private static getLegacyStrokeOrder(kanjiId: string): StrokePath[] | null {
     try {
-      const kanji = sampleKanjiData.find(k => k.id === kanjiId);
+      const kanji = sampleKanjiData.find((k) => k.id === kanjiId);
 
       // After Phase 3, strokeOrder will not exist in sampleKanjiData
       // Keep this check for backward compatibility during migration

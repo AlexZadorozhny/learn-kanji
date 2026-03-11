@@ -134,5 +134,4 @@ describe('SRSService', () => {
       expect(SRSService.ratingToQuality(4)).toBe(5);
     });
   });
-
 });

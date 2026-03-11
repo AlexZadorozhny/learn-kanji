@@ -149,10 +149,7 @@ describe('TTSService', () => {
       // Should not throw
       await TTSService.stop();
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'TTS Stop Error:',
-        expect.any(Error)
-      );
+      expect(consoleErrorSpy).toHaveBeenCalledWith('TTS Stop Error:', expect.any(Error));
 
       consoleErrorSpy.mockRestore();
     });

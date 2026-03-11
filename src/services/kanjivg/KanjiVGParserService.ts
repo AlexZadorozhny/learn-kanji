@@ -51,7 +51,7 @@ export class KanjiVGParserService {
       }
 
       // Convert to StrokePath format with normalized coordinates
-      const strokePaths: StrokePath[] = rawStrokes.map(raw => ({
+      const strokePaths: StrokePath[] = rawStrokes.map((raw) => ({
         path: this.normalizePathCoordinates(raw.pathData),
         strokeNumber: raw.strokeNumber,
       }));
@@ -146,7 +146,7 @@ export class KanjiVGParserService {
 
         if (coords) {
           // Scale all coordinate values
-          const scaledCoords = coords.map(coord => {
+          const scaledCoords = coords.map((coord) => {
             const value = parseFloat(coord) * this.SCALE_FACTOR;
             // Round to 2 decimal places for cleaner output
             return value.toFixed(2);
@@ -213,9 +213,7 @@ export class KanjiVGParserService {
     try {
       const groupPattern = /<g[^>]*kvg:number="(\d+)"/g;
       let count = 0;
-      let match;
-
-      while ((match = groupPattern.exec(svgContent)) !== null) {
+      while (groupPattern.exec(svgContent) !== null) {
         count++;
       }
 

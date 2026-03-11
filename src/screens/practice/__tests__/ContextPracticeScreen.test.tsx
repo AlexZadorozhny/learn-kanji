@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithProviders, fireEvent, waitFor } from '../../../test-utils';
 import ContextPracticeScreen from '../ContextPracticeScreen';
 
@@ -235,9 +234,7 @@ describe('ContextPracticeScreen', () => {
     const { UNSAFE_root } = renderWithProviders(<ContextPracticeScreen />);
 
     // Find IconButton in example word card
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // First IconButton is close, others are speaker buttons
     await iconButtons[1].props.onPress();
@@ -271,9 +268,7 @@ describe('ContextPracticeScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<ContextPracticeScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     await iconButtons[1].props.onPress();
 
@@ -307,9 +302,7 @@ describe('ContextPracticeScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<ContextPracticeScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     iconButtons[1].props.onPress();
 
@@ -695,9 +688,7 @@ describe('ContextPracticeScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<ContextPracticeScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
     const closeButton = iconButtons[0];
 
     closeButton.props.onPress();

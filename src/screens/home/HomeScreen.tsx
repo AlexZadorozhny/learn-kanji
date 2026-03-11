@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Text, ActivityIndicator, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -45,7 +45,10 @@ export default function HomeScreen() {
         contentContainerStyle={styles.listContent}
         ListHeaderComponent={() => (
           <View style={[styles.header, { backgroundColor: theme.colors.surface }]}>
-            <Text variant="bodyMedium" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              variant="bodyMedium"
+              style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}
+            >
               {kanjiData.length} characters available
             </Text>
           </View>

@@ -91,7 +91,7 @@ describe('KanjiVG Bundle Loading (Integration)', () => {
         expect(result!.length).toBeGreaterThan(0);
 
         // Verify each stroke has required properties
-        result!.forEach(stroke => {
+        result!.forEach((stroke) => {
           expect(stroke.path).toBeTruthy();
           expect(stroke.strokeNumber).toBeGreaterThan(0);
         });

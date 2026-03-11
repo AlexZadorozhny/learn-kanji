@@ -81,9 +81,7 @@ export class PerformanceMonitor {
     // Log slow validations in dev mode
     if (this.DEV_MODE && validationTime > this.SLOW_THRESHOLD) {
       console.warn(
-        `[PerformanceMonitor] Slow validation detected: ${validationTime.toFixed(
-          1
-        )}ms`,
+        `[PerformanceMonitor] Slow validation detected: ${validationTime.toFixed(1)}ms`,
         {
           strokeType,
           accuracy,
@@ -114,8 +112,7 @@ export class PerformanceMonitor {
     const averageTime = times.reduce((a, b) => a + b, 0) / totalValidations;
     const maxTime = Math.max(...times);
     const minTime = Math.min(...times);
-    const averageAccuracy =
-      accuracies.reduce((a, b) => a + b, 0) / totalValidations;
+    const averageAccuracy = accuracies.reduce((a, b) => a + b, 0) / totalValidations;
     const successRate = (successes / totalValidations) * 100;
 
     // Calculate stats by stroke type
@@ -153,19 +150,19 @@ export class PerformanceMonitor {
   /**
    * Get statistics for a specific stroke type.
    */
-  private static getStatsForStrokeType(
-    strokeType: 'straight' | 'curved' | 'complex'
-  ): { count: number; avgTime: number; avgAccuracy: number } {
+  private static getStatsForStrokeType(strokeType: 'straight' | 'curved' | 'complex'): {
+    count: number;
+    avgTime: number;
+    avgAccuracy: number;
+  } {
     const filtered = this.metrics.filter((m) => m.strokeType === strokeType);
 
     if (filtered.length === 0) {
       return { count: 0, avgTime: 0, avgAccuracy: 0 };
     }
 
-    const avgTime =
-      filtered.reduce((sum, m) => sum + m.validationTime, 0) / filtered.length;
-    const avgAccuracy =
-      filtered.reduce((sum, m) => sum + m.accuracy, 0) / filtered.length;
+    const avgTime = filtered.reduce((sum, m) => sum + m.validationTime, 0) / filtered.length;
+    const avgAccuracy = filtered.reduce((sum, m) => sum + m.accuracy, 0) / filtered.length;
 
     return {
       count: filtered.length,
@@ -177,21 +174,19 @@ export class PerformanceMonitor {
   /**
    * Get statistics for a specific kanji complexity level.
    */
-  private static getStatsForComplexity(
-    complexity: 'easy' | 'medium' | 'complex'
-  ): { count: number; avgTime: number; avgAccuracy: number } {
-    const filtered = this.metrics.filter(
-      (m) => m.kanjiComplexity === complexity
-    );
+  private static getStatsForComplexity(complexity: 'easy' | 'medium' | 'complex'): {
+    count: number;
+    avgTime: number;
+    avgAccuracy: number;
+  } {
+    const filtered = this.metrics.filter((m) => m.kanjiComplexity === complexity);
 
     if (filtered.length === 0) {
       return { count: 0, avgTime: 0, avgAccuracy: 0 };
     }
 
-    const avgTime =
-      filtered.reduce((sum, m) => sum + m.validationTime, 0) / filtered.length;
-    const avgAccuracy =
-      filtered.reduce((sum, m) => sum + m.accuracy, 0) / filtered.length;
+    const avgTime = filtered.reduce((sum, m) => sum + m.validationTime, 0) / filtered.length;
+    const avgAccuracy = filtered.reduce((sum, m) => sum + m.accuracy, 0) / filtered.length;
 
     return {
       count: filtered.length,
@@ -270,9 +265,7 @@ Slow Validations: ${stats.slowValidations.length}
   /**
    * Map total strokes to complexity level.
    */
-  private static getKanjiComplexity(
-    totalStrokes: number
-  ): 'easy' | 'medium' | 'complex' {
+  private static getKanjiComplexity(totalStrokes: number): 'easy' | 'medium' | 'complex' {
     if (totalStrokes <= 2) {
       return 'easy';
     } else if (totalStrokes <= 7) {

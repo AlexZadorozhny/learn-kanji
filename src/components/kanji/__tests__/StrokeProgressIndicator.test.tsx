@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react-native';
 import StrokeProgressIndicator from '../StrokeProgressIndicator';
 
@@ -8,10 +7,8 @@ jest.mock('react-native-svg', () => {
   const View = require('react-native').View;
   return {
     __esModule: true,
-    default: ({ children, ...props }: any) =>
-      React.createElement(View, props, children),
-    Svg: ({ children, ...props }: any) =>
-      React.createElement(View, props, children),
+    default: ({ children, ...props }: any) => React.createElement(View, props, children),
+    Svg: ({ children, ...props }: any) => React.createElement(View, props, children),
     Path: (props: any) => React.createElement(View, props),
   };
 });
@@ -39,11 +36,7 @@ describe('StrokeProgressIndicator', () => {
 
   it('renders nothing when totalStrokes is 0', () => {
     const { toJSON } = render(
-      <StrokeProgressIndicator
-        totalStrokes={0}
-        currentStrokeIndex={0}
-        strokePaths={[]}
-      />
+      <StrokeProgressIndicator totalStrokes={0} currentStrokeIndex={0} strokePaths={[]} />
     );
     expect(toJSON()).toBeNull();
   });
@@ -109,22 +102,14 @@ describe('StrokeProgressIndicator', () => {
       (_, i) => `M ${i * 5} ${i * 5} L ${50 + i * 5} ${50 + i * 5}`
     );
     const { toJSON } = render(
-      <StrokeProgressIndicator
-        totalStrokes={15}
-        currentStrokeIndex={7}
-        strokePaths={manyPaths}
-      />
+      <StrokeProgressIndicator totalStrokes={15} currentStrokeIndex={7} strokePaths={manyPaths} />
     );
     expect(toJSON()).not.toBeNull();
   });
 
   it('handles missing stroke paths gracefully', () => {
     const { toJSON } = render(
-      <StrokeProgressIndicator
-        totalStrokes={5}
-        currentStrokeIndex={2}
-        strokePaths={[]}
-      />
+      <StrokeProgressIndicator totalStrokes={5} currentStrokeIndex={2} strokePaths={[]} />
     );
     expect(toJSON()).not.toBeNull();
   });

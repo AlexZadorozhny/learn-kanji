@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithProviders, fireEvent } from '../../../test-utils';
 import PracticeModeScreen from '../PracticeModeScreen';
 
@@ -288,9 +287,12 @@ describe('PracticeModeScreen', () => {
     const buttons = getAllByText(/Start Practice \(3 kanji\)/);
     fireEvent.press(buttons[0]);
 
-    expect(mockNavigate).toHaveBeenCalledWith('StrokeOrderScreen', expect.objectContaining({
-      sessionKey: expect.any(Number)
-    }));
+    expect(mockNavigate).toHaveBeenCalledWith(
+      'StrokeOrderScreen',
+      expect.objectContaining({
+        sessionKey: expect.any(Number),
+      })
+    );
   });
 
   it('navigates to MultipleChoiceScreen when multiple choice button is pressed', () => {

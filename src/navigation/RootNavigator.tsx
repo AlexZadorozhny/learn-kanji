@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
 import MainTabNavigator from './MainTabNavigator';

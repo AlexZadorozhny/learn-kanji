@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Svg, { Path } from 'react-native-svg';
@@ -41,9 +40,7 @@ export default function StrokeProgressIndicator({
             style={[
               styles.strokeThumbnail,
               {
-                borderColor: isCurrent
-                  ? theme.colors.primary
-                  : theme.colors.outline,
+                borderColor: isCurrent ? theme.colors.primary : theme.colors.outline,
                 backgroundColor: theme.colors.surface,
               },
               isCurrent && styles.currentStroke,
@@ -51,20 +48,15 @@ export default function StrokeProgressIndicator({
           >
             {/* Render miniature stroke */}
             {strokePath && (
-              <Svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 100 100"
-                style={StyleSheet.absoluteFill}
-              >
+              <Svg width="100%" height="100%" viewBox="0 0 100 100" style={StyleSheet.absoluteFill}>
                 <Path
                   d={strokePath}
                   stroke={
                     isCompleted
                       ? '#4caf50' // Green for completed
                       : isCurrent
-                      ? theme.colors.primary // Blue for current
-                      : theme.colors.outlineVariant // Gray for future
+                        ? theme.colors.primary // Blue for current
+                        : theme.colors.outlineVariant // Gray for future
                   }
                   strokeWidth={isCompleted ? 4 : isCurrent ? 3 : 2}
                   fill="none"
@@ -79,10 +71,7 @@ export default function StrokeProgressIndicator({
             {isCompleted && (
               <View style={styles.checkmarkOverlay}>
                 <Svg width="12" height="12" viewBox="0 0 24 24">
-                  <Path
-                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-                    fill="#4caf50"
-                  />
+                  <Path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#4caf50" />
                 </Svg>
               </View>
             )}

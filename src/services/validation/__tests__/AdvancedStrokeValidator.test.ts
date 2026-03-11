@@ -6,12 +6,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 11 11 L 51 51'; // Slightly off but within tolerance
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       expect(result.valid).toBe(true);
       expect(result.accuracy).toBeGreaterThan(80);
@@ -52,12 +47,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50'; // Diagonal down-right
       const userPath = 'M 12 12 L 52 12'; // Horizontal right (wrong direction)
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       expect(result.valid).toBe(false);
       expect(result.metrics!.directionAccuracy).toBeLessThan(60);
@@ -67,12 +57,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 50 50 L 10 10'; // Drawn backwards
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       expect(result.valid).toBe(false);
     });
@@ -113,18 +98,8 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 16 16 L 56 56'; // Further off
 
-      const easyResult = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        2,
-        4
-      );
-      const complexResult = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        10,
-        4
-      );
+      const easyResult = AdvancedStrokeValidator.validate(userPath, targetPath, 2, 4);
+      const complexResult = AdvancedStrokeValidator.validate(userPath, targetPath, 10, 4);
 
       // Complex kanji should be more forgiving
       if (!complexResult.valid) {
@@ -136,18 +111,10 @@ describe('AdvancedStrokeValidator', () => {
       const stats1 = AdvancedStrokeValidator.getValidationStats(2, 4);
       const stats2 = AdvancedStrokeValidator.getValidationStats(10, 4);
 
-      expect(stats2.startPointTolerance).toBeGreaterThan(
-        stats1.startPointTolerance
-      );
-      expect(stats2.endPointTolerance).toBeGreaterThan(
-        stats1.endPointTolerance
-      );
-      expect(stats2.directionTolerance).toBeGreaterThan(
-        stats1.directionTolerance
-      );
-      expect(stats1.accuracyThreshold).toBeGreaterThan(
-        stats2.accuracyThreshold
-      );
+      expect(stats2.startPointTolerance).toBeGreaterThan(stats1.startPointTolerance);
+      expect(stats2.endPointTolerance).toBeGreaterThan(stats1.endPointTolerance);
+      expect(stats2.directionTolerance).toBeGreaterThan(stats1.directionTolerance);
+      expect(stats1.accuracyThreshold).toBeGreaterThan(stats2.accuracyThreshold);
     });
   });
 
@@ -156,13 +123,13 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 15 15 L 55 55'; // Moderately off
 
-      const learningResult = AdvancedStrokeValidator.validate(
+      const _learningResult = AdvancedStrokeValidator.validate(
         userPath,
         targetPath,
         5,
         1 // First attempt
       );
-      const normalResult = AdvancedStrokeValidator.validate(
+      const _normalResult = AdvancedStrokeValidator.validate(
         userPath,
         targetPath,
         5,
@@ -173,9 +140,7 @@ describe('AdvancedStrokeValidator', () => {
       const learningStats = AdvancedStrokeValidator.getValidationStats(5, 1);
       const normalStats = AdvancedStrokeValidator.getValidationStats(5, 5);
 
-      expect(learningStats.accuracyThreshold).toBeLessThan(
-        normalStats.accuracyThreshold
-      );
+      expect(learningStats.accuracyThreshold).toBeLessThan(normalStats.accuracyThreshold);
     });
 
     it('identifies learning mode correctly', () => {
@@ -194,9 +159,7 @@ describe('AdvancedStrokeValidator', () => {
       const learningStats = AdvancedStrokeValidator.getValidationStats(5, 1);
       const normalStats = AdvancedStrokeValidator.getValidationStats(5, 4);
 
-      expect(learningStats.accuracyThreshold).toBe(
-        normalStats.accuracyThreshold - 10
-      );
+      expect(learningStats.accuracyThreshold).toBe(normalStats.accuracyThreshold - 10);
     });
   });
 
@@ -225,12 +188,7 @@ describe('AdvancedStrokeValidator', () => {
       const straightPath = 'M 10 10 L 70 70';
 
       // These should be different enough for hybrid validator to detect
-      const result = AdvancedStrokeValidator.validate(
-        straightPath,
-        curvedPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(straightPath, curvedPath, 5, 1);
 
       // Result depends on how different the shapes are
       expect(result.metrics?.shapeAccuracy).toBeDefined();
@@ -312,12 +270,7 @@ describe('AdvancedStrokeValidator', () => {
   describe('extractPointsFromPath', () => {
     it('extracts points from straight line path', () => {
       const targetPath = 'M 10 10 L 50 50';
-      const result = AdvancedStrokeValidator.validate(
-        targetPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(targetPath, targetPath, 5, 1);
 
       // Should validate successfully (same path)
       expect(result.valid).toBe(true);
@@ -374,12 +327,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 12 12 L 52 52';
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       expect(result.metrics).toBeDefined();
       expect(result.metrics!.startPointAccuracy).toBeGreaterThanOrEqual(0);
@@ -396,12 +344,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 15 15 L 55 55';
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       expect(result.accuracy).toBeGreaterThanOrEqual(0);
       expect(result.accuracy).toBeLessThanOrEqual(100);
@@ -413,12 +356,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 25 25 L 50 50';
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        2,
-        4
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 2, 4);
 
       if (!result.valid) {
         expect(result.reason).toBeDefined();
@@ -430,12 +368,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 10 10 L 30 30';
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        2,
-        4
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 2, 4);
 
       if (!result.valid) {
         expect(result.reason).toBeDefined();
@@ -447,12 +380,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50'; // Diagonal
       const userPath = 'M 10 10 L 50 10'; // Horizontal (correct start, correct length, wrong direction)
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        2,
-        4
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 2, 4);
 
       if (!result.valid) {
         expect(result.reason).toBeDefined();
@@ -465,12 +393,7 @@ describe('AdvancedStrokeValidator', () => {
       const targetPath = 'M 10 10 L 50 50';
       const userPath = 'M 11 11 L 51 51';
 
-      const result = AdvancedStrokeValidator.validate(
-        userPath,
-        targetPath,
-        5,
-        1
-      );
+      const result = AdvancedStrokeValidator.validate(userPath, targetPath, 5, 1);
 
       if (result.valid) {
         expect(result.reason).toBeUndefined();

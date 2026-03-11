@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Text, IconButton, ProgressBar, useTheme, Button } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { useProgressStore } from '../../store/progressStore';
 import { usePracticeStore } from '../../store/practiceStore';
 import StrokeOrderCanvas from '../../components/kanji/StrokeOrderCanvas';
 import { PracticeResult } from '../../types/practice';
-import { KanjiCharacter, StrokePath } from '../../types/kanji';
+import { KanjiCharacter } from '../../types/kanji';
 
 type StrokeOrderScreenNavigationProp = NativeStackNavigationProp<
   PracticeStackParamList,
@@ -23,14 +23,8 @@ export default function StrokeOrderScreen() {
   const route = useRoute<StrokeOrderScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
   const { kanjiProgress, updateKanjiProgress, updateStudyStats, studyStats } = useProgressStore();
-  const {
-    currentSession,
-    startSession,
-    endSession,
-    addResult,
-    nextCard,
-    getSessionProgress,
-  } = usePracticeStore();
+  const { currentSession, startSession, endSession, addResult, nextCard, getSessionProgress } =
+    usePracticeStore();
 
   const [sessionStartTime, setSessionStartTime] = useState(Date.now());
   const [correctStrokes, setCorrectStrokes] = useState(0);
@@ -39,8 +33,8 @@ export default function StrokeOrderScreen() {
   const [detailKanjiId, setDetailKanjiId] = useState<string | undefined>();
 
   // Use refs to track stroke counts to avoid state timing issues
-  const correctStrokesRef = React.useRef(0);
-  const totalStrokesRef = React.useRef(0);
+  const correctStrokesRef = useRef(0);
+  const totalStrokesRef = useRef(0);
 
   // KanjiVG integration state
   const [loadingSession, setLoadingSession] = useState(true);
@@ -108,14 +102,20 @@ export default function StrokeOrderScreen() {
         const kanji = kanjiData.find((k) => k.id === id);
         if (kanji) {
           const strokeData = await loadStrokeOrder(id);
-          console.log(`Loaded stroke data for ${kanji.character} (${id}):`, strokeData?.length, 'strokes');
+          console.log(
+            `Loaded stroke data for ${kanji.character} (${id}):`,
+            strokeData?.length,
+            'strokes'
+          );
           if (strokeData && strokeData.length > 0) {
             // Create enhanced kanji with KanjiVG stroke data
             const enhancedKanji = {
               ...kanji,
               strokeOrder: strokeData,
             };
-            console.log(`✓ Added ${kanji.character} to session | metadata strokes: ${kanji.strokes} | loaded strokes: ${strokeData.length}`);
+            console.log(
+              `✓ Added ${kanji.character} to session | metadata strokes: ${kanji.strokes} | loaded strokes: ${strokeData.length}`
+            );
             kanjiWithData.push(enhancedKanji);
           } else {
             console.warn(`✗ Skipped ${kanji.character} (${id}) - no stroke data loaded`);
@@ -152,7 +152,9 @@ export default function StrokeOrderScreen() {
     if (correct) {
       correctStrokesRef.current += 1;
     }
-    console.log(`  Refs updated: correctStrokes=${correctStrokesRef.current}, totalStrokes=${totalStrokesRef.current}`);
+    console.log(
+      `  Refs updated: correctStrokes=${correctStrokesRef.current}, totalStrokes=${totalStrokesRef.current}`
+    );
 
     // Also update state for UI display (asynchronous)
     setTotalStrokes((prev) => {
@@ -182,12 +184,17 @@ export default function StrokeOrderScreen() {
     // Calculate accuracy for this kanji using refs (synchronous, not affected by state batching)
     const finalCorrectStrokes = correctStrokesRef.current;
     const finalTotalStrokes = totalStrokesRef.current;
-    console.log(`📊 Calculating accuracy from REFS: correctStrokes=${finalCorrectStrokes}, totalStrokes=${finalTotalStrokes}`);
-    console.log(`📊 State values for comparison: correctStrokes=${correctStrokes}, totalStrokes=${totalStrokes}`);
+    console.log(
+      `📊 Calculating accuracy from REFS: correctStrokes=${finalCorrectStrokes}, totalStrokes=${finalTotalStrokes}`
+    );
+    console.log(
+      `📊 State values for comparison: correctStrokes=${correctStrokes}, totalStrokes=${totalStrokes}`
+    );
     const accuracy = finalTotalStrokes > 0 ? (finalCorrectStrokes / finalTotalStrokes) * 100 : 0;
     const wasCorrect = accuracy >= 70; // 70% accuracy threshold
-    console.log(`  Accuracy: ${accuracy.toFixed(1)}% | Pass threshold: 70% | Result: ${wasCorrect ? 'PASS ✓' : 'FAIL ✗'}`);
-
+    console.log(
+      `  Accuracy: ${accuracy.toFixed(1)}% | Pass threshold: 70% | Result: ${wasCorrect ? 'PASS ✓' : 'FAIL ✗'}`
+    );
 
     // Add result
     const result: PracticeResult = {
@@ -260,7 +267,9 @@ export default function StrokeOrderScreen() {
   // Loading state
   if (loadingSession) {
     return (
-      <View style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}
+      >
         <ActivityIndicator size="large" color={theme.colors.primary} />
         <Text variant="bodyLarge" style={styles.loadingText}>
           Preparing stroke order practice...
@@ -272,7 +281,9 @@ export default function StrokeOrderScreen() {
   // Error state
   if (strokeDataError) {
     return (
-      <View style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.container, styles.centered, { backgroundColor: theme.colors.background }]}
+      >
         <Text variant="bodyLarge" style={styles.errorText}>
           {strokeDataError}
         </Text>

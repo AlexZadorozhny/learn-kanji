@@ -105,14 +105,7 @@ describe('PerformanceMonitor', () => {
     it('limits slow validations to last 10', () => {
       // Record 15 slow validations
       for (let i = 0; i < 15; i++) {
-        PerformanceMonitor.recordValidation(
-          'curved',
-          110 + i,
-          80,
-          true,
-          5,
-          true
-        );
+        PerformanceMonitor.recordValidation('curved', 110 + i, 80, true, 5, true);
       }
 
       const stats = PerformanceMonitor.getStats();

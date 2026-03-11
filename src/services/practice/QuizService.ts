@@ -19,7 +19,8 @@ export class QuizService {
     type?: QuizQuestion['type']
   ): QuizQuestion {
     const questionType =
-      type || this.getRandomQuestionType(['kanji-to-meaning', 'meaning-to-kanji', 'kanji-to-reading']);
+      type ||
+      this.getRandomQuestionType(['kanji-to-meaning', 'meaning-to-kanji', 'kanji-to-reading']);
 
     switch (questionType) {
       case 'kanji-to-meaning':
@@ -84,8 +85,7 @@ export class QuizService {
     allKanji: KanjiCharacter[]
   ): QuizQuestion {
     // Prefer on-yomi, fallback to kun-yomi
-    const correctReading =
-      targetKanji.onYomi[0]?.reading || targetKanji.kunYomi[0]?.reading || '?';
+    const correctReading = targetKanji.onYomi[0]?.reading || targetKanji.kunYomi[0]?.reading || '?';
     const distractors = this.getReadingDistractors(targetKanji, allKanji, 3);
 
     return {
@@ -117,11 +117,7 @@ export class QuizService {
 
       // Use first meaning that doesn't match target
       const meaning = kanji.meanings[0];
-      if (
-        meaning &&
-        !targetKanji.meanings.includes(meaning) &&
-        !distractors.includes(meaning)
-      ) {
+      if (meaning && !targetKanji.meanings.includes(meaning) && !distractors.includes(meaning)) {
         distractors.push(meaning);
       }
     }
@@ -189,8 +185,7 @@ export class QuizService {
       if (distractors.length >= count) break;
 
       // Get first on-yomi or kun-yomi reading
-      const reading =
-        kanji.onYomi[0]?.reading || kanji.kunYomi[0]?.reading;
+      const reading = kanji.onYomi[0]?.reading || kanji.kunYomi[0]?.reading;
 
       if (reading && !distractors.includes(reading)) {
         // Make sure it's not the correct reading
@@ -210,9 +205,7 @@ export class QuizService {
   /**
    * Get a random question type
    */
-  private static getRandomQuestionType(
-    types: QuizQuestion['type'][]
-  ): QuizQuestion['type'] {
+  private static getRandomQuestionType(types: QuizQuestion['type'][]): QuizQuestion['type'] {
     return types[Math.floor(Math.random() * types.length)];
   }
 

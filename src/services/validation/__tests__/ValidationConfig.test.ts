@@ -233,10 +233,7 @@ describe('ValidationConfig', () => {
 
       const easyLearning = ValidationConfig.applyLearningMode(easyBase, 1);
       const mediumLearning = ValidationConfig.applyLearningMode(mediumBase, 1);
-      const complexLearning = ValidationConfig.applyLearningMode(
-        complexBase,
-        1
-      );
+      const complexLearning = ValidationConfig.applyLearningMode(complexBase, 1);
 
       expect(easyLearning).toBeLessThan(easyBase);
       expect(mediumLearning).toBeLessThan(mediumBase);
@@ -244,10 +241,7 @@ describe('ValidationConfig', () => {
     });
 
     it('maintains relative difficulty even in learning mode', () => {
-      const easy = ValidationConfig.applyLearningMode(
-        ValidationConfig.getAccuracyThreshold(2),
-        1
-      );
+      const easy = ValidationConfig.applyLearningMode(ValidationConfig.getAccuracyThreshold(2), 1);
       const medium = ValidationConfig.applyLearningMode(
         ValidationConfig.getAccuracyThreshold(5),
         1

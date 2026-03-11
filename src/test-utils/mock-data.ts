@@ -12,9 +12,7 @@ export const mockKanjiOne: KanjiCharacter = {
     { reading: 'イチ', romaji: 'ichi' },
     { reading: 'イツ', romaji: 'itsu' },
   ],
-  kunYomi: [
-    { reading: 'ひと', romaji: 'hito' },
-  ],
+  kunYomi: [{ reading: 'ひと', romaji: 'hito' }],
   strokes: 1,
   radicals: ['一'],
   exampleWords: [
@@ -40,12 +38,8 @@ export const mockKanjiTwo: KanjiCharacter = {
   character: '二',
   frequencyRank: 2,
   meanings: ['two'],
-  onYomi: [
-    { reading: 'ニ', romaji: 'ni' },
-  ],
-  kunYomi: [
-    { reading: 'ふた', romaji: 'futa' },
-  ],
+  onYomi: [{ reading: 'ニ', romaji: 'ni' }],
+  kunYomi: [{ reading: 'ふた', romaji: 'futa' }],
   strokes: 2,
   radicals: ['二'],
   exampleWords: [

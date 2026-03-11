@@ -36,9 +36,7 @@ describe('KanjiVGIntegrationService', () => {
       await KanjiVGIntegrationService.initialize();
 
       expect(KanjiVGIntegrationService.isInitialized()).toBe(true);
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Initialized with')
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Initialized with'));
 
       consoleLogSpy.mockRestore();
     });
@@ -326,9 +324,7 @@ describe('KanjiVGIntegrationService', () => {
       const kanjiIds = ['U+4E00', 'U+4E8C', 'U+4E09'];
       await KanjiVGIntegrationService.prefetchForSession(kanjiIds);
 
-      expect(consoleLogSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Prefetching 3 kanji')
-      );
+      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Prefetching 3 kanji'));
       expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('Prefetch complete'));
 
       consoleLogSpy.mockRestore();
@@ -340,9 +336,7 @@ describe('KanjiVGIntegrationService', () => {
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
       // Use non-bundled kanji that will trigger network fetch
-      await expect(
-        KanjiVGIntegrationService.prefetchForSession(['U+8000'])
-      ).resolves.not.toThrow();
+      await expect(KanjiVGIntegrationService.prefetchForSession(['U+8000'])).resolves.not.toThrow();
 
       expect(consoleErrorSpy).toHaveBeenCalled();
 
@@ -353,9 +347,7 @@ describe('KanjiVGIntegrationService', () => {
   describe('legacy fallback', () => {
     it('should verify legacy strokeOrder data was removed', () => {
       // After Phase 3, strokeOrder should be removed from all sampleKanjiData
-      const legacyKanji = sampleKanjiData.filter(
-        k => k.strokeOrder && k.strokeOrder.length > 0
-      );
+      const legacyKanji = sampleKanjiData.filter((k) => k.strokeOrder && k.strokeOrder.length > 0);
 
       // Should be 0 since we removed all strokeOrder arrays
       expect(legacyKanji.length).toBe(0);
@@ -421,7 +413,9 @@ describe('KanjiVGIntegrationService', () => {
       // Use real parser implementation for bundled SVG tests
       // This allows actual parsing of bundled SVG content
       MockedParser.parseKanjiVGSVG.mockImplementation((svgContent: string, kanjiId?: string) => {
-        console.log(`Mock parser called for ${kanjiId}, SVG length: ${svgContent ? svgContent.length : 'null'}`);
+        console.log(
+          `Mock parser called for ${kanjiId}, SVG length: ${svgContent ? svgContent.length : 'null'}`
+        );
         const result = ActualParser.parseKanjiVGSVG(svgContent, kanjiId);
         console.log(`Mock parser returned ${result ? result.length : 'null'} strokes`);
         return result;
@@ -483,7 +477,7 @@ describe('KanjiVGIntegrationService', () => {
         expect(result!.length).toBeGreaterThan(0);
 
         // Verify each stroke has required properties
-        result!.forEach(stroke => {
+        result!.forEach((stroke) => {
           expect(stroke.path).toBeTruthy();
           expect(stroke.strokeNumber).toBeGreaterThan(0);
         });

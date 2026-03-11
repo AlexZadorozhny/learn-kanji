@@ -1,4 +1,3 @@
-import React from 'react';
 import { Linking } from 'react-native';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -30,7 +29,9 @@ describe('LicenseScreen', () => {
 
     expect(getByText('KanjiVG')).toBeTruthy();
     expect(getByText('© Ulrich Apel')).toBeTruthy();
-    expect(getByText('Creative Commons Attribution-Share Alike 3.0 Unported (CC BY-SA 3.0)')).toBeTruthy();
+    expect(
+      getByText('Creative Commons Attribution-Share Alike 3.0 Unported (CC BY-SA 3.0)')
+    ).toBeTruthy();
   });
 
   it('displays modification information', () => {
@@ -75,7 +76,7 @@ describe('LicenseScreen', () => {
     fireEvent.press(button);
 
     // Wait for promise rejection
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     expect(consoleSpy).toHaveBeenCalledWith('Failed to open URL:', expect.any(Error));
 

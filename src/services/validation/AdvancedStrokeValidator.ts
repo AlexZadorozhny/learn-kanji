@@ -51,17 +51,11 @@ export class AdvancedStrokeValidator {
 
     // Get adaptive thresholds
     const baseThreshold = ValidationConfig.getAccuracyThreshold(totalStrokes);
-    const accuracyThreshold = ValidationConfig.applyLearningMode(
-      baseThreshold,
-      attemptCount
-    );
+    const accuracyThreshold = ValidationConfig.applyLearningMode(baseThreshold, attemptCount);
 
-    const startPointTolerance =
-      ValidationConfig.getStartPointTolerance(totalStrokes);
-    const endPointTolerance =
-      ValidationConfig.getEndPointTolerance(totalStrokes);
-    const directionTolerance =
-      ValidationConfig.getDirectionTolerance(totalStrokes);
+    const startPointTolerance = ValidationConfig.getStartPointTolerance(totalStrokes);
+    const endPointTolerance = ValidationConfig.getEndPointTolerance(totalStrokes);
+    const directionTolerance = ValidationConfig.getDirectionTolerance(totalStrokes);
     const bboxTolerance = ValidationConfig.getBoundingBoxTolerance(totalStrokes);
 
     // Step 1: Validate start point (fast rejection)
@@ -98,8 +92,7 @@ export class AdvancedStrokeValidator {
       const userPoints = this.extractPointsFromPath(userStrokePath);
       const targetPoints = this.extractPointsFromPath(targetStrokePath);
 
-      const frechetThreshold =
-        ValidationConfig.getFrechetThreshold(totalStrokes);
+      const frechetThreshold = ValidationConfig.getFrechetThreshold(totalStrokes);
       const frechetResult = FrechetDistanceService.validate(
         userPoints,
         targetPoints,
@@ -131,10 +124,7 @@ export class AdvancedStrokeValidator {
         bboxResult.accuracy * 0.2;
 
       // Determine which accuracy to use based on which validation passed
-      const geometricPass =
-        startPointResult.valid &&
-        endPointResult.valid &&
-        directionResult.valid;
+      const geometricPass = startPointResult.valid && endPointResult.valid && directionResult.valid;
 
       // FIX: If geometric validation passes, use geometric accuracy alone
       // Don't let poor Fréchet score drag down a geometrically correct stroke
@@ -163,10 +153,7 @@ export class AdvancedStrokeValidator {
       );
 
       // Pass if: (start AND end AND direction) OR bbox
-      const geometricPass =
-        startPointResult.valid &&
-        endPointResult.valid &&
-        directionResult.valid;
+      const geometricPass = startPointResult.valid && endPointResult.valid && directionResult.valid;
 
       if (geometricPass) {
         accuracy = geometricAccuracy;
@@ -263,8 +250,8 @@ export class AdvancedStrokeValidator {
     endPointResult: ValidationResult,
     directionResult: ValidationResult,
     bboxResult: ValidationResult,
-    userStroke: any,
-    targetStroke: any
+    userStroke: unknown,
+    targetStroke: unknown
   ): string | undefined {
     if (valid) {
       return undefined;
@@ -313,18 +300,13 @@ export class AdvancedStrokeValidator {
     isLearningMode: boolean;
   } {
     const baseThreshold = ValidationConfig.getAccuracyThreshold(totalStrokes);
-    const accuracyThreshold = ValidationConfig.applyLearningMode(
-      baseThreshold,
-      attemptCount
-    );
+    const accuracyThreshold = ValidationConfig.applyLearningMode(baseThreshold, attemptCount);
 
     return {
       accuracyThreshold,
-      startPointTolerance:
-        ValidationConfig.getStartPointTolerance(totalStrokes),
+      startPointTolerance: ValidationConfig.getStartPointTolerance(totalStrokes),
       endPointTolerance: ValidationConfig.getEndPointTolerance(totalStrokes),
-      directionTolerance:
-        ValidationConfig.getDirectionTolerance(totalStrokes),
+      directionTolerance: ValidationConfig.getDirectionTolerance(totalStrokes),
       isLearningMode: attemptCount <= 3,
     };
   }

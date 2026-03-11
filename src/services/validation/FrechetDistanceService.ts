@@ -24,24 +24,14 @@ export class FrechetDistanceService {
    * @param earlyTermination If true, stops early when distance exceeds threshold
    * @returns The Fréchet distance (lower is more similar)
    */
-  static calculate(
-    path1: Point[],
-    path2: Point[],
-    earlyTermination: boolean = true
-  ): number {
+  static calculate(path1: Point[], path2: Point[], earlyTermination: boolean = true): number {
     if (path1.length === 0 || path2.length === 0) {
       return Infinity;
     }
 
     // Resample both paths to uniform point distribution
-    const resampledPath1 = PathResamplingService.resample(
-      path1,
-      this.RESAMPLE_POINTS
-    );
-    const resampledPath2 = PathResamplingService.resample(
-      path2,
-      this.RESAMPLE_POINTS
-    );
+    const resampledPath1 = PathResamplingService.resample(path1, this.RESAMPLE_POINTS);
+    const resampledPath2 = PathResamplingService.resample(path2, this.RESAMPLE_POINTS);
 
     const m = resampledPath1.length;
     const n = resampledPath2.length;
@@ -56,11 +46,7 @@ export class FrechetDistanceService {
     };
 
     // Initialize first cell
-    setDP(
-      0,
-      0,
-      this.euclideanDistance(resampledPath1[0], resampledPath2[0])
-    );
+    setDP(0, 0, this.euclideanDistance(resampledPath1[0], resampledPath2[0]));
 
     // Initialize first column
     for (let i = 1; i < m; i++) {
@@ -79,10 +65,7 @@ export class FrechetDistanceService {
       let minInRow = Infinity;
 
       for (let j = 1; j < n; j++) {
-        const dist = this.euclideanDistance(
-          resampledPath1[i],
-          resampledPath2[j]
-        );
+        const dist = this.euclideanDistance(resampledPath1[i], resampledPath2[j]);
 
         const minPrev = Math.min(
           getDP(i - 1, j), // vertical
@@ -128,10 +111,7 @@ export class FrechetDistanceService {
     // Distance of 0 = 100% similarity
     // Distance of 50 = 0% similarity (chosen as reasonable threshold for SVG viewBox 0-100)
     const maxReasonableDistance = 50;
-    const normalized = Math.max(
-      0,
-      100 * (1 - distance / maxReasonableDistance)
-    );
+    const normalized = Math.max(0, 100 * (1 - distance / maxReasonableDistance));
 
     return Math.round(normalized);
   }
@@ -184,10 +164,7 @@ export class FrechetDistanceService {
    * @param path2Length Length of second path
    * @returns Estimated number of operations
    */
-  static estimateComplexity(
-    path1Length: number,
-    path2Length: number
-  ): number {
+  static estimateComplexity(_path1Length: number, _path2Length: number): number {
     // After resampling, both paths will have RESAMPLE_POINTS points
     // Complexity is O(n²) for the DP algorithm
     return this.RESAMPLE_POINTS * this.RESAMPLE_POINTS;
@@ -202,8 +179,6 @@ export class FrechetDistanceService {
    */
   static shouldUseFrechet(pathCommands: string[]): boolean {
     // Use Fréchet distance if path contains curves (C or Q commands)
-    return pathCommands.some(
-      (cmd) => cmd.startsWith('C') || cmd.startsWith('Q')
-    );
+    return pathCommands.some((cmd) => cmd.startsWith('C') || cmd.startsWith('Q'));
   }
 }

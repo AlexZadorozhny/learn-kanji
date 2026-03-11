@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react-native';
 import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,18 +15,12 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
 
 export function renderWithProviders(
   ui: ReactElement,
-  {
-    theme = lightTheme,
-    navigationProps = {},
-    ...renderOptions
-  }: CustomRenderOptions = {}
+  { theme = lightTheme, navigationProps = {}, ...renderOptions }: CustomRenderOptions = {}
 ) {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <PaperProvider theme={theme}>
-        <NavigationContainer {...navigationProps}>
-          {children}
-        </NavigationContainer>
+        <NavigationContainer {...navigationProps}>{children}</NavigationContainer>
       </PaperProvider>
     );
   }

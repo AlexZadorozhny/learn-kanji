@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, PanResponder, Animated } from 'react-native';
+import { useState, useRef, useEffect } from 'react';
+import { View, StyleSheet, PanResponder } from 'react-native';
 import { Text, IconButton, useTheme } from 'react-native-paper';
 import Svg, { Path, G } from 'react-native-svg';
 import { KanjiCharacter } from '../../types/kanji';
@@ -140,7 +140,9 @@ export default function StrokeOrderCanvas({
 
           // Move to next stroke or complete
           const nextIndex = strokeIndex + 1;
-          console.log(`nextIndex: ${nextIndex}, strokeOrder.length: ${kanji.strokeOrder?.length}, kanji.strokes: ${kanji.strokes}`);
+          console.log(
+            `nextIndex: ${nextIndex}, strokeOrder.length: ${kanji.strokeOrder?.length}, kanji.strokes: ${kanji.strokes}`
+          );
 
           // Use strokeOrder.length (actual data) instead of kanji.strokes (metadata)
           if (nextIndex < (kanji.strokeOrder?.length || 0)) {
@@ -191,7 +193,14 @@ export default function StrokeOrderCanvas({
     console.log('=== Validating stroke (Advanced) ===');
     console.log('Stroke index:', strokeIndex);
     console.log('Total points drawn:', points.length);
-    console.log('Kanji:', kanji.character, '| strokeOrder.length:', kanji.strokeOrder?.length, '| kanji.strokes metadata:', kanji.strokes);
+    console.log(
+      'Kanji:',
+      kanji.character,
+      '| strokeOrder.length:',
+      kanji.strokeOrder?.length,
+      '| kanji.strokes metadata:',
+      kanji.strokes
+    );
 
     if (!kanji.strokeOrder || strokeIndex >= kanji.strokeOrder.length) {
       console.error('❌ VALIDATION ERROR: No stroke order data or invalid index!');
@@ -232,9 +241,7 @@ export default function StrokeOrderCanvas({
 
     // Determine stroke type for performance tracking
     const strokeType = ValidationConfig.shouldUseFrechetDistance(
-      kanji.strokeOrder
-        .slice(strokeIndex, strokeIndex + 1)
-        .map((s) => s.path)
+      kanji.strokeOrder.slice(strokeIndex, strokeIndex + 1).map((s) => s.path)
     )
       ? 'curved'
       : 'straight';
@@ -331,11 +338,7 @@ export default function StrokeOrderCanvas({
             onPress={handleUndo}
             disabled={userStrokes.length === 0}
           />
-          <IconButton
-            icon="refresh"
-            size={24}
-            onPress={handleClear}
-          />
+          <IconButton icon="refresh" size={24} onPress={handleClear} />
         </View>
       </View>
 
@@ -356,15 +359,17 @@ export default function StrokeOrderCanvas({
         )}
       </View>
 
-      <View style={[
-        styles.canvasContainer,
-        {
-          width: canvasSize,
-          height: canvasSize,
-          backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.outline,
-        }
-      ]}>
+      <View
+        style={[
+          styles.canvasContainer,
+          {
+            width: canvasSize,
+            height: canvasSize,
+            backgroundColor: theme.colors.surface,
+            borderColor: theme.colors.outline,
+          },
+        ]}
+      >
         <Svg
           width={canvasSize}
           height={canvasSize}
@@ -429,7 +434,7 @@ export default function StrokeOrderCanvas({
               <Path
                 key={`user-${index}`}
                 d={convertUserStrokeToPath(userStroke.points)}
-                stroke={shouldGlow ? "#4caf50" : "#6200ee"}
+                stroke={shouldGlow ? '#4caf50' : '#6200ee'}
                 strokeWidth={shouldGlow ? 4 : 3}
                 fill="none"
                 strokeLinecap="round"
@@ -485,7 +490,7 @@ export default function StrokeOrderCanvas({
         <StrokeProgressIndicator
           totalStrokes={kanji.strokes}
           currentStrokeIndex={currentStrokeIndex}
-          strokePaths={kanji.strokeOrder.map(s => s.path)}
+          strokePaths={kanji.strokeOrder.map((s) => s.path)}
         />
       )}
 

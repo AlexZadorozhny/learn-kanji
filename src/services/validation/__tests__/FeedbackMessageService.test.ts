@@ -111,10 +111,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = Math.PI / 12; // 15 degrees
       const targetAngle = 0; // 0 degrees (right)
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toBeTruthy();
       expect(message).toContain('Draw more');
@@ -124,10 +121,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = 0; // 0 degrees (right)
       const targetAngle = Math.PI / 2; // 90 degrees (down)
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toBeTruthy();
       expect(message.toLowerCase()).toContain('draw more');
@@ -137,10 +131,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = 0; // 0 degrees (right)
       const targetAngle = Math.PI; // 180 degrees (left)
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toContain('opposite direction');
     });
@@ -149,10 +140,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = Math.PI / 2; // 90 degrees (down)
       const targetAngle = (3 * Math.PI) / 2; // 270 degrees (up)
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toContain('opposite direction');
     });
@@ -161,10 +149,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = 0; // 0 degrees
       const targetAngle = Math.PI / 12; // 15 degrees
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toBeTruthy();
       expect(message).toContain('Draw more');
@@ -174,10 +159,7 @@ describe('FeedbackMessageService', () => {
       const userAngle = 0; // 0 degrees (right)
       const targetAngle = Math.PI / 4; // 45 degrees (diagonal down-right)
 
-      const message = FeedbackMessageService.generateDirectionFeedback(
-        userAngle,
-        targetAngle
-      );
+      const message = FeedbackMessageService.generateDirectionFeedback(userAngle, targetAngle);
 
       expect(message).toBeTruthy();
     });

@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Button, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -27,9 +26,7 @@ export default function PracticeModeScreen() {
   const availableCards = dueKanji.length + newKanji.length;
 
   // Count kanji with stroke order data (all bundled kanji have stroke data available)
-  const kanjiWithStrokeData = kanjiData.filter(
-    (k) => BUNDLED_KANJI_IDS.includes(k.id)
-  ).length;
+  const kanjiWithStrokeData = kanjiData.filter((k) => BUNDLED_KANJI_IDS.includes(k.id)).length;
 
   return (
     <ScrollView
@@ -40,13 +37,21 @@ export default function PracticeModeScreen() {
         <Text variant="headlineMedium" style={styles.title}>
           Practice Modes
         </Text>
-        <Text variant="bodyMedium" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+        <Text
+          variant="bodyMedium"
+          style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}
+        >
           Choose how you want to practice
         </Text>
       </View>
 
       {availableCards > 0 && (
-        <Card style={[styles.infoCard, { backgroundColor: theme.dark ? theme.colors.primaryContainer : '#e3f2fd' }]}>
+        <Card
+          style={[
+            styles.infoCard,
+            { backgroundColor: theme.dark ? theme.colors.primaryContainer : '#e3f2fd' },
+          ]}
+        >
           <Card.Content>
             <Text variant="titleMedium" style={styles.infoTitle}>
               📚 Cards Ready
@@ -63,9 +68,12 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             🎴 Flashcards
           </Text>
-          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
-            Test your recognition with spaced repetition. See the kanji, recall the meaning
-            and reading, then rate your confidence.
+          <Text
+            variant="bodyMedium"
+            style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}
+          >
+            Test your recognition with spaced repetition. See the kanji, recall the meaning and
+            reading, then rate your confidence.
           </Text>
           <Button
             mode="contained"
@@ -84,9 +92,12 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             ✍️ Stroke Order
           </Text>
-          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
-            Practice writing kanji with correct stroke order. Draw each stroke and get
-            instant feedback.
+          <Text
+            variant="bodyMedium"
+            style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}
+          >
+            Practice writing kanji with correct stroke order. Draw each stroke and get instant
+            feedback.
           </Text>
           <Button
             mode="contained"
@@ -95,7 +106,9 @@ export default function PracticeModeScreen() {
             disabled={kanjiWithStrokeData === 0}
             testID="practice-mode-stroke-order-button"
           >
-            {kanjiWithStrokeData > 0 ? `Start Practice (${Math.min(kanjiWithStrokeData, 5)} kanji)` : 'No kanji available'}
+            {kanjiWithStrokeData > 0
+              ? `Start Practice (${Math.min(kanjiWithStrokeData, 5)} kanji)`
+              : 'No kanji available'}
           </Button>
         </Card.Content>
       </Card>
@@ -105,9 +118,12 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             ❓ Multiple Choice
           </Text>
-          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
-            Test your knowledge with quiz questions. Choose the correct meaning, reading, or
-            kanji from multiple options.
+          <Text
+            variant="bodyMedium"
+            style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}
+          >
+            Test your knowledge with quiz questions. Choose the correct meaning, reading, or kanji
+            from multiple options.
           </Text>
           <Button
             mode="contained"
@@ -116,7 +132,9 @@ export default function PracticeModeScreen() {
             disabled={kanjiData.length === 0}
             testID="practice-mode-multiple-choice-button"
           >
-            {kanjiData.length > 0 ? `Start Quiz (${Math.min(kanjiData.length, 10)} questions)` : 'No questions available'}
+            {kanjiData.length > 0
+              ? `Start Quiz (${Math.min(kanjiData.length, 10)} questions)`
+              : 'No questions available'}
           </Button>
         </Card.Content>
       </Card>
@@ -126,9 +144,11 @@ export default function PracticeModeScreen() {
           <Text variant="titleLarge" style={styles.modeTitle}>
             📚 Context Practice
           </Text>
-          <Text variant="bodyMedium" style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}>
-            Learn kanji in real words and phrases. See how kanji are used in Japanese
-            language.
+          <Text
+            variant="bodyMedium"
+            style={[styles.modeDescription, { color: theme.colors.onSurfaceVariant }]}
+          >
+            Learn kanji in real words and phrases. See how kanji are used in Japanese language.
           </Text>
           <Button
             mode="contained"
@@ -137,7 +157,9 @@ export default function PracticeModeScreen() {
             disabled={kanjiData.length === 0}
             testID="practice-mode-context-button"
           >
-            {kanjiData.length > 0 ? `Start Practice (${Math.min(kanjiData.length, 10)} kanji)` : 'No kanji available'}
+            {kanjiData.length > 0
+              ? `Start Practice (${Math.min(kanjiData.length, 10)} kanji)`
+              : 'No kanji available'}
           </Button>
         </Card.Content>
       </Card>

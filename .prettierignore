@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+android/
+ios/
+.expo/
+dist/
+build/
+*.svg
+package-lock.json

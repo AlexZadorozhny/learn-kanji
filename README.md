@@ -19,9 +19,11 @@ A React Native mobile application built with Expo for learning Japanese Kanji ch
 - ✅ **Phase 3**: Advanced Algorithms (Fréchet distance, adaptive thresholds, performance monitoring)
 - ✅ **KanjiVG Integration**: Professional stroke order data for 6,355+ kanji with on-demand loading
 - ✅ **Navigation Polish**: Stack management fixes, clean headers, proper screen transitions
+- ✅ **Static Analysis**: ESLint 9 + Prettier + Husky pre-commit hooks
 - 🚧 **Next**: Streak tracking, Progress charts, Master kanji list expansion
 
 ## Prerequisites
+
 - Node.js >= 18
 - npm or yarn
 - Expo Go app (for physical device testing)
@@ -37,7 +39,7 @@ npm install
 The project includes a `babel.config.js` with the reanimated plugin:
 
 ```javascript
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
     presets: ['babel-preset-expo'],
@@ -51,11 +53,13 @@ All dependencies are tracked in `package.json` and will be installed automatical
 ## Running the App
 
 ### Development Mode (shows QR code)
+
 ```bash
 npx expo start
 ```
 
 Then:
+
 - **iOS**: Scan QR code with Camera app
 - **Android**: Scan QR code with Expo Go app
 - **Press 'i'**: Open iOS simulator (requires Xcode)
@@ -63,6 +67,7 @@ Then:
 - **Press 'w'**: Open in web browser
 
 ### Specific Platforms
+
 ```bash
 npx expo start --ios      # iOS Simulator
 npx expo start --android  # Android Emulator
@@ -70,11 +75,13 @@ npx expo start --web      # Web Browser
 ```
 
 ### Tunnel Mode (for network issues)
+
 ```bash
 npx expo start --tunnel   # Creates public URL for cross-network testing
 ```
 
 Use tunnel mode when:
+
 - Device and computer are on different networks
 - Experiencing connection issues with local network
 - Working with restrictive network configurations
@@ -82,6 +89,7 @@ Use tunnel mode when:
 ## Features
 
 ### Implemented
+
 - 🎨 **Dark Theme**: Complete dark mode support
   - Three theme modes: Light, Dark, and Auto (follows system)
   - Persistent preference across app restarts
@@ -173,6 +181,7 @@ Use tunnel mode when:
   - **UI indicators**: Badges show availability status (Instant Access/Downloaded/Available Online)
 
 ### Planned (Optional Enhancements)
+
 - 🎬 **Stroke Animation Demo**: "Show Me" button with animated stroke demonstrations
 - ⚡ **Enhanced Haptics**: Multi-stage feedback during stroke drawing
 - 📊 **Stroke Statistics**: Track accuracy per stroke, identify problem areas
@@ -181,6 +190,7 @@ Use tunnel mode when:
 - 📚 **Master Kanji List**: Expand home screen to show all JLPT kanji with search and filters
 
 ## Project Structure
+
 ```
 learn-kanji/
 ├── App.tsx                    # Root component with navigation
@@ -265,26 +275,31 @@ learn-kanji/
 ## Technologies
 
 ### Core
+
 - **React Native** 0.83.2
 - **Expo** ~55.0.5
 - **TypeScript** 5.9.2 (strict mode)
 - **React** 19.2.0
 
 ### Navigation
+
 - **React Navigation** v7
   - `@react-navigation/native`
   - `@react-navigation/native-stack`
   - `@react-navigation/bottom-tabs`
 
 ### UI Framework
+
 - **React Native Paper** v5 (Material Design 3)
 - **Expo Vector Icons**
 
 ### State Management
+
 - **Zustand** - Lightweight state management
 - **AsyncStorage** - Local data persistence
 
 ### Utilities
+
 - **expo-speech** - Text-to-speech for pronunciation
 - **expo-haptics** - Haptic feedback for tactile interactions
 - **react-native-svg** - SVG rendering
@@ -292,10 +307,18 @@ learn-kanji/
 - **react-native-reanimated** - Smooth animations
 - **react-native-gesture-handler** - Touch gestures
 
+### Code Quality
+
+- **ESLint 9** - Static analysis with TypeScript, React, React Native plugins
+- **Prettier** - Code formatting (single quotes, trailing commas, 100-char width)
+- **Husky + lint-staged** - Pre-commit hooks enforce lint + format on staged files
+
 ## Data Model
 
 ### Kanji Character Structure
+
 Each kanji includes:
+
 - **Character**: The kanji itself (e.g., "一")
 - **Meanings**: English translations
 - **On-yomi readings**: Chinese-derived pronunciations (in katakana)
@@ -306,7 +329,9 @@ Each kanji includes:
 - **Grade level**: Japanese school grade (1-6)
 
 ### Sample Data
+
 Currently includes 25 most common kanji by frequency rank with professional KanjiVG stroke order data:
+
 - **Numbers**: 一 (one), 二 (two), 三 (three)
 - **People & Life**: 人 (person), 生 (life), 子 (child)
 - **Time**: 日 (day/sun), 年 (year), 時 (time), 月 (month), 分 (minute), 間 (interval)
@@ -321,11 +346,13 @@ Currently includes 25 most common kanji by frequency rank with professional Kanj
 **Hot Reload:** Changes to code automatically refresh the app
 
 **Clear Cache:**
+
 ```bash
 npx expo start --clear
 ```
 
 **Reset Project:**
+
 ```bash
 rm -rf node_modules
 npm install
@@ -336,6 +363,7 @@ npm install
 ### "Something went wrong" Blue/Red Screen on Device
 
 **If you see "Failed to download remote update":**
+
 1. Ensure `app.json` doesn't have an `updates` configuration during development
 2. Use tunnel mode: `npx expo start --tunnel`
 3. Clear Expo Go cache on device:
@@ -345,28 +373,33 @@ npm install
    - Or close and reopen the app
 
 **If you see Babel/Transform errors:**
+
 1. Install babel preset: `npm install --save-dev babel-preset-expo`
 2. Ensure `babel.config.js` exists in project root
 3. Restart with cache cleared: `npx expo start --clear`
 
 ### Port Already in Use
+
 ```bash
 lsof -ti:8081 | xargs kill -9
 npx expo start
 ```
 
 ### Metro Bundler Cache Issues
+
 ```bash
 npx expo start --clear
 ```
 
 ### Node Modules Corruption
+
 ```bash
 rm -rf node_modules
 npm install
 ```
 
 ### Watchman Issues (macOS)
+
 ```bash
 brew install watchman
 watchman watch-del-all
@@ -375,6 +408,7 @@ watchman watch-del-all
 ### Connection Issues Between Device and Computer
 
 **Symptoms:**
+
 - "Failed to download remote update" error
 - "Cannot connect to Metro" error
 - Expo Go can't reach the dev server
@@ -384,6 +418,7 @@ watchman watch-del-all
 1. **Ensure same WiFi network**: Computer and device must be on the same WiFi
 
 2. **Clear Expo Go cache** (Android):
+
    ```
    Settings → Apps → Expo Go → Storage → Clear Cache → Force Stop
    ```
@@ -393,12 +428,15 @@ watchman watch-del-all
    - Delete any old "learn-kanji" entries
 
 4. **Use tunnel mode** (slower but more reliable):
+
    ```bash
    npx expo start --tunnel
    ```
+
    Then manually enter the `exp://...` URL in Expo Go
 
 5. **Get tunnel URL programmatically**:
+
    ```bash
    curl -s http://localhost:4040/api/tunnels | grep public_url
    ```
@@ -412,12 +450,14 @@ watchman watch-del-all
 ## Development Workflow
 
 ### Testing on Android
+
 1. Start Expo server: `npx expo start` or `npx expo start --tunnel`
 2. Open Expo Go on Android device
 3. Scan QR code or enter URL manually
 4. App reloads automatically on code changes
 
 ### Git Workflow
+
 ```bash
 # Check status
 git status
@@ -425,15 +465,35 @@ git status
 # Add all changes
 git add -A
 
-# Commit with descriptive message
+# Commit with descriptive message (pre-commit hook auto-runs lint + format)
 git commit -m "Your message here"
 
 # View commit history
 git log --oneline
 ```
 
+### Linting & Formatting
+
+```bash
+# Check for lint errors (0 errors expected)
+npm run lint
+
+# Auto-fix lint errors
+npm run lint:fix
+
+# Format all source files
+npm run format
+
+# Check formatting without writing
+npm run format:check
+```
+
+Pre-commit hooks automatically run `eslint --fix` and `prettier --write` on staged files via Husky + lint-staged.
+
 ### Task Management
+
 This project uses a detailed task list for iterative development. View tasks with:
+
 ```
 /tasks
 ```
@@ -451,6 +511,7 @@ Milestones are verified on Android device after each implementation phase.
 - **Frequency-based learning**: Most practical kanji learned first
 
 ### Design Principles
+
 - **Offline-first**: All data stored locally, no internet required
 - **TypeScript strict mode**: Catch errors at compile time
 - **Small iterations**: Each milestone is testable on device

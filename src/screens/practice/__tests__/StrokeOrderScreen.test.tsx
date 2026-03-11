@@ -1,6 +1,4 @@
-import React from 'react';
-import { View } from 'react-native';
-import { renderWithProviders, act, waitFor } from '../../../test-utils';
+import { renderWithProviders, act } from '../../../test-utils';
 import StrokeOrderScreen from '../StrokeOrderScreen';
 
 // Store callbacks for testing
@@ -231,7 +229,7 @@ describe('StrokeOrderScreen', () => {
 
     // Wait a bit for rendering
     await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     });
 
     expect(toJSON()).toMatchSnapshot();
@@ -566,7 +564,7 @@ describe('StrokeOrderScreen', () => {
 
     // Wait for initialization to complete
     await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     });
 
     // Should show error or navigate back
@@ -574,13 +572,11 @@ describe('StrokeOrderScreen', () => {
   });
 
   it('closes session and navigates back when close button is pressed', async () => {
-    const { getByTestId, findByTestId, UNSAFE_root } = renderWithProviders(<StrokeOrderScreen />);
+    const { findByTestId, UNSAFE_root } = renderWithProviders(<StrokeOrderScreen />);
 
     await waitForSessionToLoad(findByTestId);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
     const closeButton = iconButtons[0];
 
     act(() => {

@@ -11,10 +11,7 @@ export class SRSService {
    * @param quality User rating (0-5): 0=blackout, 1=incorrect, 2=difficult, 3=correct, 4=easy, 5=perfect
    * @returns Updated progress with new SRS values
    */
-  static calculateNextReview(
-    progress: KanjiProgress,
-    quality: number
-  ): Partial<KanjiProgress> {
+  static calculateNextReview(progress: KanjiProgress, quality: number): Partial<KanjiProgress> {
     let { easinessFactor, interval, repetitions } = progress;
 
     // Update easiness factor (EF)
@@ -92,9 +89,7 @@ export class SRSService {
     allProgress: Record<string, KanjiProgress>,
     limit: number = 5
   ): string[] {
-    return allKanjiIds
-      .filter((id) => !allProgress[id])
-      .slice(0, limit);
+    return allKanjiIds.filter((id) => !allProgress[id]).slice(0, limit);
   }
 
   /**

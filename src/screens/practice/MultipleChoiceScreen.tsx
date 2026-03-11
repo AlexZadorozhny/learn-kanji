@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Text, Card, IconButton, ProgressBar, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -23,14 +23,8 @@ export default function MultipleChoiceScreen() {
   const route = useRoute<MultipleChoiceScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
   const { kanjiProgress, updateKanjiProgress, updateStudyStats, studyStats } = useProgressStore();
-  const {
-    currentSession,
-    startSession,
-    endSession,
-    addResult,
-    nextCard,
-    getSessionProgress,
-  } = usePracticeStore();
+  const { currentSession, startSession, endSession, addResult, nextCard, getSessionProgress } =
+    usePracticeStore();
 
   const [sessionStartTime] = useState(Date.now());
   const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(null);
@@ -215,10 +209,7 @@ export default function MultipleChoiceScreen() {
                 testID={`multiple-choice-option-${index}`}
               >
                 <Card
-                  style={[
-                    showCorrect && styles.correctCard,
-                    showIncorrect && styles.incorrectCard,
-                  ]}
+                  style={[showCorrect && styles.correctCard, showIncorrect && styles.incorrectCard]}
                 >
                   <Card.Content style={styles.optionContent}>
                     <Text
@@ -231,12 +222,8 @@ export default function MultipleChoiceScreen() {
                     >
                       {option}
                     </Text>
-                    {showCorrect && (
-                      <Text style={styles.feedbackIcon}>✓</Text>
-                    )}
-                    {showIncorrect && (
-                      <Text style={styles.feedbackIcon}>✗</Text>
-                    )}
+                    {showCorrect && <Text style={styles.feedbackIcon}>✓</Text>}
+                    {showIncorrect && <Text style={styles.feedbackIcon}>✗</Text>}
                   </Card.Content>
                 </Card>
               </Pressable>
@@ -248,7 +235,10 @@ export default function MultipleChoiceScreen() {
           <View style={styles.feedbackContainer}>
             <Text
               variant="titleLarge"
-              style={[styles.feedbackText, isCorrect ? styles.correctFeedback : styles.incorrectFeedback]}
+              style={[
+                styles.feedbackText,
+                isCorrect ? styles.correctFeedback : styles.incorrectFeedback,
+              ]}
             >
               {isCorrect ? '🎉 Correct!' : '❌ Incorrect'}
             </Text>

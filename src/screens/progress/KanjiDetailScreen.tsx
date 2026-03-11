@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Chip, Divider, IconButton, Button, useTheme } from 'react-native-paper';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
@@ -15,7 +15,12 @@ export default function KanjiDetailScreen() {
   const theme = useTheme();
   const route = useRoute<KanjiDetailRouteProp>();
   const { kanjiId } = route.params;
-  const { getKanjiById, hasStrokeData: checkStrokeData, getStrokeDataTier, loadStrokeOrder } = useKanjiStore();
+  const {
+    getKanjiById,
+    hasStrokeData: checkStrokeData,
+    getStrokeDataTier,
+    loadStrokeOrder,
+  } = useKanjiStore();
   const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [strokeDataAvailable, setStrokeDataAvailable] = useState(false);
   const [strokeDataTier, setStrokeDataTier] = useState<KanjiTier>('unavailable');
@@ -64,8 +69,8 @@ export default function KanjiDetailScreen() {
         kanjiIds: [kanji.id],
         sessionKey: Date.now(),
         fromKanjiDetail: true,
-        detailKanjiId: kanji.id
-      }
+        detailKanjiId: kanji.id,
+      },
     });
   };
 
@@ -158,15 +163,20 @@ export default function KanjiDetailScreen() {
             <Text variant="titleMedium" style={styles.sectionTitle}>
               On-yomi (音読み)
             </Text>
-            <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              variant="bodySmall"
+              style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}
+            >
               Chinese reading
             </Text>
             {kanji.onYomi.map((reading, index) => (
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
-                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>({reading.romaji})</Text>
+                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>
+                  ({reading.romaji})
+                </Text>
                 <IconButton
-                  icon={speakingId === `on-${index}` ? "stop" : "volume-high"}
+                  icon={speakingId === `on-${index}` ? 'stop' : 'volume-high'}
                   size={20}
                   onPress={() => handleSpeak(reading.reading, `on-${index}`)}
                   style={styles.speakerButton}
@@ -184,15 +194,20 @@ export default function KanjiDetailScreen() {
             <Text variant="titleMedium" style={styles.sectionTitle}>
               Kun-yomi (訓読み)
             </Text>
-            <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              variant="bodySmall"
+              style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}
+            >
               Japanese reading
             </Text>
             {kanji.kunYomi.map((reading, index) => (
               <View key={index} style={styles.readingRow}>
                 <Text style={styles.readingText}>{reading.reading}</Text>
-                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>({reading.romaji})</Text>
+                <Text style={[styles.romajiText, { color: theme.colors.onSurfaceVariant }]}>
+                  ({reading.romaji})
+                </Text>
                 <IconButton
-                  icon={speakingId === `kun-${index}` ? "stop" : "volume-high"}
+                  icon={speakingId === `kun-${index}` ? 'stop' : 'volume-high'}
                   size={20}
                   onPress={() => handleSpeak(reading.reading, `kun-${index}`)}
                   style={styles.speakerButton}
@@ -217,15 +232,21 @@ export default function KanjiDetailScreen() {
                   <View style={styles.wordHeader}>
                     <Text style={styles.wordText}>{word.word}</Text>
                     <IconButton
-                      icon={speakingId === `word-${index}` ? "stop" : "volume-high"}
+                      icon={speakingId === `word-${index}` ? 'stop' : 'volume-high'}
                       size={20}
                       onPress={() => handleSpeak(word.word, `word-${index}`)}
                       style={styles.speakerButton}
                     />
                   </View>
-                  <Text style={[styles.wordReading, { color: theme.colors.onSurface }]}>{word.reading}</Text>
-                  <Text style={[styles.wordRomaji, { color: theme.colors.onSurfaceVariant }]}>({word.romaji})</Text>
-                  <Text style={[styles.wordMeaning, { color: theme.colors.onSurface }]}>{word.meaning}</Text>
+                  <Text style={[styles.wordReading, { color: theme.colors.onSurface }]}>
+                    {word.reading}
+                  </Text>
+                  <Text style={[styles.wordRomaji, { color: theme.colors.onSurfaceVariant }]}>
+                    ({word.romaji})
+                  </Text>
+                  <Text style={[styles.wordMeaning, { color: theme.colors.onSurface }]}>
+                    {word.meaning}
+                  </Text>
                 </View>
               </View>
             ))}

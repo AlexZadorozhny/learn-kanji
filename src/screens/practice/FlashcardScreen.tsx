@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, ProgressBar, IconButton, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -23,14 +23,8 @@ export default function FlashcardScreen() {
   const route = useRoute<FlashcardScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
   const { kanjiProgress, updateKanjiProgress, updateStudyStats, studyStats } = useProgressStore();
-  const {
-    currentSession,
-    startSession,
-    endSession,
-    addResult,
-    nextCard,
-    getSessionProgress,
-  } = usePracticeStore();
+  const { currentSession, startSession, endSession, addResult, nextCard, getSessionProgress } =
+    usePracticeStore();
 
   const [sessionStartTime] = useState(Date.now());
   const [isTransitioning, setIsTransitioning] = useState(false);

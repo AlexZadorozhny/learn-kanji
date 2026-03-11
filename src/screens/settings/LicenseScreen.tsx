@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView, Linking } from 'react-native';
 import { Text, Card, Button, useTheme } from 'react-native-paper';
 
@@ -15,8 +14,8 @@ export default function LicenseScreen() {
         <Card.Title title="KanjiVG" subtitle="Stroke Order Data" />
         <Card.Content>
           <Text variant="bodyLarge" style={styles.paragraph}>
-            Stroke order data is provided by KanjiVG, an open-source project
-            providing SVG vector data for Japanese kanji.
+            Stroke order data is provided by KanjiVG, an open-source project providing SVG vector
+            data for Japanese kanji.
           </Text>
 
           <Text variant="titleMedium" style={styles.subheading}>
@@ -55,16 +54,16 @@ export default function LicenseScreen() {
             Modifications
           </Text>
           <Text variant="bodyMedium" style={styles.paragraph}>
-            SVG path coordinates normalized from 109×109 to 100×100 viewBox
-            for compatibility with app rendering system.
+            SVG path coordinates normalized from 109×109 to 100×100 viewBox for compatibility with
+            app rendering system.
           </Text>
 
           <Text variant="titleMedium" style={styles.subheading}>
             Coverage
           </Text>
           <Text variant="bodyMedium" style={styles.paragraph}>
-            KanjiVG provides stroke order data for 6,355+ Japanese kanji characters,
-            including all jōyō kanji (常用漢字) and many additional characters.
+            KanjiVG provides stroke order data for 6,355+ Japanese kanji characters, including all
+            jōyō kanji (常用漢字) and many additional characters.
           </Text>
         </Card.Content>
       </Card>
@@ -73,11 +72,14 @@ export default function LicenseScreen() {
         <Card.Title title="Simple Mobile" subtitle="Application License" />
         <Card.Content>
           <Text variant="bodyMedium" style={styles.paragraph}>
-            This application is built using KanjiVG data under the CC BY-SA 3.0 license.
-            Any derivative works must also be shared under the same license.
+            This application is built using KanjiVG data under the CC BY-SA 3.0 license. Any
+            derivative works must also be shared under the same license.
           </Text>
 
-          <Text variant="bodySmall" style={[styles.paragraph, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            variant="bodySmall"
+            style={[styles.paragraph, { color: theme.colors.onSurfaceVariant }]}
+          >
             Built with Expo, React Native, and React Native Paper
           </Text>
         </Card.Content>

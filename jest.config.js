@@ -19,10 +19,7 @@ module.exports = {
     '!src/navigation/**/*',
   ],
 
-  testMatch: [
-    '**/__tests__/**/*.(test|spec).(ts|tsx|js)',
-    '**/*.(test|spec).(ts|tsx|js)',
-  ],
+  testMatch: ['**/__tests__/**/*.(test|spec).(ts|tsx|js)', '**/*.(test|spec).(ts|tsx|js)'],
 
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

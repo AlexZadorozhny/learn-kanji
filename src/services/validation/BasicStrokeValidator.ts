@@ -75,21 +75,13 @@ export class BasicStrokeValidator {
       directionResult.accuracy * 0.2;
 
     // Pass if: (start AND end AND direction) OR bounding box
-    const geometricPass =
-      startPointResult.valid &&
-      endPointResult.valid &&
-      directionResult.valid;
+    const geometricPass = startPointResult.valid && endPointResult.valid && directionResult.valid;
 
     const valid = geometricPass || bboxResult.valid;
 
     return {
       valid: valid && accuracy >= fullConfig.minimumAccuracy,
-      reason: this.getFailureReason(
-        startPointResult,
-        endPointResult,
-        directionResult,
-        bboxResult
-      ),
+      reason: this.getFailureReason(startPointResult, endPointResult, directionResult, bboxResult),
       accuracy: Math.round(accuracy),
       metrics: {
         startPointAccuracy: startPointResult.accuracy,
@@ -115,10 +107,7 @@ export class BasicStrokeValidator {
 
     return {
       valid: distance <= tolerance,
-      reason:
-        distance > tolerance
-          ? `Start point off by ${Math.round(distance)} units`
-          : undefined,
+      reason: distance > tolerance ? `Start point off by ${Math.round(distance)} units` : undefined,
       accuracy: Math.round(accuracy),
     };
   }
@@ -126,11 +115,7 @@ export class BasicStrokeValidator {
   /**
    * Validate stroke end point.
    */
-  static validateEndPoint(
-    userEnd: Point,
-    targetEnd: Point,
-    tolerance: number
-  ): ValidationResult {
+  static validateEndPoint(userEnd: Point, targetEnd: Point, tolerance: number): ValidationResult {
     const distance = PathParserService.distance(userEnd, targetEnd);
 
     // Calculate accuracy: 100% at distance 0, 0% at tolerance distance
@@ -138,10 +123,7 @@ export class BasicStrokeValidator {
 
     return {
       valid: distance <= tolerance,
-      reason:
-        distance > tolerance
-          ? `End point off by ${Math.round(distance)} units`
-          : undefined,
+      reason: distance > tolerance ? `End point off by ${Math.round(distance)} units` : undefined,
       accuracy: Math.round(accuracy),
     };
   }
@@ -154,10 +136,7 @@ export class BasicStrokeValidator {
     targetDirection: number,
     toleranceDegrees: number
   ): ValidationResult {
-    const angleDiff = PathParserService.angleDifference(
-      userDirection,
-      targetDirection
-    );
+    const angleDiff = PathParserService.angleDifference(userDirection, targetDirection);
 
     // Calculate accuracy: 100% at 0 degrees, 0% at tolerance degrees
     const accuracy = Math.max(0, 100 * (1 - angleDiff / toleranceDegrees));
@@ -165,9 +144,7 @@ export class BasicStrokeValidator {
     return {
       valid: angleDiff <= toleranceDegrees,
       reason:
-        angleDiff > toleranceDegrees
-          ? `Direction off by ${Math.round(angleDiff)}°`
-          : undefined,
+        angleDiff > toleranceDegrees ? `Direction off by ${Math.round(angleDiff)}°` : undefined,
       accuracy: Math.round(accuracy),
     };
   }
@@ -201,10 +178,7 @@ export class BasicStrokeValidator {
 
     return {
       valid: startInside && endInside,
-      reason:
-        !startInside || !endInside
-          ? 'Stroke outside target area'
-          : undefined,
+      reason: !startInside || !endInside ? 'Stroke outside target area' : undefined,
       accuracy,
     };
   }
@@ -219,11 +193,7 @@ export class BasicStrokeValidator {
     bboxResult: ValidationResult
   ): string | undefined {
     // If all validations pass, no reason needed
-    if (
-      startResult.valid &&
-      endResult.valid &&
-      directionResult.valid
-    ) {
+    if (startResult.valid && endResult.valid && directionResult.valid) {
       return undefined;
     }
 

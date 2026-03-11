@@ -100,7 +100,8 @@ export const useSettingsStore = create<SettingsState>((set, get) => ({
         set({
           themeMode: settings.themeMode || defaultSettings.themeMode,
           dailyGoal: settings.dailyGoal || defaultSettings.dailyGoal,
-          notificationsEnabled: settings.notificationsEnabled ?? defaultSettings.notificationsEnabled,
+          notificationsEnabled:
+            settings.notificationsEnabled ?? defaultSettings.notificationsEnabled,
           soundEnabled: settings.soundEnabled ?? defaultSettings.soundEnabled,
           hapticsEnabled: settings.hapticsEnabled ?? defaultSettings.hapticsEnabled,
         });

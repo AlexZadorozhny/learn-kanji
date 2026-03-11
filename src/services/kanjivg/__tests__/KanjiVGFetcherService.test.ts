@@ -162,9 +162,7 @@ describe('KanjiVGFetcherService', () => {
   describe('buildKanjiVGUrl', () => {
     it('should build correct URL for single-byte hex codes', () => {
       // Access private method via type assertion
-      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(
-        KanjiVGFetcherService
-      );
+      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(KanjiVGFetcherService);
 
       expect(buildUrl('U+4E00')).toBe(
         'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/04e00.svg'
@@ -172,9 +170,7 @@ describe('KanjiVGFetcherService', () => {
     });
 
     it('should pad hex codes to 5 digits', () => {
-      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(
-        KanjiVGFetcherService
-      );
+      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(KanjiVGFetcherService);
 
       expect(buildUrl('U+20')).toBe(
         'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/00020.svg'
@@ -185,9 +181,7 @@ describe('KanjiVGFetcherService', () => {
     });
 
     it('should handle lowercase u+ prefix', () => {
-      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(
-        KanjiVGFetcherService
-      );
+      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(KanjiVGFetcherService);
 
       expect(buildUrl('u+4e00')).toBe(
         'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/04e00.svg'
@@ -195,9 +189,7 @@ describe('KanjiVGFetcherService', () => {
     });
 
     it('should convert uppercase hex to lowercase', () => {
-      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(
-        KanjiVGFetcherService
-      );
+      const buildUrl = (KanjiVGFetcherService as any).buildKanjiVGUrl.bind(KanjiVGFetcherService);
 
       expect(buildUrl('U+4E8C')).toBe(
         'https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/04e8c.svg'

@@ -10,10 +10,7 @@ export class FeedbackMessageService {
    * @param targetStart Correct start point
    * @returns Directional guidance message
    */
-  static generateStartPointFeedback(
-    userStart: Point,
-    targetStart: Point
-  ): string {
+  static generateStartPointFeedback(userStart: Point, targetStart: Point): string {
     const dx = targetStart.x - userStart.x;
     const dy = targetStart.y - userStart.y;
 
@@ -61,10 +58,7 @@ export class FeedbackMessageService {
    * @param targetAngle Correct direction angle in radians
    * @returns Directional guidance message
    */
-  static generateDirectionFeedback(
-    userAngle: number,
-    targetAngle: number
-  ): string {
+  static generateDirectionFeedback(userAngle: number, targetAngle: number): string {
     // Convert to degrees
     const userDeg = this.radiansToDegrees(userAngle);
     const targetDeg = this.radiansToDegrees(targetAngle);
@@ -170,10 +164,7 @@ export class FeedbackMessageService {
     return 'diagonally up-right';
   }
 
-  private static getRotationFeedback(
-    targetDegrees: number,
-    rotation: 'cw' | 'ccw'
-  ): string {
+  private static getRotationFeedback(targetDegrees: number, rotation: 'cw' | 'ccw'): string {
     // Determine what direction to move toward
     const normalized = this.normalizeDegrees(targetDegrees);
 

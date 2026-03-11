@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithProviders } from '../../../test-utils';
 import { mockKanjiOne, mockKanjiTwo } from '../../../test-utils/mock-data';
 import HomeScreen from '../HomeScreen';

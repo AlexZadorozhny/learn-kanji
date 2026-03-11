@@ -14,7 +14,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ひと', romaji: 'hito' },
       { reading: 'ひとつ', romaji: 'hitotsu' },
     ],
-    strokes: 1,    radicals: ['一'],
+    strokes: 1,
+    radicals: ['一'],
     exampleWords: [
       {
         word: '一つ',
@@ -43,14 +44,13 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '二',
     frequencyRank: 2,
     meanings: ['two'],
-    onYomi: [
-      { reading: 'ニ', romaji: 'ni' },
-    ],
+    onYomi: [{ reading: 'ニ', romaji: 'ni' }],
     kunYomi: [
       { reading: 'ふた', romaji: 'futa' },
       { reading: 'ふたつ', romaji: 'futatsu' },
     ],
-    strokes: 2,    radicals: ['二'],
+    strokes: 2,
+    radicals: ['二'],
     exampleWords: [
       {
         word: '二つ',
@@ -79,15 +79,14 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '三',
     frequencyRank: 3,
     meanings: ['three'],
-    onYomi: [
-      { reading: 'サン', romaji: 'san' },
-    ],
+    onYomi: [{ reading: 'サン', romaji: 'san' }],
     kunYomi: [
       { reading: 'み', romaji: 'mi' },
       { reading: 'みつ', romaji: 'mitsu' },
       { reading: 'みっつ', romaji: 'mittsu' },
     ],
-    strokes: 3,    radicals: ['一'],
+    strokes: 3,
+    radicals: ['一'],
     exampleWords: [
       {
         word: '三つ',
@@ -120,10 +119,9 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ジン', romaji: 'jin' },
       { reading: 'ニン', romaji: 'nin' },
     ],
-    kunYomi: [
-      { reading: 'ひと', romaji: 'hito' },
-    ],
-    strokes: 2,    radicals: ['人'],
+    kunYomi: [{ reading: 'ひと', romaji: 'hito' }],
+    strokes: 2,
+    radicals: ['人'],
     exampleWords: [
       {
         word: '人',
@@ -160,7 +158,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ひ', romaji: 'hi' },
       { reading: 'か', romaji: 'ka' },
     ],
-    strokes: 4,    radicals: ['日'],
+    strokes: 4,
+    radicals: ['日'],
     exampleWords: [
       {
         word: '今日',
@@ -189,13 +188,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '国',
     frequencyRank: 6,
     meanings: ['country', 'nation'],
-    onYomi: [
-      { reading: 'コク', romaji: 'koku' },
-    ],
-    kunYomi: [
-      { reading: 'くに', romaji: 'kuni' },
-    ],
-    strokes: 8,    radicals: ['囗', '玉'],
+    onYomi: [{ reading: 'コク', romaji: 'koku' }],
+    kunYomi: [{ reading: 'くに', romaji: 'kuni' }],
+    strokes: 8,
+    radicals: ['囗', '玉'],
     exampleWords: [
       {
         word: '国',
@@ -224,13 +220,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '本',
     frequencyRank: 7,
     meanings: ['book', 'origin', 'main'],
-    onYomi: [
-      { reading: 'ホン', romaji: 'hon' },
-    ],
-    kunYomi: [
-      { reading: 'もと', romaji: 'moto' },
-    ],
-    strokes: 5,    radicals: ['木'],
+    onYomi: [{ reading: 'ホン', romaji: 'hon' }],
+    kunYomi: [{ reading: 'もと', romaji: 'moto' }],
+    strokes: 5,
+    radicals: ['木'],
     exampleWords: [
       {
         word: '本',
@@ -267,7 +260,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'おお', romaji: 'oo' },
       { reading: 'おおきい', romaji: 'ookii' },
     ],
-    strokes: 3,    radicals: ['大'],
+    strokes: 3,
+    radicals: ['大'],
     exampleWords: [
       {
         word: '大きい',
@@ -296,13 +290,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '年',
     frequencyRank: 9,
     meanings: ['year', 'age'],
-    onYomi: [
-      { reading: 'ネン', romaji: 'nen' },
-    ],
-    kunYomi: [
-      { reading: 'とし', romaji: 'toshi' },
-    ],
-    strokes: 6,    radicals: ['干'],
+    onYomi: [{ reading: 'ネン', romaji: 'nen' }],
+    kunYomi: [{ reading: 'とし', romaji: 'toshi' }],
+    strokes: 6,
+    radicals: ['干'],
     exampleWords: [
       {
         word: '今年',
@@ -331,13 +322,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '中',
     frequencyRank: 10,
     meanings: ['middle', 'inside', 'center'],
-    onYomi: [
-      { reading: 'チュウ', romaji: 'chuu' },
-    ],
-    kunYomi: [
-      { reading: 'なか', romaji: 'naka' },
-    ],
-    strokes: 4,    radicals: ['丨'],
+    onYomi: [{ reading: 'チュウ', romaji: 'chuu' }],
+    kunYomi: [{ reading: 'なか', romaji: 'naka' }],
+    strokes: 4,
+    radicals: ['丨'],
     exampleWords: [
       {
         word: '中',
@@ -366,14 +354,13 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '出',
     frequencyRank: 11,
     meanings: ['exit', 'leave', 'come out'],
-    onYomi: [
-      { reading: 'シュツ', romaji: 'shutsu' },
-    ],
+    onYomi: [{ reading: 'シュツ', romaji: 'shutsu' }],
     kunYomi: [
       { reading: 'でる', romaji: 'deru' },
       { reading: 'だす', romaji: 'dasu' },
     ],
-    strokes: 5,    radicals: ['凵'],
+    strokes: 5,
+    radicals: ['凵'],
     exampleWords: [
       {
         word: '出る',
@@ -402,14 +389,13 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '上',
     frequencyRank: 12,
     meanings: ['up', 'above', 'top'],
-    onYomi: [
-      { reading: 'ジョウ', romaji: 'jou' },
-    ],
+    onYomi: [{ reading: 'ジョウ', romaji: 'jou' }],
     kunYomi: [
       { reading: 'うえ', romaji: 'ue' },
       { reading: 'あがる', romaji: 'agaru' },
     ],
-    strokes: 3,    radicals: ['一'],
+    strokes: 3,
+    radicals: ['一'],
     exampleWords: [
       {
         word: '上',
@@ -447,7 +433,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'うまれる', romaji: 'umareru' },
       { reading: 'なま', romaji: 'nama' },
     ],
-    strokes: 5,    radicals: ['生'],
+    strokes: 5,
+    radicals: ['生'],
     exampleWords: [
       {
         word: '学生',
@@ -476,13 +463,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '時',
     frequencyRank: 14,
     meanings: ['time', 'hour'],
-    onYomi: [
-      { reading: 'ジ', romaji: 'ji' },
-    ],
-    kunYomi: [
-      { reading: 'とき', romaji: 'toki' },
-    ],
-    strokes: 10,    radicals: ['日', '寺'],
+    onYomi: [{ reading: 'ジ', romaji: 'ji' }],
+    kunYomi: [{ reading: 'とき', romaji: 'toki' }],
+    strokes: 10,
+    radicals: ['日', '寺'],
     exampleWords: [
       {
         word: '時間',
@@ -511,13 +495,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '手',
     frequencyRank: 15,
     meanings: ['hand'],
-    onYomi: [
-      { reading: 'シュ', romaji: 'shu' },
-    ],
-    kunYomi: [
-      { reading: 'て', romaji: 'te' },
-    ],
-    strokes: 4,    radicals: ['手'],
+    onYomi: [{ reading: 'シュ', romaji: 'shu' }],
+    kunYomi: [{ reading: 'て', romaji: 'te' }],
+    strokes: 4,
+    radicals: ['手'],
     exampleWords: [
       {
         word: '手',
@@ -554,7 +535,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'いく', romaji: 'iku' },
       { reading: 'ゆく', romaji: 'yuku' },
     ],
-    strokes: 6,    radicals: ['行'],
+    strokes: 6,
+    radicals: ['行'],
     exampleWords: [
       {
         word: '行く',
@@ -583,13 +565,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '前',
     frequencyRank: 17,
     meanings: ['front', 'before', 'previous'],
-    onYomi: [
-      { reading: 'ゼン', romaji: 'zen' },
-    ],
-    kunYomi: [
-      { reading: 'まえ', romaji: 'mae' },
-    ],
-    strokes: 9,    radicals: ['刀', '月'],
+    onYomi: [{ reading: 'ゼン', romaji: 'zen' }],
+    kunYomi: [{ reading: 'まえ', romaji: 'mae' }],
+    strokes: 9,
+    radicals: ['刀', '月'],
     exampleWords: [
       {
         word: '前',
@@ -626,7 +605,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'あと', romaji: 'ato' },
       { reading: 'うしろ', romaji: 'ushiro' },
     ],
-    strokes: 9,    radicals: ['彳', '幺'],
+    strokes: 9,
+    radicals: ['彳', '幺'],
     exampleWords: [
       {
         word: '後',
@@ -655,13 +635,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '見',
     frequencyRank: 19,
     meanings: ['see', 'look', 'watch'],
-    onYomi: [
-      { reading: 'ケン', romaji: 'ken' },
-    ],
-    kunYomi: [
-      { reading: 'みる', romaji: 'miru' },
-    ],
-    strokes: 7,    radicals: ['見'],
+    onYomi: [{ reading: 'ケン', romaji: 'ken' }],
+    kunYomi: [{ reading: 'みる', romaji: 'miru' }],
+    strokes: 7,
+    radicals: ['見'],
     exampleWords: [
       {
         word: '見る',
@@ -699,7 +676,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'さがる', romaji: 'sagaru' },
       { reading: 'くだる', romaji: 'kudaru' },
     ],
-    strokes: 3,    radicals: ['一'],
+    strokes: 3,
+    radicals: ['一'],
     exampleWords: [
       {
         word: '下',
@@ -732,10 +710,9 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'ゲツ', romaji: 'getsu' },
       { reading: 'ガツ', romaji: 'gatsu' },
     ],
-    kunYomi: [
-      { reading: 'つき', romaji: 'tsuki' },
-    ],
-    strokes: 4,    radicals: ['月'],
+    kunYomi: [{ reading: 'つき', romaji: 'tsuki' }],
+    strokes: 4,
+    radicals: ['月'],
     exampleWords: [
       {
         word: '月',
@@ -768,10 +745,9 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'シ', romaji: 'shi' },
       { reading: 'ス', romaji: 'su' },
     ],
-    kunYomi: [
-      { reading: 'こ', romaji: 'ko' },
-    ],
-    strokes: 3,    radicals: ['子'],
+    kunYomi: [{ reading: 'こ', romaji: 'ko' }],
+    strokes: 3,
+    radicals: ['子'],
     exampleWords: [
       {
         word: '子供',
@@ -808,7 +784,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'わける', romaji: 'wakeru' },
       { reading: 'わかる', romaji: 'wakaru' },
     ],
-    strokes: 4,    radicals: ['八', '刀'],
+    strokes: 4,
+    radicals: ['八', '刀'],
     exampleWords: [
       {
         word: '分かる',
@@ -845,7 +822,8 @@ export const sampleKanjiData: KanjiCharacter[] = [
       { reading: 'あいだ', romaji: 'aida' },
       { reading: 'ま', romaji: 'ma' },
     ],
-    strokes: 12,    radicals: ['門', '日'],
+    strokes: 12,
+    radicals: ['門', '日'],
     exampleWords: [
       {
         word: '時間',
@@ -874,13 +852,10 @@ export const sampleKanjiData: KanjiCharacter[] = [
     character: '学',
     frequencyRank: 25,
     meanings: ['study', 'learn', 'school'],
-    onYomi: [
-      { reading: 'ガク', romaji: 'gaku' },
-    ],
-    kunYomi: [
-      { reading: 'まなぶ', romaji: 'manabu' },
-    ],
-    strokes: 8,    radicals: ['子'],
+    onYomi: [{ reading: 'ガク', romaji: 'gaku' }],
+    kunYomi: [{ reading: 'まなぶ', romaji: 'manabu' }],
+    strokes: 8,
+    radicals: ['子'],
     exampleWords: [
       {
         word: '学校',

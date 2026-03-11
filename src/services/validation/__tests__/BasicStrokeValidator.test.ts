@@ -194,33 +194,21 @@ describe('BasicStrokeValidator', () => {
 
   describe('validateEndPoint', () => {
     it('validates exact end point', () => {
-      const result = BasicStrokeValidator.validateEndPoint(
-        { x: 50, y: 50 },
-        { x: 50, y: 50 },
-        15
-      );
+      const result = BasicStrokeValidator.validateEndPoint({ x: 50, y: 50 }, { x: 50, y: 50 }, 15);
 
       expect(result.valid).toBe(true);
       expect(result.accuracy).toBe(100);
     });
 
     it('validates nearby end point', () => {
-      const result = BasicStrokeValidator.validateEndPoint(
-        { x: 52, y: 53 },
-        { x: 50, y: 50 },
-        15
-      );
+      const result = BasicStrokeValidator.validateEndPoint({ x: 52, y: 53 }, { x: 50, y: 50 }, 15);
 
       expect(result.valid).toBe(true);
       expect(result.accuracy).toBeGreaterThan(70);
     });
 
     it('rejects far end point', () => {
-      const result = BasicStrokeValidator.validateEndPoint(
-        { x: 70, y: 70 },
-        { x: 50, y: 50 },
-        15
-      );
+      const result = BasicStrokeValidator.validateEndPoint({ x: 70, y: 70 }, { x: 50, y: 50 }, 15);
 
       expect(result.valid).toBe(false);
       expect(result.reason).toContain('End point');

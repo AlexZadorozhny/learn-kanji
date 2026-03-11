@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Button, useTheme } from 'react-native-paper';
 import { useProgressStore } from '../../store/progressStore';
@@ -16,7 +15,10 @@ export default function ProgressScreen() {
           <Text variant="headlineMedium" style={styles.title}>
             Your Progress
           </Text>
-          <Text variant="bodySmall" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            variant="bodySmall"
+            style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}
+          >
             {isLoaded ? 'Data loaded from storage' : 'Loading...'}
           </Text>
         </Card.Content>
@@ -77,15 +79,13 @@ export default function ProgressScreen() {
           <Text variant="titleMedium" style={styles.sectionTitle}>
             Storage Test
           </Text>
-          <Text variant="bodySmall" style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            variant="bodySmall"
+            style={[styles.helpText, { color: theme.colors.onSurfaceVariant }]}
+          >
             Progress is automatically saved. Clear data to reset your progress.
           </Text>
-          <Button
-            mode="outlined"
-            onPress={clearProgress}
-            style={styles.clearButton}
-            icon="delete"
-          >
+          <Button mode="outlined" onPress={clearProgress} style={styles.clearButton} icon="delete">
             Clear All Progress
           </Button>
         </Card.Content>

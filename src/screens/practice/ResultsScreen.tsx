@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Card, Button, IconButton, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp, CommonActions } from '@react-navigation/native';
@@ -50,10 +49,10 @@ export default function ResultsScreen() {
                 kanjiIds: [returnKanjiId],
                 sessionKey: Date.now(),
                 fromKanjiDetail: true,
-                detailKanjiId: returnKanjiId
-              }
-            }
-          ]
+                detailKanjiId: returnKanjiId,
+              },
+            },
+          ],
         })
       );
     } else {
@@ -68,14 +67,14 @@ export default function ResultsScreen() {
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
-          routes: [{ name: 'PracticeModeScreen' }]
+          routes: [{ name: 'PracticeModeScreen' }],
         })
       );
 
       // Navigate back to Home tab -> KanjiDetail screen
       tabNavigation.navigate('Home', {
         screen: 'KanjiDetail',
-        params: { kanjiId: returnKanjiId }
+        params: { kanjiId: returnKanjiId },
       });
     } else {
       // Navigate to practice mode selection
@@ -111,28 +110,46 @@ export default function ResultsScreen() {
 
           <View style={styles.statsGrid}>
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
+              <Text
+                variant="displaySmall"
+                style={[styles.statValue, { color: theme.colors.primary }]}
+              >
                 {correctCount}/{totalCount}
               </Text>
-              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="bodyMedium"
+                style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}
+              >
                 Correct
               </Text>
             </View>
 
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
+              <Text
+                variant="displaySmall"
+                style={[styles.statValue, { color: theme.colors.primary }]}
+              >
                 {accuracy.toFixed(0)}%
               </Text>
-              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="bodyMedium"
+                style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}
+              >
                 Accuracy
               </Text>
             </View>
 
             <View style={styles.statItem}>
-              <Text variant="displaySmall" style={[styles.statValue, { color: theme.colors.primary }]}>
+              <Text
+                variant="displaySmall"
+                style={[styles.statValue, { color: theme.colors.primary }]}
+              >
                 {avgTime.toFixed(0)}s
               </Text>
-              <Text variant="bodyMedium" style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="bodyMedium"
+                style={[styles.statLabel, { color: theme.colors.onSurfaceVariant }]}
+              >
                 Avg Time
               </Text>
             </View>
@@ -151,13 +168,19 @@ export default function ResultsScreen() {
             if (!kanji) return null;
 
             return (
-              <View key={index} style={[styles.resultRow, { borderBottomColor: theme.colors.surfaceVariant }]}>
+              <View
+                key={index}
+                style={[styles.resultRow, { borderBottomColor: theme.colors.surfaceVariant }]}
+              >
                 <View style={[styles.resultIcon, { backgroundColor: theme.colors.surfaceVariant }]}>
                   <Text style={styles.resultKanji}>{kanji.character}</Text>
                 </View>
                 <View style={styles.resultDetails}>
                   <Text variant="bodyLarge">{kanji.meanings[0]}</Text>
-                  <Text variant="bodySmall" style={[styles.resultTime, { color: theme.colors.onSurfaceVariant }]}>
+                  <Text
+                    variant="bodySmall"
+                    style={[styles.resultTime, { color: theme.colors.onSurfaceVariant }]}
+                  >
                     {result.timeSpent}s
                   </Text>
                 </View>

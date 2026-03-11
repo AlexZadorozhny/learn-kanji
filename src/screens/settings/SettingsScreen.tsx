@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Text, List, Switch, Divider, SegmentedButtons, useTheme, Button, ProgressBar } from 'react-native-paper';
+import {
+  Text,
+  List,
+  Switch,
+  Divider,
+  SegmentedButtons,
+  useTheme,
+  Button,
+  ProgressBar,
+} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useSettingsStore, ThemeMode } from '../../store/settingsStore';
@@ -55,10 +64,7 @@ export default function SettingsScreen() {
     HapticService.light();
   };
 
-  const handleToggle = async (
-    value: boolean,
-    setter: (value: boolean) => Promise<void>
-  ) => {
+  const handleToggle = async (value: boolean, setter: (value: boolean) => Promise<void>) => {
     await setter(value);
     if (hapticsEnabled) {
       HapticService.light();
@@ -248,7 +254,10 @@ export default function SettingsScreen() {
           {downloadingAll && (
             <View style={styles.progressContainer}>
               <ProgressBar progress={downloadProgress} style={styles.progressBar} />
-              <Text variant="bodySmall" style={[styles.progressText, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="bodySmall"
+                style={[styles.progressText, { color: theme.colors.onSurfaceVariant }]}
+              >
                 Downloading {Math.round(downloadProgress * 100)}%
               </Text>
             </View>
@@ -258,7 +267,7 @@ export default function SettingsScreen() {
             title="Download All Stroke Data"
             description="Download ~6,355 kanji. Use on WiFi."
             left={(props) => <List.Icon {...props} icon="download" />}
-            right={(props) => (
+            right={(_props) => (
               <Button
                 mode="contained"
                 onPress={handleDownloadAll}

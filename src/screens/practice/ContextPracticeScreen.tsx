@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Text, Card, IconButton, ProgressBar, Button, useTheme } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -24,17 +24,11 @@ export default function ContextPracticeScreen() {
   const route = useRoute<ContextPracticeScreenRouteProp>();
   const { kanjiData } = useKanjiStore();
   const { kanjiProgress, updateKanjiProgress, updateStudyStats, studyStats } = useProgressStore();
-  const {
-    currentSession,
-    startSession,
-    endSession,
-    addResult,
-    nextCard,
-    getSessionProgress,
-  } = usePracticeStore();
+  const { currentSession, startSession, endSession, addResult, nextCard, getSessionProgress } =
+    usePracticeStore();
 
   const [sessionStartTime] = useState(Date.now());
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+  const [, setSelectedAnswers] = useState<string[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
@@ -191,17 +185,26 @@ export default function ContextPracticeScreen() {
       <View style={styles.content}>
         <Card style={styles.kanjiCard}>
           <Card.Content>
-            <Text variant="headlineLarge" style={[styles.targetKanji, { color: theme.colors.primary }]}>
+            <Text
+              variant="headlineLarge"
+              style={[styles.targetKanji, { color: theme.colors.primary }]}
+            >
               {currentKanji.character}
             </Text>
             {!showAnswer && (
-              <Text variant="bodyLarge" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="bodyLarge"
+                style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}
+              >
                 Find this kanji in the words below
               </Text>
             )}
             {showAnswer && (
               <View style={styles.meaningsContainer}>
-                <Text variant="titleMedium" style={[styles.meanings, { color: theme.colors.primary }]}>
+                <Text
+                  variant="titleMedium"
+                  style={[styles.meanings, { color: theme.colors.primary }]}
+                >
                   {currentKanji.meanings.join(', ')}
                 </Text>
               </View>
@@ -220,7 +223,10 @@ export default function ContextPracticeScreen() {
                 <Card.Content style={styles.wordContent}>
                   <View style={styles.wordTextContainer}>
                     <View style={styles.wordRow}>
-                      <Text variant="headlineSmall" style={[styles.wordText, { color: theme.colors.onSurface }]}>
+                      <Text
+                        variant="headlineSmall"
+                        style={[styles.wordText, { color: theme.colors.onSurface }]}
+                      >
                         {word.word}
                       </Text>
                       <IconButton
@@ -229,11 +235,17 @@ export default function ContextPracticeScreen() {
                         onPress={() => handleSpeak(word.reading)}
                       />
                     </View>
-                    <Text variant="bodyMedium" style={[styles.readingText, { color: theme.colors.onSurfaceVariant }]}>
+                    <Text
+                      variant="bodyMedium"
+                      style={[styles.readingText, { color: theme.colors.onSurfaceVariant }]}
+                    >
                       {word.reading} ({word.romaji})
                     </Text>
                     {showAnswer && (
-                      <Text variant="bodyMedium" style={[styles.meaningText, { color: theme.colors.onSurface }]}>
+                      <Text
+                        variant="bodyMedium"
+                        style={[styles.meaningText, { color: theme.colors.onSurface }]}
+                      >
                         {word.meaning}
                       </Text>
                     )}
@@ -346,8 +358,7 @@ const styles = StyleSheet.create({
   wordText: {
     fontWeight: 'bold',
   },
-  readingText: {
-  },
+  readingText: {},
   meaningText: {
     marginTop: 4,
   },

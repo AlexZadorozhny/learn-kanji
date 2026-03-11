@@ -1,7 +1,10 @@
 import { create } from 'zustand';
 import { KanjiCharacter, StrokePath } from '../types/kanji';
 import { sampleKanjiData } from '../data/sample-data';
-import { KanjiVGIntegrationService, KanjiTier } from '../services/kanjivg/KanjiVGIntegrationService';
+import {
+  KanjiVGIntegrationService,
+  KanjiTier,
+} from '../services/kanjivg/KanjiVGIntegrationService';
 
 interface KanjiStore {
   // Existing fields
@@ -45,7 +48,7 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
   },
 
   getKanjiById: (id) => {
-    return get().kanjiData.find(kanji => kanji.id === id);
+    return get().kanjiData.find((kanji) => kanji.id === id);
   },
 
   // KanjiVG methods
@@ -76,7 +79,7 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
     // 2. Prevent duplicate concurrent fetches
     if (loadingStrokeData.has(kanjiId)) {
       // Wait for ongoing fetch to complete
-      await new Promise<void>(resolve => {
+      await new Promise<void>((resolve) => {
         const checkInterval = setInterval(() => {
           if (!get().loadingStrokeData.has(kanjiId)) {
             clearInterval(checkInterval);
@@ -88,7 +91,7 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
     }
 
     // 3. Mark as loading
-    set(state => ({
+    set((state) => ({
       loadingStrokeData: new Set([...state.loadingStrokeData, kanjiId]),
     }));
 
@@ -97,9 +100,9 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
       const strokeData = await KanjiVGIntegrationService.getStrokeOrder(kanjiId);
 
       // 5. Cache result (even if null to avoid repeated failed fetches)
-      set(state => ({
+      set((state) => ({
         strokeDataCache: new Map(state.strokeDataCache).set(kanjiId, strokeData),
-        loadingStrokeData: new Set([...state.loadingStrokeData].filter(id => id !== kanjiId)),
+        loadingStrokeData: new Set([...state.loadingStrokeData].filter((id) => id !== kanjiId)),
       }));
 
       return strokeData;
@@ -107,8 +110,8 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
       console.error(`Failed to load stroke order for ${kanjiId}:`, error);
 
       // Remove from loading set
-      set(state => ({
-        loadingStrokeData: new Set([...state.loadingStrokeData].filter(id => id !== kanjiId)),
+      set((state) => ({
+        loadingStrokeData: new Set([...state.loadingStrokeData].filter((id) => id !== kanjiId)),
       }));
 
       return null;
@@ -119,7 +122,7 @@ export const useKanjiStore = create<KanjiStore>((set, get) => ({
    * Load stroke order for multiple kanji in parallel
    */
   loadStrokeOrderBatch: async (kanjiIds: string[]): Promise<void> => {
-    await Promise.all(kanjiIds.map(id => get().loadStrokeOrder(id)));
+    await Promise.all(kanjiIds.map((id) => get().loadStrokeOrder(id)));
   },
 
   /**

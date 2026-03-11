@@ -9,9 +9,7 @@ describe('PathResamplingService', () => {
     });
 
     it('returns 0 for single point', () => {
-      const length = PathResamplingService.calculatePathLength([
-        { x: 10, y: 10 },
-      ]);
+      const length = PathResamplingService.calculatePathLength([{ x: 10, y: 10 }]);
       expect(length).toBe(0);
     });
 

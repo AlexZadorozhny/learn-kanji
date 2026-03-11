@@ -56,9 +56,7 @@ describe('settingsStore', () => {
   it('setThemeMode saves all settings', async () => {
     await useSettingsStore.getState().setThemeMode('auto');
 
-    const savedSettings = JSON.parse(
-      (mockStorageService.setItem as jest.Mock).mock.calls[0][1]
-    );
+    const savedSettings = JSON.parse((mockStorageService.setItem as jest.Mock).mock.calls[0][1]);
 
     expect(savedSettings).toEqual({
       themeMode: 'auto',

@@ -38,10 +38,7 @@ export class ValidationConfig {
    * @param attemptCount Number of attempts user has made on this stroke
    * @returns Adjusted threshold
    */
-  static applyLearningMode(
-    baseThreshold: number,
-    attemptCount: number
-  ): number {
+  static applyLearningMode(baseThreshold: number, attemptCount: number): number {
     if (attemptCount <= 3) {
       return Math.max(50, baseThreshold - 10); // Minimum 50% even in learning mode
     }
@@ -155,9 +152,7 @@ export class ValidationConfig {
    */
   static shouldUseFrechetDistance(pathCommands: string[]): boolean {
     // Use Fréchet distance if path contains curves (C or Q commands)
-    return pathCommands.some(
-      (cmd) => cmd.startsWith('C') || cmd.startsWith('Q')
-    );
+    return pathCommands.some((cmd) => cmd.startsWith('C') || cmd.startsWith('Q'));
   }
 
   /**

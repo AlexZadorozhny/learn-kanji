@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react-native';
 import StrokeDirectionIndicator from '../StrokeDirectionIndicator';
 
@@ -40,38 +39,27 @@ describe('StrokeDirectionIndicator', () => {
 
   it('handles cubic curve path (M C)', () => {
     const { toJSON } = render(
-      <StrokeDirectionIndicator
-        strokePath="M 10 10 C 30 30 50 50 70 70"
-        visible={true}
-      />
+      <StrokeDirectionIndicator strokePath="M 10 10 C 30 30 50 50 70 70" visible={true} />
     );
     expect(toJSON()).not.toBeNull();
   });
 
   it('handles quadratic curve path (M Q)', () => {
     const { toJSON } = render(
-      <StrokeDirectionIndicator
-        strokePath="M 10 10 Q 50 50 90 10"
-        visible={true}
-      />
+      <StrokeDirectionIndicator strokePath="M 10 10 Q 50 50 90 10" visible={true} />
     );
     expect(toJSON()).not.toBeNull();
   });
 
   it('handles multi-segment path', () => {
     const { toJSON } = render(
-      <StrokeDirectionIndicator
-        strokePath="M 10 10 L 30 30 L 50 20"
-        visible={true}
-      />
+      <StrokeDirectionIndicator strokePath="M 10 10 L 30 30 L 50 20" visible={true} />
     );
     expect(toJSON()).not.toBeNull();
   });
 
   it('handles empty or invalid path gracefully', () => {
-    const { toJSON: toJSON1 } = render(
-      <StrokeDirectionIndicator strokePath="" visible={true} />
-    );
+    const { toJSON: toJSON1 } = render(<StrokeDirectionIndicator strokePath="" visible={true} />);
     expect(toJSON1()).toBeNull();
 
     const { toJSON: toJSON2 } = render(
@@ -96,10 +84,7 @@ describe('StrokeDirectionIndicator', () => {
 
   it('handles complex path with Z command', () => {
     const { toJSON } = render(
-      <StrokeDirectionIndicator
-        strokePath="M 10 10 L 50 10 L 50 50 Z"
-        visible={true}
-      />
+      <StrokeDirectionIndicator strokePath="M 10 10 L 50 10 L 50 50 Z" visible={true} />
     );
     expect(toJSON()).not.toBeNull();
   });

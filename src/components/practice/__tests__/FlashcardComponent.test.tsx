@@ -1,5 +1,4 @@
-import React from 'react';
-import { renderWithProviders, fireEvent, waitFor, act } from '../../../test-utils';
+import { renderWithProviders, fireEvent, waitFor } from '../../../test-utils';
 import FlashcardComponent from '../FlashcardComponent';
 import { mockKanjiOne, mockKanjiTwo } from '../../../test-utils/mock-data';
 
@@ -343,9 +342,7 @@ describe('FlashcardComponent', () => {
     }
 
     // Find IconButton and press it
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     if (iconButtons.length > 0) {
       await iconButtons[0].props.onPress();
@@ -376,9 +373,7 @@ describe('FlashcardComponent', () => {
     }
 
     // Find and press speaker button
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     if (iconButtons.length > 0) {
       iconButtons[0].props.onPress();
@@ -408,9 +403,7 @@ describe('FlashcardComponent', () => {
     }
 
     // Find and press speaker button
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     if (iconButtons.length > 0) {
       await iconButtons[0].props.onPress();
@@ -431,9 +424,7 @@ describe('FlashcardComponent', () => {
     expect(getByText('一')).toBeTruthy();
 
     // Change kanji with different key
-    rerender(
-      <FlashcardComponent key={mockKanjiTwo.id} kanji={mockKanjiTwo} onRate={mockOnRate} />
-    );
+    rerender(<FlashcardComponent key={mockKanjiTwo.id} kanji={mockKanjiTwo} onRate={mockOnRate} />);
 
     expect(getByText('二')).toBeTruthy();
   });

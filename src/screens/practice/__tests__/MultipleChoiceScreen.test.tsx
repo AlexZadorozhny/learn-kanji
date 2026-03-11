@@ -1,5 +1,4 @@
-import React from 'react';
-import { renderWithProviders, fireEvent, waitFor, act } from '../../../test-utils';
+import { renderWithProviders, fireEvent, act } from '../../../test-utils';
 import MultipleChoiceScreen from '../MultipleChoiceScreen';
 
 // Mock navigation
@@ -485,7 +484,7 @@ describe('MultipleChoiceScreen', () => {
 
   it('navigates back when no kanji available', () => {
     // Temporarily override useRoute to return empty kanjiIds
-    const originalUseRoute = require('@react-navigation/native').useRoute;
+    const _originalUseRoute = require('@react-navigation/native').useRoute;
     jest.spyOn(require('@react-navigation/native'), 'useRoute').mockImplementation(() => ({
       params: { kanjiIds: [] }, // Empty array
     }));

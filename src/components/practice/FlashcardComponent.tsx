@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { View, StyleSheet, Pressable, Animated } from 'react-native';
 import { Card, Text, IconButton, useTheme } from 'react-native-paper';
 import { KanjiCharacter } from '../../types/kanji';
@@ -125,7 +125,10 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
               >
                 {kanji.character}
               </Text>
-              <Text variant="titleLarge" style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                variant="titleLarge"
+                style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}
+              >
                 👆 Tap to reveal answer
               </Text>
             </View>
@@ -144,43 +147,45 @@ export default function FlashcardComponent({ kanji, onRate }: FlashcardComponent
               },
             ]}
           >
-          <Card style={[styles.innerCard, { backgroundColor: theme.colors.surface }]}>
-            <View style={styles.content}>
-              <View style={styles.answerHeader}>
-                <Text style={[styles.kanjiTextSmall, { color: theme.colors.primary }]}>{kanji.character}</Text>
-                <IconButton
-                  icon={speaking ? 'stop' : 'volume-high'}
-                  size={24}
-                  onPress={handleSpeak}
-                />
-              </View>
-
-              <Text variant="headlineSmall" style={styles.meanings}>
-                {kanji.meanings.join(', ')}
-              </Text>
-
-              <View style={styles.readings}>
-                <View style={styles.readingRow}>
-                  <Text variant="labelSmall" style={styles.readingLabel}>
-                    On-yomi:
+            <Card style={[styles.innerCard, { backgroundColor: theme.colors.surface }]}>
+              <View style={styles.content}>
+                <View style={styles.answerHeader}>
+                  <Text style={[styles.kanjiTextSmall, { color: theme.colors.primary }]}>
+                    {kanji.character}
                   </Text>
-                  <Text variant="bodyMedium">
-                    {kanji.onYomi.map((r) => r.reading).join(', ') || '-'}
-                  </Text>
+                  <IconButton
+                    icon={speaking ? 'stop' : 'volume-high'}
+                    size={24}
+                    onPress={handleSpeak}
+                  />
                 </View>
 
-                <View style={styles.readingRow}>
-                  <Text variant="labelSmall" style={styles.readingLabel}>
-                    Kun-yomi:
-                  </Text>
-                  <Text variant="bodyMedium">
-                    {kanji.kunYomi.map((r) => r.reading).join(', ') || '-'}
-                  </Text>
+                <Text variant="headlineSmall" style={styles.meanings}>
+                  {kanji.meanings.join(', ')}
+                </Text>
+
+                <View style={styles.readings}>
+                  <View style={styles.readingRow}>
+                    <Text variant="labelSmall" style={styles.readingLabel}>
+                      On-yomi:
+                    </Text>
+                    <Text variant="bodyMedium">
+                      {kanji.onYomi.map((r) => r.reading).join(', ') || '-'}
+                    </Text>
+                  </View>
+
+                  <View style={styles.readingRow}>
+                    <Text variant="labelSmall" style={styles.readingLabel}>
+                      Kun-yomi:
+                    </Text>
+                    <Text variant="bodyMedium">
+                      {kanji.kunYomi.map((r) => r.reading).join(', ') || '-'}
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
-          </Card>
-        </Animated.View>
+            </Card>
+          </Animated.View>
         )}
       </Pressable>
 

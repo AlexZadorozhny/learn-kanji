@@ -286,9 +286,7 @@ describe('KanjiVGParserService', () => {
         const noStrokesSvg = '<svg><g id="kvg:test"></g></svg>';
         KanjiVGParserService.parseKanjiVGSVG(noStrokesSvg, 'U+TEST');
 
-        expect(consoleWarnSpy).toHaveBeenCalledWith(
-          expect.stringContaining('No strokes found')
-        );
+        expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('No strokes found'));
 
         consoleWarnSpy.mockRestore();
       });
@@ -442,7 +440,7 @@ describe('KanjiVGParserService', () => {
     it('should handle all fixture files successfully', () => {
       const fixtures = ['04e00.svg', '04eba.svg', '056fd.svg', '06642.svg'];
 
-      fixtures.forEach(filename => {
+      fixtures.forEach((filename) => {
         const svgContent = loadFixture(filename);
         const kanjiId = `U+${filename.replace('.svg', '').toUpperCase()}`;
         const result = KanjiVGParserService.parseKanjiVGSVG(svgContent, kanjiId);

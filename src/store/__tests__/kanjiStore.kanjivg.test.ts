@@ -87,7 +87,7 @@ describe('kanjiStore - KanjiVG Integration', () => {
     it('should prevent duplicate concurrent fetches', async () => {
       // Simulate slow fetch
       MockedIntegration.getStrokeOrder.mockImplementation(
-        () => new Promise(resolve => setTimeout(() => resolve(mockStrokePaths), 100))
+        () => new Promise((resolve) => setTimeout(() => resolve(mockStrokePaths), 100))
       );
 
       // Start two fetches simultaneously

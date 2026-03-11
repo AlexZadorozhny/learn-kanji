@@ -1,4 +1,3 @@
-import React from 'react';
 import { G, Circle, Polygon } from 'react-native-svg';
 
 interface StrokeDirectionIndicatorProps {
@@ -37,20 +36,10 @@ export default function StrokeDirectionIndicator({
   return (
     <G>
       {/* Start point indicator (green dot) */}
-      <Circle
-        cx={startPoint.x}
-        cy={startPoint.y}
-        r={2.5}
-        fill="#4caf50"
-        opacity={0.9}
-      />
+      <Circle cx={startPoint.x} cy={startPoint.y} r={2.5} fill="#4caf50" opacity={0.9} />
 
       {/* End point indicator (arrow) */}
-      <Polygon
-        points={arrowPoints}
-        fill="#2196f3"
-        opacity={0.85}
-      />
+      <Polygon points={arrowPoints} fill="#2196f3" opacity={0.85} />
     </G>
   );
 }
@@ -181,12 +170,7 @@ function parsePathForIndicators(pathData: string): PathInfo | null {
  * Calculate triangle points for directional arrow.
  * Returns a string suitable for SVG polygon points attribute.
  */
-function calculateArrowPoints(
-  x: number,
-  y: number,
-  angle: number,
-  size: number
-): string {
+function calculateArrowPoints(x: number, y: number, angle: number, size: number): string {
   // Arrow points form an isosceles triangle pointing in the direction of angle
   // Tip of arrow is at (x, y)
 

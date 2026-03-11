@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithProviders } from '../../../test-utils';
 import KanjiDetailScreen from '../KanjiDetailScreen';
 
@@ -167,7 +166,7 @@ describe('KanjiDetailScreen', () => {
       getKanjiById: jest.fn(() => mockKanji),
     });
 
-    const { getAllByTestId } = renderWithProviders(<KanjiDetailScreen />);
+    renderWithProviders(<KanjiDetailScreen />);
 
     // Component should have speaker buttons
     expect(TTSService.speak).toBeDefined();
@@ -189,7 +188,7 @@ describe('KanjiDetailScreen', () => {
     renderWithProviders(<KanjiDetailScreen />);
 
     // Wait for async effects to complete
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     // Component should render without crashing (console.error from checkStrokeData is expected to be mocked away)
     // The component catches the TTS error internally, so no console.error should occur from TTS
@@ -308,9 +307,7 @@ describe('KanjiDetailScreen', () => {
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
     // Find all IconButton components
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // First IconButton is for on-yomi (first reading)
     await iconButtons[0].props.onPress();
@@ -332,9 +329,7 @@ describe('KanjiDetailScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // Kun-yomi speaker button (after all on-yomi buttons)
     await iconButtons[2].props.onPress();
@@ -356,9 +351,7 @@ describe('KanjiDetailScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // Example word speaker button (after readings)
     await iconButtons[3].props.onPress();
@@ -385,9 +378,7 @@ describe('KanjiDetailScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // Trigger TTS
     iconButtons[0].props.onPress();
@@ -414,9 +405,7 @@ describe('KanjiDetailScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // Trigger TTS that will fail
     await iconButtons[0].props.onPress();
@@ -441,9 +430,7 @@ describe('KanjiDetailScreen', () => {
 
     const { UNSAFE_root } = renderWithProviders(<KanjiDetailScreen />);
 
-    const iconButtons = UNSAFE_root.findAllByType(
-      require('react-native-paper').IconButton
-    );
+    const iconButtons = UNSAFE_root.findAllByType(require('react-native-paper').IconButton);
 
     // Trigger TTS for two different readings
     await iconButtons[0].props.onPress();

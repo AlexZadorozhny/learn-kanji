@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithProviders, act } from '../../../test-utils';
 import FlashcardScreen from '../FlashcardScreen';
 
