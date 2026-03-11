@@ -328,6 +328,13 @@ rm -rf node_modules && npm install
 
 ## Development Workflow
 
+## Pull Request Policy
+
+- All repository changes must go through a pull request.
+- Do not push feature or documentation changes directly to `master`.
+- Create a branch for each change, push the branch, and open a PR targeting `master`.
+- Keep local `master` aligned with `origin/master` and branch from it before starting new work.
+
 ### Testing Before Commits
 
 **CRITICAL: Always run tests before committing or pushing to GitHub**
@@ -434,6 +441,7 @@ When creating commits:
 
 - Ensure all 691 tests pass before committing
 - Ensure `npm run lint` reports 0 errors before committing
+- Prepare commits on a feature branch and submit them via pull request; do not merge by pushing directly to `master`
 - Write clear, descriptive commit messages
 - Document breaking changes or new features
 - Update CLAUDE.md and MEMORY.md for significant changes

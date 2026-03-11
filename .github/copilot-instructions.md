@@ -33,6 +33,8 @@
 - Lint fix: `npm run lint:fix`
 - Format: `npm run format` / `npm run format:check`
 - E2E (Maestro): `npm run test:e2e` (or `test:e2e:ios` / `test:e2e:android`)
+- All code changes must go through a pull request; do not push feature changes directly to `master`.
+- Create a dedicated branch for each change, push that branch, and open a pull request targeting `master`.
 - Before significant commits, run at least unit tests; for navigation/practice flow changes, run E2E flows too.
 - Pre-commit hook (Husky + lint-staged) auto-runs `eslint --fix` + `prettier --write` on staged files.
 
